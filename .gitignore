@@ -54,3 +54,4 @@ CATKIN_IGNORE
 /.vscode
 /workspace/install
 /workspace/log
+*video.mp4

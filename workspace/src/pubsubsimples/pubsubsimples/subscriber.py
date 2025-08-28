@@ -22,7 +22,7 @@ def main():
     elif len(sys.argv) == 2:
         node = Publisher(sys.argv[1])
     else:
-        print("Usage: my_node.py <topic>")
+        print("Usage: ros2 run <pkg> <node> <topic>")
         exit()
 
     rclpy.spin(node)
