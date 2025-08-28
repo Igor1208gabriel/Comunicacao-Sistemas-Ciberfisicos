@@ -52,5 +52,11 @@ CATKIN_IGNORE
 
 
 /.vscode
-/workspace/install
-/workspace/log
+*/*/install
+*/*/log
+*.mp4
+AADL/workspace/*/.settings
+AADL/workspace/*/diagrams
+AADL/workspace/*/.aadlbin-gen
+AADL/workspace/.metadata
+
