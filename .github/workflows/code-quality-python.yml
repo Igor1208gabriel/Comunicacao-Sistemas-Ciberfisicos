@@ -12,6 +12,9 @@ jobs:
   back:
     runs-on: ubuntu-latest
     steps:
+      - name: Fazer checkout do código
+        uses: actions/checkout@v4
+
       - name: Instalar dependências Python para análise
         run: |
           python -m pip install --upgrade pip
@@ -24,4 +27,6 @@ jobs:
 
       - name: Verificar formatação com Black
         run: |
+          cd ROS2/workspace/src
           black . --check
+    
