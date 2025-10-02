@@ -19,7 +19,7 @@ jobs:
 
       - name: Verificar código com Flake8
         run: |
-          cd gamb-back
+          cd ROS2/workspace/src
           flake8 . --count --show-source --statistics
 
       - name: Verificar formatação com Black
