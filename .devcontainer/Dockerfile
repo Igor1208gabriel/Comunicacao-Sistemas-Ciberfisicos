@@ -33,6 +33,9 @@ RUN rosdep update
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 
+
 ################################
 ## ADD ANY CUSTOM SETUP BELOW ##
 ################################
+# Source do workspace para todo shell
+RUN echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc
