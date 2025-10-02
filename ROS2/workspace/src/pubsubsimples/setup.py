@@ -21,6 +21,7 @@ setup(
         "console_scripts": [
             "publisher = pubsubsimples.publisher:main",
             "subscriber = pubsubsimples.subscriber:main",
+            "confuso = pubsubsimples.pubsubloop:main",
         ],
     },
 )

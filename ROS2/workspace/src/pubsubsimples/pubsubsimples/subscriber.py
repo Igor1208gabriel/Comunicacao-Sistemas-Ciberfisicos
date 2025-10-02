@@ -4,7 +4,7 @@ import rclpy
 from std_msgs.msg import String
 
 
-class Publisher(Node):
+class Subscriber(Node):
 
     def __init__(self, TopicName="topico"):
         super().__init__("subscriber_simples")
@@ -18,9 +18,9 @@ class Publisher(Node):
 def main():
     rclpy.init()
     if len(sys.argv) == 1:
-        node = Publisher()
+        node = Subscriber()
     elif len(sys.argv) == 2:
-        node = Publisher(sys.argv[1])
+        node = Subscriber(sys.argv[1])
     else:
         print("Usage: ros2 run <pkg> <node> <topic>")
         exit()
