@@ -3,9 +3,13 @@ name: code-quality-python
 on:
   push:
     branches: ["*"]
+    paths:
+        - "**/*.py"
 
   pull_request:
     branches: ["*"]
+    paths:
+        - "**/*.py"
 
 
 jobs:
