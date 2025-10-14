@@ -15,13 +15,25 @@ jobs:
       - name: Setup
         uses: actions/checkout@v4
       
-      - name: Compilação
-        uses: xu-cheng/latex-action@v4
-        with:
-          root_file: main.tex
-          working_directory: LaTeX
-          compiler: latexmk
-          args: -pdf -interaction=nonstopmode -halt-on-error
+      #- name: Compilação
+      #  uses: xu-cheng/latex-action@v4
+      #  with:
+      #    root_file: main.tex
+      #    working_directory: LaTeX
+      #    compiler: latexmk
+      #    args: -pdf -interaction=nonstopmode -halt-on-error
+
+      - name: Instalar TeX Live
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y texlive-latex-extra texlive-bibtex-extra biber
+    
+      - name: Compilar com pdflatex
+        run: |
+            cd LaTeX
+            latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+
+
 
       - name: Upload como artefato
         if: success() 
@@ -33,3 +45,10 @@ jobs:
       - name: Adicionar PDF ao resumo da action
         if: success() 
         run: echo "[PDF Compilado](${{ steps.upload.outputs.artifact-url }})" >> $GITHUB_STEP_SUMMARY
+
+      - name: Gerar miniatura
+        if: success()
+        run: |
+          sudo apt-get update && sudo apt-get install -y poppler-utils
+          pdftoppm LaTeX/main.pdf thumb -png -singlefile
+          echo "![Preview](thumb.png)" >> $GITHUB_STEP_SUMMARY
