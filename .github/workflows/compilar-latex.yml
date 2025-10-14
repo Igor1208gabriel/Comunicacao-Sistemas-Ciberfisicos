@@ -1,0 +1,25 @@
+name: compilar-latex
+
+on:
+  push:
+    branches: 
+      - main
+      - dev
+      - artigo*
+      - 12* #Temp
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        uses: actions/checkout@v4
+      - name: Compilação
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: LaTeX/main.tex
+      - name: Upload omo artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: main.pdf
