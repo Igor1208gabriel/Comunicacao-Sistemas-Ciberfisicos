@@ -32,4 +32,4 @@ jobs:
 
       - name: Adicionar PDF ao resumo da action
         if: success() 
-        run: echo "![PDF](LaTeX/main.pdf)" >> $GITHUB_STEP_SUMMARY
+        run: echo "[PDF Compilado](${{ steps.upload.outputs.artifact-url }})" >> $GITHUB_STEP_SUMMARY
