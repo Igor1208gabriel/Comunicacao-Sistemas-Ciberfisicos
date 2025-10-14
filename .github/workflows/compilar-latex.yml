@@ -14,11 +14,13 @@ jobs:
     steps:
       - name: Setup
         uses: actions/checkout@v4
+      - name: Ir para diretório
+        run: cd LaTeX
       - name: Compilação
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: LaTeX/main.tex
-      - name: Upload omo artefato
+          root_file: main.tex
+      - name: Upload como artefato
         uses: actions/upload-artifact@v4
         with:
           name: PDF
