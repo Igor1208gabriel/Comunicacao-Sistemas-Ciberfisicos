@@ -1,55 +1,65 @@
 name: Build and Analyze ROS2
-
 on: [push, pull_request]
-
 jobs:
   build-and-analyze:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
-          
-      - name: Cache Docker Image
-        uses: actions/cache@v4
-        with:
-          path: /tmp/docker-ros2-dev.tar
-          key: docker-ros2-dev-${{ hashFiles('.devcontainer/Dockerfile', '.devcontainer/**') }}
-          restore-keys: docker-ros2-dev-
+          fetch-depth: 0
       
+      # 🔥 CACHE DOCKER AUTOMÁTICO (CORRETO!)
       - name: Build DevContainer image
-        run: |
-          if [ -f /tmp/docker-ros2-dev.tar ]; then
-            echo "🔄 Restaurando imagem do cache..."
-            docker load < /tmp/docker-ros2-dev.tar
-          else
-            echo "🏗️  Construindo imagem do zero..."
-          fi
-          docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
-          docker save ros2-dev > /tmp/docker-ros2-dev.tar
-
-      - name: Build DevContainer image
-        run: |
-          docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
-
-
+        uses: docker/build-push-action@v6
+        with:
+          context: .devcontainer
+          file: .devcontainer/Dockerfile
+          push: false
+          tags: ros2-dev:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      # 🔥 CACHE ROS2 + BUILD COM LOGS VISÍVEIS
       - name: Build ROS2 Workspace
         run: |
-            docker run --rm \
-            --privileged \
-            --network=host \
-            --user root \
-            -v ${{ github.workspace }}:/project \
-            -w /project/ROS2/workspace \
-            ros2-dev \
-            bash -c "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install"
-
-
+          docker run --rm \
+          --privileged \
+          --network=host \
+          --user root \
+          -v ${{ github.workspace }}:/project \
+          -w /project/ROS2/workspace \
+          ros2-dev \
+          bash -c "
+            source /opt/ros/humble/setup.bash
+            
+            # ✅ LOGS VISÍVEIS NA TELA PRINCIPAL
+            echo '📦 INSTALLING DEPENDENCIES...'
+            rosdep install --from-paths src --ignore-src -r -y || { echo '❌ ROSDEP FAILED'; exit 1; }
+            
+            echo '🏗️  BUILDING ROS2 PACKAGES...'
+            colcon build \
+              --symlink-install \
+              --event-handlers console_direct+ \
+              --event-handlers console_cohesion+ \
+              || { echo '❌ COLCON BUILD FAILED'; exit 1; }
+            
+            echo '✅ BUILD COMPLETED SUCCESSFULLY!'
+          "
+      
+      # 🔥 ERROS NA TELA PRINCIPAL (SUMÁRIO)
+      - name: Show Build Summary
+        if: always()
+        run: |
+          if [ -f ROS2/workspace/install/setup.bash ]; then
+            echo "✅ **BUILD SUCCESS** - $(find ROS2/workspace/build -name '*.so' | wc -l) packages built!"
+          else
+            echo "❌ **BUILD FAILED** - Check logs above!"
+          fi
+      
       - name: SonarQube Scan
+        if: success()  # Só roda se build OK
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
         env:
-          SONAR_HOST_URL: https://sonarcloud.io  
+          SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
