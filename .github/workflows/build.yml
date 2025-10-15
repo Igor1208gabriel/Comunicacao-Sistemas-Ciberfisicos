@@ -16,15 +16,6 @@ jobs:
         run: |
           docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
 
-      - name: Build ROS2 Workspace
-        run: |
-          docker run --rm \
-            --privileged \
-            --network=host \
-            -v ${{ github.workspace }}:/project \
-            -w /project/ROS2/workspace \
-            ros2-dev \
-            bash -c "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install"
 
       - name: Build ROS2 Workspace
         run: |
@@ -36,7 +27,6 @@ jobs:
             -w /project/ROS2/workspace \
             ros2-dev \
             bash -c "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install"
-
 
 
       - name: SonarQube Scan
