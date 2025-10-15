@@ -1,14 +1,43 @@
-name: Build
+name: Build and Analyze ROS2
+
 on: [push, pull_request]
+
 jobs:
-  sonarqube:
-    name: SonarQube
+  build-and-analyze:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 
+
+      - name: Build DevContainer image
+        run: |
+          docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
+
+      - name: Build ROS2 Workspace
+        run: |
+          docker run --rm \
+            --privileged \
+            --network=host \
+            -v ${{ github.workspace }}:/project \
+            -w /project/ROS2/workspace \
+            ros2-dev \
+            bash -c "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install"
+
+      - name: Run tests
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/project \
+            -w /project/ROS2/workspace \
+            ros2-dev \
+            bash -c 'colcon test && colcon test-result --verbose'
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
         env:
+          SONAR_HOST_URL: https://sonarcloud.io  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ROS2/workspace
