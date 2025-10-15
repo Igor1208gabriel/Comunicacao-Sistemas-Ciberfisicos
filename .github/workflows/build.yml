@@ -34,5 +34,4 @@ jobs:
         env:
           SONAR_HOST_URL: https://sonarcloud.io  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: ROS2/workspace
+
