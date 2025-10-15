@@ -9,7 +9,6 @@ jobs:
         with:
           fetch-depth: 0
       
-      # 🔥 CACHE DOCKER CORRETO (FUNCIONA SEMPRE!)
       - name: Cache Docker Image
         uses: actions/cache@v4
         id: docker-cache
@@ -21,15 +20,12 @@ jobs:
       - name: Build DevContainer image
         run: |
           if [ "${{ steps.docker-cache.outputs.cache-hit }}" = "true" ]; then
-            echo "🔄 Restaurando imagem do cache... (30s)"
             docker load < /tmp/docker-ros2-dev.tar
           else
-            echo "🏗️ Construindo imagem do zero... (5min)"
             docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
             docker save ros2-dev | gzip > /tmp/docker-ros2-dev.tar.gz
           fi
       
-      # 🔥 CACHE ROS2 (OPCIONAL - +50% mais rápido)
       - name: Cache ROS2 Workspace
         uses: actions/cache@v4
         with:
@@ -39,7 +35,6 @@ jobs:
           key: ${{ runner.os }}-ros2-${{ hashFiles('ROS2/workspace/src/**/package.xml') }}
           restore-keys: ${{ runner.os }}-ros2-
       
-      # 🔥 BUILD COM LOGS VISÍVEIS NA TELA!
       - name: Build ROS2 Workspace
         run: |
           docker run --rm \
@@ -51,35 +46,12 @@ jobs:
           ros2-dev \
           bash -c "
             source /opt/ros/humble/setup.bash
-            
-            echo ''
-            echo '📦=== ROSDEP INSTALLING DEPENDENCIES ==='
-            echo ''
-            rosdep install --from-paths src --ignore-src -r -y || { echo '❌ ROSDEP FAILED'; exit 1; }
-            
-            echo ''
-            echo '🏗️ === COLCON BUILDING PACKAGES ==='
-            echo ''
+            rosdep install --from-paths src --ignore-src -r -y
             colcon build \
               --symlink-install \
               --event-handlers console_direct+ \
               --event-handlers console_cohesion+ \
-              || { echo '❌ COLCON BUILD FAILED'; exit 1; }
-            
-            echo ''
-            echo '✅ BUILD COMPLETED!'
           "
-      
-      # 🔥 RESUMO NA TELA PRINCIPAL
-      - name: Build Summary
-        if: always()
-        run: |
-          if [ -f ROS2/workspace/install/setup.bash ]; then
-            PKGS=$(find ROS2/workspace/build -name '*.so' | wc -l)
-            echo "✅ **SUCCESS** - ${PKGS} packages built!"
-          else
-            echo "❌ **FAILED** - See logs above!"
-          fi
       
       - name: SonarQube Scan
         if: success()
@@ -95,41 +67,44 @@ jobs:
           echo "🔍=== SONARQUBE ANALYSIS RESULTS ==="
           echo ""
           
-          # Pega resultados da API SonarCloud
-          TASK_ID=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: \
-            "https://sonarcloud.io/api/ce/task?name=${{ github.run_id }}-${{ github.run_attempt }}" | \
-            jq -r '.task.id // empty')
-          
-          if [ -n "$TASK_ID" ]; then
-            sleep 10  # Aguarda análise terminar
-            ANALYSIS_URL="https://sonarcloud.io/api/measures/component?component=${{ github.repository }}&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density"
-            RESULTS=$(curl -s "$ANALYSIS_URL")
-            
-            BUGS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="bugs") | .value // "N/A"')
-            VULNS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="vulnerabilities") | .value // "N/A"')
-            SMELLS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="code_smells") | .value // "N/A"')
-            COVERAGE=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="coverage") | .value // "N/A"' | sed 's/\..*//')
-            DUPS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="duplicated_lines_density") | .value // "N/A"' | sed 's/\..*//')
-            
-            echo "🐛 **BUGS:** ${BUGS}"
-            echo "🔒 **VULNERABILITIES:** ${VULNS}"
-            echo "💩 **CODE SMELLS:** ${SMELLS}"
-            echo "🟢 **COVERAGE:** ${COVERAGE}%"
-            echo "📋 **DUPLICATION:** ${DUPS}%"
+          ANALYSIS_URL="https://sonarcloud.io/api/measures/component?component=${{ github.repository }}&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density"
+          RESULTS=$(curl -s "$ANALYSIS_URL")
+
+          BUGS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="bugs") | .value // "N/A"')
+          VULNS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="vulnerabilities") | .value // "N/A"')
+          SMELLS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="code_smells") | .value // "N/A"')
+          COVERAGE=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="coverage") | .value // "N/A"' | sed 's/\..*//')
+          DUPS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="duplicated_lines_density") | .value // "N/A"' | sed 's/\..*//')
+
+          # Mostra no log também
+          echo "🐛 BUGS: ${BUGS}"
+          echo "🔒 VULNERABILITIES: ${VULNS}"
+          echo "💩 CODE SMELLS: ${SMELLS}"
+          echo "🟢 COVERAGE: ${COVERAGE}%"
+          echo "📋 DUPLICATION: ${DUPS}%"
+
+          echo ""
+          echo "📊 FULL REPORT: https://sonarcloud.io/dashboard?id=${{ github.repository }}"
+          echo ""
+
+          # === MARKDOWN SUMMARY ===
+          {
+            echo "## 🧠 SonarQube Analysis Summary"
             echo ""
-            echo "📊 **FULL REPORT:** https://sonarcloud.io/dashboard?id=${{ github.repository }}"
+            echo "| Métrica | Valor |"
+            echo "|----------|--------|"
+            echo "| 🐛 **Bugs** | ${BUGS} |"
+            echo "| 🔒 **Vulnerabilidades** | ${VULNS} |"
+            echo "| 💩 **Code Smells** | ${SMELLS} |"
+            echo "| 🧪 **Cobertura de Testes** | ${COVERAGE}% |"
+            echo "| 📋 **Duplicação de Código** | ${DUPS}% |"
             echo ""
-            
-            # 🚨 ALERTAS VISUAIS
-            if [ "$BUGS" != "N/A" ] && [ "$BUGS" -gt 5 ]; then echo "🚨 HIGH BUG COUNT!"; fi
-            if [ "$COVERAGE" != "N/A" ] && [ "$COVERAGE" -lt 70 ]; then echo "📉 LOW COVERAGE!"; fi
-          else
-            echo "⏳ Analysis still running... Check: https://sonarcloud.io/dashboard?id=${{ github.repository }}"
-          fi
-      
-      # 🔥 STATUS FINAL
-      - name: Final Status
-        if: always()
-        run: |
-          echo "🎯 **WORKFLOW COMPLETE**"
-          echo "   📋 Sonar: https://sonarcloud.io/dashboard?id=${{ github.repository }}"
+            echo "### 📊 [Ver relatório completo no SonarCloud](https://sonarcloud.io/dashboard?id=${{ github.repository }})"
+            echo ""
+            if [ "$BUGS" != "N/A" ] && [ "$BUGS" -gt 5 ]; then
+              echo "> 🚨 **Alerta:** número alto de bugs!"
+            fi
+            if [ "$COVERAGE" != "N/A" ] && [ "$COVERAGE" -lt 70 ]; then
+              echo "> ⚠️ **Cobertura baixa:** recomenda-se acima de 70%."
+            fi
+          } >> $GITHUB_STEP_SUMMARY
