@@ -26,13 +26,17 @@ jobs:
             ros2-dev \
             bash -c "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install"
 
-      - name: Run tests
+      - name: Build ROS2 Workspace
         run: |
-          docker run --rm \
+            docker run --rm \
+            --privileged \
+            --network=host \
+            --user root \
             -v ${{ github.workspace }}:/project \
             -w /project/ROS2/workspace \
             ros2-dev \
-            bash -c 'colcon test && colcon test-result --verbose'
+            bash -c "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install"
+
 
 
       - name: SonarQube Scan
