@@ -63,7 +63,7 @@ jobs:
       - name: Show SonarQube Results
         if: always()
         run: |
-          ANALYSIS_URL="https://sonarcloud.io/api/measures/component?component=${{ github.repository }}&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density"
+          ANALYSIS_URL="https://sonarcloud.io/api/measures/component?component=Igor1208gabriel_Comunicacao-Sistemas-Ciberfisicos&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density"
           RESULTS=$(curl -s "$ANALYSIS_URL")
 
           BUGS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="bugs") | .value // "N/A"')
