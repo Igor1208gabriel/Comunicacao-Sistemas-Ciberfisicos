@@ -11,6 +11,24 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 
+          
+      - name: Cache Docker Image
+        uses: actions/cache@v4
+        with:
+          path: /tmp/docker-ros2-dev.tar
+          key: docker-ros2-dev-${{ hashFiles('.devcontainer/Dockerfile', '.devcontainer/**') }}
+          restore-keys: docker-ros2-dev-
+      
+      - name: Build DevContainer image
+        run: |
+          if [ -f /tmp/docker-ros2-dev.tar ]; then
+            echo "🔄 Restaurando imagem do cache..."
+            docker load < /tmp/docker-ros2-dev.tar
+          else
+            echo "🏗️  Construindo imagem do zero..."
+          fi
+          docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
+          docker save ros2-dev > /tmp/docker-ros2-dev.tar
 
       - name: Build DevContainer image
         run: |
