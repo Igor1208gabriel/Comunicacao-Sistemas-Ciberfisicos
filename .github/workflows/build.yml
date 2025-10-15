@@ -87,3 +87,49 @@ jobs:
         env:
           SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Show SonarQube Results
+        if: always()
+        run: |
+          echo ""
+          echo "🔍=== SONARQUBE ANALYSIS RESULTS ==="
+          echo ""
+          
+          # Pega resultados da API SonarCloud
+          TASK_ID=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: \
+            "https://sonarcloud.io/api/ce/task?name=${{ github.run_id }}-${{ github.run_attempt }}" | \
+            jq -r '.task.id // empty')
+          
+          if [ -n "$TASK_ID" ]; then
+            sleep 10  # Aguarda análise terminar
+            ANALYSIS_URL="https://sonarcloud.io/api/measures/component?component=${{ github.repository }}&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density"
+            RESULTS=$(curl -s "$ANALYSIS_URL")
+            
+            BUGS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="bugs") | .value // "N/A"')
+            VULNS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="vulnerabilities") | .value // "N/A"')
+            SMELLS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="code_smells") | .value // "N/A"')
+            COVERAGE=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="coverage") | .value // "N/A"' | sed 's/\..*//')
+            DUPS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="duplicated_lines_density") | .value // "N/A"' | sed 's/\..*//')
+            
+            echo "🐛 **BUGS:** ${BUGS}"
+            echo "🔒 **VULNERABILITIES:** ${VULNS}"
+            echo "💩 **CODE SMELLS:** ${SMELLS}"
+            echo "🟢 **COVERAGE:** ${COVERAGE}%"
+            echo "📋 **DUPLICATION:** ${DUPS}%"
+            echo ""
+            echo "📊 **FULL REPORT:** https://sonarcloud.io/dashboard?id=${{ github.repository }}"
+            echo ""
+            
+            # 🚨 ALERTAS VISUAIS
+            if [ "$BUGS" != "N/A" ] && [ "$BUGS" -gt 5 ]; then echo "🚨 HIGH BUG COUNT!"; fi
+            if [ "$COVERAGE" != "N/A" ] && [ "$COVERAGE" -lt 70 ]; then echo "📉 LOW COVERAGE!"; fi
+          else
+            echo "⏳ Analysis still running... Check: https://sonarcloud.io/dashboard?id=${{ github.repository }}"
+          fi
+      
+      # 🔥 STATUS FINAL
+      - name: Final Status
+        if: always()
+        run: |
+          echo "🎯 **WORKFLOW COMPLETE**"
+          echo "   📋 Sonar: https://sonarcloud.io/dashboard?id=${{ github.repository }}"
