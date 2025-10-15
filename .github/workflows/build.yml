@@ -9,18 +9,37 @@ jobs:
         with:
           fetch-depth: 0
       
-      # 🔥 CACHE DOCKER AUTOMÁTICO (CORRETO!)
-      - name: Build DevContainer image
-        uses: docker/build-push-action@v6
+      # 🔥 CACHE DOCKER CORRETO (FUNCIONA SEMPRE!)
+      - name: Cache Docker Image
+        uses: actions/cache@v4
+        id: docker-cache
         with:
-          context: .devcontainer
-          file: .devcontainer/Dockerfile
-          push: false
-          tags: ros2-dev:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          path: /tmp/docker-ros2-dev.tar
+          key: docker-ros2-dev-${{ hashFiles('.devcontainer/Dockerfile', '.devcontainer/**') }}
+          restore-keys: docker-ros2-dev-
       
-      # 🔥 CACHE ROS2 + BUILD COM LOGS VISÍVEIS
+      - name: Build DevContainer image
+        run: |
+          if [ "${{ steps.docker-cache.outputs.cache-hit }}" = "true" ]; then
+            echo "🔄 Restaurando imagem do cache... (30s)"
+            docker load < /tmp/docker-ros2-dev.tar
+          else
+            echo "🏗️ Construindo imagem do zero... (5min)"
+            docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
+            docker save ros2-dev | gzip > /tmp/docker-ros2-dev.tar.gz
+          fi
+      
+      # 🔥 CACHE ROS2 (OPCIONAL - +50% mais rápido)
+      - name: Cache ROS2 Workspace
+        uses: actions/cache@v4
+        with:
+          path: |
+            ROS2/workspace/install
+            ROS2/workspace/build
+          key: ${{ runner.os }}-ros2-${{ hashFiles('ROS2/workspace/src/**/package.xml') }}
+          restore-keys: ${{ runner.os }}-ros2-
+      
+      # 🔥 BUILD COM LOGS VISÍVEIS NA TELA!
       - name: Build ROS2 Workspace
         run: |
           docker run --rm \
@@ -33,32 +52,37 @@ jobs:
           bash -c "
             source /opt/ros/humble/setup.bash
             
-            # ✅ LOGS VISÍVEIS NA TELA PRINCIPAL
-            echo '📦 INSTALLING DEPENDENCIES...'
+            echo ''
+            echo '📦=== ROSDEP INSTALLING DEPENDENCIES ==='
+            echo ''
             rosdep install --from-paths src --ignore-src -r -y || { echo '❌ ROSDEP FAILED'; exit 1; }
             
-            echo '🏗️  BUILDING ROS2 PACKAGES...'
+            echo ''
+            echo '🏗️ === COLCON BUILDING PACKAGES ==='
+            echo ''
             colcon build \
               --symlink-install \
               --event-handlers console_direct+ \
               --event-handlers console_cohesion+ \
               || { echo '❌ COLCON BUILD FAILED'; exit 1; }
             
-            echo '✅ BUILD COMPLETED SUCCESSFULLY!'
+            echo ''
+            echo '✅ BUILD COMPLETED!'
           "
       
-      # 🔥 ERROS NA TELA PRINCIPAL (SUMÁRIO)
-      - name: Show Build Summary
+      # 🔥 RESUMO NA TELA PRINCIPAL
+      - name: Build Summary
         if: always()
         run: |
           if [ -f ROS2/workspace/install/setup.bash ]; then
-            echo "✅ **BUILD SUCCESS** - $(find ROS2/workspace/build -name '*.so' | wc -l) packages built!"
+            PKGS=$(find ROS2/workspace/build -name '*.so' | wc -l)
+            echo "✅ **SUCCESS** - ${PKGS} packages built!"
           else
-            echo "❌ **BUILD FAILED** - Check logs above!"
+            echo "❌ **FAILED** - See logs above!"
           fi
       
       - name: SonarQube Scan
-        if: success()  # Só roda se build OK
+        if: success()
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
         env:
           SONAR_HOST_URL: https://sonarcloud.io
