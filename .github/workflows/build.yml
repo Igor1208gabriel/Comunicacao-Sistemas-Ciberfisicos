@@ -83,7 +83,7 @@ jobs:
             echo "| 💩 **Code Smells** | ${SMELLS} |"
             echo "| 🧪 **Cobertura de Testes** | ${COVERAGE}% |"
             echo "| 📋 **Duplicação de Código** | ${DUPS}% |"
-            echo "### 📊 [Ver relatório completo no SonarCloud](https://sonarcloud.io/dashboard?id=${{ github.repository }})"
+            echo "### 📊 [Ver relatório completo no SonarCloud](https://sonarcloud.io/dashboard?id=Igor1208gabriel_Comunicacao-Sistemas-Ciberfisicos)"
             if [ "$BUGS" != "N/A" ] && [ "$BUGS" -gt 5 ]; then
               echo "> 🚨 **Alerta:** número alto de bugs!"
             fi
