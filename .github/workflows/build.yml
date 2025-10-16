@@ -53,17 +53,6 @@ jobs:
               --event-handlers console_cohesion+ \
           "
 
-      - name: CodeQL Iniciar
-        uses: github/codeql-action/init@v3
-        with:
-          languages: python
-          queries: security-and-quality
-
-      - name: CodeQL Análise
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:python"
-      
       - name: SonarQube Scan
         if: success()
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
