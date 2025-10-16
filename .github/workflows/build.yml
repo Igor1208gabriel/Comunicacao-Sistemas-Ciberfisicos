@@ -90,4 +90,4 @@ jobs:
             if [ "$COVERAGE" != "N/A" ] && [ "$COVERAGE" -lt 70 ]; then
               echo "> ⚠️ **Cobertura baixa:** recomenda-se acima de 70%."
             fi
-          } >> $GITHUB_STEP_SUMMARY
+          } >> $GITHUB_STEP_SUMMARY 
