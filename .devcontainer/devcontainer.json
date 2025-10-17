@@ -1,0 +1,27 @@
+{
+  "name": "rolling desktop",
+  "postCreateCommand": "rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install",
+  "dockerFile": "Dockerfile",
+  "runArgs": [
+    "--privileged",
+    "--network=host"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
+  "workspaceFolder": "/${localWorkspaceFolderBasename}/ROS2/workspace",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/vscode/.bash_history,type=bind"
+],
+"features": {
+	"ghcr.io/devcontainers/features/python:1": {}
+},
+"customizations": {
+  "vscode": {
+    "extensions": [
+      "ms-iot.vscode-ros",
+      "Ranch-Hand-Robotics.rde-pack",
+      "ms-vscode.cpptools"
+    ]
+  }
+}
+
+}
