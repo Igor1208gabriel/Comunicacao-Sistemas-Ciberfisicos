@@ -1,0 +1,48 @@
+name: compilar-latex
+
+on:
+  push:
+    branches: 
+      - main
+      - dev
+      - artigo*
+      - 12* #Temp
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        uses: actions/checkout@v4
+      
+      - name: Instalação TexLive
+        uses: TeX-Live/setup-texlive-action@v3
+        with:
+          packages: scheme-basic collection-latexextra collection-bibtexextra collection-fontsextra collection-langportuguese collection-fontsrecommended biber latexmk abntex2 biblatex-abnt tex-gyre
+          cache: true
+          update-all-packages: true
+
+      - name: Compilar LaTeX
+        run: |
+            cd LaTeX
+            latexmk -pdf -interaction=nonstopmode main.tex
+
+
+      - name: Upload como artefato
+        id: upload
+        if: success() 
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: LaTeX/main.pdf
+
+      - name: Adicionar PDF ao resumo da action
+        if: success() 
+        run: echo "[PDF Compilado](${{ steps.upload.outputs.artifact-url }})" >> $GITHUB_STEP_SUMMARY
+
+      # - name: Gerar miniatura
+      #   if: success()
+      #   run: |
+      #     sudo apt-get update && sudo apt-get install -y poppler-utils
+      #     pdftoppm LaTeX/main.pdf thumb -png -singlefile
+      #     echo "![Preview](thumb.png)" >> $GITHUB_STEP_SUMMARY

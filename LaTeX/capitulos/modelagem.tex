@@ -1,0 +1,17 @@
+\chapter{Modeling in AADL}
+For more complex and robust systems, efficient communication is a key factor in ensuring reliability and real-time performance. To achieve it, AADL is employed to model all aspects of Robinho.
+AADL provides a formal representation of a system architecture, enabling the identification of potential design flaws, performance bottlenecks and communication inefficiencies before deployment. \cite{Santos2024}. It is crucial for the system's architecture because with AADL it is possible to analyze performance and the system's requirements. Robinho is modeled as such, with the visual diagram editor:
+
+In systems composed of multiple computing cores distributed across different devices, managing the communication flow without message loss or delays become increasingly difficult. While ROS 2 assists in handling such communication, key architectural decisions must be carefully evaluated through precise analysis, which is enabled by using AADL tools.
+
+Firstly, it is necessary to define the communication flow and all used devices. The programmer then begins the modeling process by identifying the system’s main functional blocks, including sensors, actuators, processing units, and the software components that orchestrate their behavior. Each of these is represented as an AADL component (such as `device`, `process`, `thread`, or `data`), along with their interfaces and communication ports.
+
+Once the architectural elements are identified, the engineer creates a modular hierarchy of packages, promoting reusability and clarity. These packages represent logical groupings of components, such as the control logic, sensor interfaces, and mobility subsystems. For example, in Robinho’s model, the differential drive system and the ultrasonic sensor are modeled as separate devices, while the main control unit is modeled as a process that integrates sensor inputs and generates motor commands.
+
+After defining the structure, the next step involves annotating the model with performance-related properties, such as thread execution times, communication latencies, periodic rates, and scheduling priorities. These annotations allow for formal timing and schedulability analysis using OSATE.
+
+At this point, the model is instantiated, generating a complete system instance graph. This enables validation checks for architectural consistency, data flow correctness, and timing constraints. In Robinho’s case, this includes verifying that the controller can process ultrasonic data within the required deadline and issue motor commands with minimal latency.
+
+Finally, the engineer uses analysis tools integrated into OSATE — such as latency analysis, scheduling simulation, and resource usage estimation — to assess whether the current architecture meets the system requirements. If any bottlenecks or violations are detected, the model can be iteratively refined, supporting a design-before-implementation methodology that significantly reduces integration risks during deployment.
+
+This model-driven approach ensures that the architectural decisions behind Robinho are not only documented but also validated against quantitative performance metrics early in the development lifecycle.

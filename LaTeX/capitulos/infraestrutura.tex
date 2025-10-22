@@ -1,0 +1,27 @@
+\chapter{Robotic System Infrastructure}
+Robinho is designed as an autonomous, distributed platform which integrate various hardware and software components to enable real-time perception, decision making and actuation. Its infrastructure is built to ensure efficient communication, scalability and robustness in dynamic environments.
+\section{Hardware components}
+Robinho consists of the following hardware elements: 
+\begin{itemize}
+    \item \textbf{Raspberry Pi 2B} - The main processing unit, responsible for executing the ROS 2 environment.
+    \item \textbf{ESP-CAM} - A microcontroller equipped with a camera module, used to capture a video stream and transmit it to the Raspberry Pi.
+    \item \textbf{H-Bridge motor driver} - Controls the motion of the two DC motors.
+\end{itemize}
+
+\section{Software components}
+Robinho's software is mainly built on ROS 2, which enables modular, flexible and distributed system design. The key software components include:
+\begin{itemize}
+    \item \textbf{ESP-CAM module} - not present in the Raspberry Pi, this module reads data from the camera, pre-processes it and sends it to Raspberry Pi.
+    \item \textbf{ESP communication node} - node responsible for capturing the ESP-CAM input data and forwarding it for further processing.
+    \item \textbf{Computer Vision nodes} - A set of nodes that process the input stream from the camera, applies vision algorithms to extract relevant features.
+    \item \textbf{Motor controller nodes} - nodes responsible for interpreting the computer vision algorithm results and generating velocity commands for the motors
+\end{itemize}
+These software components exchange messages following a specific communication flow, with well-defined message types. A detailed representation of this flow is provided in the \textit{Modeling in AADL} chapter through modeling diagrams.
+\section{System Operation}
+The system operates in a continuous loop, where:
+\begin{enumerate}
+    \item The ESP-CAM captures a video frame and sends it to the Raspberry Pi
+    \item the Raspberry Pi communication node receives the video input from ESP-CAM and sends it to the Computer Vision nodes 
+    \item The Raspberry Pi Computer Vision Algorithms module finds a point in the image, based on the algorithm choice
+    \item the Motor Controller nodes receive the treated image and sends a motor command
+\end{enumerate}
