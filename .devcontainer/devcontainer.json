@@ -7,7 +7,7 @@
     "--network=host"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
-  // "workspaceFolder": "/${localWorkspaceFolderBasename}/ROS2/workspace",
+  "workspaceFolder": "/${localWorkspaceFolderBasename}/ROS2/workspace",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/vscode/.bash_history,type=bind"
 ],

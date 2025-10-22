@@ -22,15 +22,6 @@ RUN sudo usermod -aG video $USERNAME
 RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo apt-get install -y git curl wget make cmake build-essential
 
-
-RUN sudo apt-get install -y \
-texlive-full \
-latexmk \
-biber \
-texlive-science \
-texlive-lang-portuguese && \
-sudo apt-get clean
-
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc && \
     echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc
 
