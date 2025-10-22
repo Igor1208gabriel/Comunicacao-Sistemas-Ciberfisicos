@@ -18,7 +18,7 @@ jobs:
       - name: Instalação TexLive
         uses: TeX-Live/setup-texlive-action@v3
         with:
-          packages: scheme-basic collection-latexextra collection-bibtexextra biber
+          packages: scheme-basic collection-latexextra collection-bibtexextra collection-fontsextra collection-langportuguese biber latexmk
           cache: true
           update-all-packages: false
 
