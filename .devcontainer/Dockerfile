@@ -5,48 +5,33 @@ FROM osrf/ros:rolling-desktop
 ARG USERNAME=ubuntu
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+
 RUN if ! id -u $USER_UID >/dev/null 2>&1; then \
         groupadd --gid $USER_GID $USERNAME && \
         useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME; \
     fi
-# Add sudo support for the non-root user
+    
 RUN apt-get update && \
     apt-get install -y sudo && \
     echo "$USERNAME ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME && \
     chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Switch from root to user
 USER $USERNAME
+RUN sudo usermod -aG video $USERNAME
 
-# Add user to video group to allow access to webcam
-RUN sudo usermod --append --groups video $USERNAME
-
-# Update all packages
-RUN sudo apt update && sudo apt upgrade -y
-
-# Install Git
-RUN sudo apt install -y git
-
-# Rosdep update
-RUN rosdep update
-
-# Source the ROS setup file
-RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+RUN sudo apt-get update && sudo apt-get upgrade -y && \
+    sudo apt-get install -y git curl wget make cmake build-essential
 
 
-################################
-## ADD ANY CUSTOM SETUP BELOW ##
-################################
-# Source do workspace para todo shell
+RUN sudo apt-get install -y \
+texlive-full \
+latexmk \
+biber \
+texlive-science \
+texlive-lang-portuguese && \
+sudo apt-get clean
 
-RUN sudo sudo apt-get install -y \
-    texlive-latex-base \
-    texlive-latex-extra \
-    texlive-fonts-extra \
-    texlive-lang-portuguese \
-    texlive-bibtex-extra \
-    biber \
-    texlive-science \
-    && sudo apt-get clean
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc && \
+    echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc
 
-RUN echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc
+RUN sudo rosdep update
