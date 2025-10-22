@@ -18,14 +18,14 @@ jobs:
       - name: Instalação TexLive
         uses: TeX-Live/setup-texlive-action@v3
         with:
-          packages: scheme-basic collection-latexextra collection-bibtexextra collection-fontsextra collection-langportuguese biber latexmk abntex2 biblatex-abnt
+          packages: scheme-basic collection-latexextra collection-bibtexextra collection-fontsextra collection-langportuguese collection-fontsrecommended biber latexmk abntex2 biblatex-abnt tex-gyre
           cache: true
-          update-all-packages: false
+          update-all-packages: true
 
       - name: Compilar LaTeX
         run: |
             cd LaTeX
-            latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+            latexmk -pdf -interaction=nonstopmode main.tex
 
 
       - name: Upload como artefato
