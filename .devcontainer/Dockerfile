@@ -38,4 +38,15 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 ## ADD ANY CUSTOM SETUP BELOW ##
 ################################
 # Source do workspace para todo shell
+
+RUN sudo sudo apt-get install -y \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    texlive-lang-portuguese \
+    texlive-bibtex-extra \
+    biber \
+    texlive-science \
+    && sudo apt-get clean
+
 RUN echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc

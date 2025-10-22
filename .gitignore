@@ -61,3 +61,4 @@ AADL/workspace/*/diagrams
 AADL/workspace/*/.aadlbin-gen
 AADL/workspace/.metadata
 
+*.log

@@ -7,19 +7,20 @@
     "--network=host"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
-  "workspaceFolder": "/${localWorkspaceFolderBasename}/ROS2/workspace",
+  // "workspaceFolder": "/${localWorkspaceFolderBasename}/ROS2/workspace",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/vscode/.bash_history,type=bind"
 ],
 "features": {
-	"ghcr.io/devcontainers/features/python:1": {}
+	"ghcr.io/devcontainers/features/python:1": {},
+  "ghcr.io/prulloac/devcontainer-features/latex:1": {}
 },
 "customizations": {
   "vscode": {
     "extensions": [
       "Ranch-Hand-Robotics.rde-pack",
       "ms-vscode.cpptools",
-      "mathematic.vscode-latex",
+      "JamesYu.latex-workshop",
       "github.vscode-github-actions",
       "ms-python.python"
     ]
