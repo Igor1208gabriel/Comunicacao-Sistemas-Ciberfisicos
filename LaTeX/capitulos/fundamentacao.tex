@@ -1,24 +1,37 @@
 \chapter{Fundamentação Teórica}
+
 \section{Sistemas Ciberfísicos}
+
 De acordo com \cite{Moraes2013}, sistemas ciberfísicos integram componentes computacionais com interações físicas, biológicas e de engenharia, incorporando novas capacidades. O custo computacional de um sistema é diretamente proporcional ao número de processos e tarefas simultâneas. Como consequência, um sistema complexo pode chegar rapidamente ao seu limite, causando consequências imprevisíveis se o hardware não for corretamente adequado aos seus casos de uso previstos. \cite{SennBourdon2022}
- 
+
+
 \section{Modelagem de Sistemas}
 
-O design e validação de sistemas ciberfísicos requer metologias robustas para farantir a integração de componentes de hardware e software mantendo performance, confiabilidade e escalabilidade. Neste estudo, a Linguagem de Análise de Arquitetura e Design (AADL) é empregada para modelar a arquitetura de Robinho, provendo uma representação estruturada de seus componentes físicos e computacionais
+O design e validação de sistemas ciberfísicos requer metologias robustas para garantir a integração de componentes de hardware e software mantendo performance, confiabilidade e escalabilidade. Neste estudo, a Architecture Analysis Design Language (AADL) é empregada para modelar a arquitetura de Robinho, provendo uma representação estruturada de seus componentes físicos e computacionais.
+
 AADL permite a definição de componentes de software, como nós de ROS2, elementos de hardware, como microcontroladores e sensores, a interação entre diversos componentes e a implantação de cada pedaço de software em seu respectivo hardware. Esta abordagem garante que todos os aspectos da arquitetura de Robinho sejam bem documentados e analisados antes da implantação, reduzindo gargalos potenciais e melhorando performance e eficiência geral.
+
 Robinho é composto de diversos componentes conectados, cada um mapeado em AADL, com diagramas mostrando claramente suas interações. Isto facilita validação primitiva de escolhas de design. 
+
 Ademais, usando o Open Source AADL Tool Environment, OSATE, a modelagem do sistema é analisada para garantir conformidade com exigências de performance. O processo de modelagem permite identificação prévia de necessidades de recursos, verificação de limites na comunicação e estimativa de carga computacional nas unidades de processamento distribuídas.
 
-Through this approach, Robinho's architecture is optimized before physical implementation, reducing risks associated with real-world deployment, and as a result, reducing overall costs as well.
+Por meio destas ferramentas, a arquitetura de Robinho é otimizada antes de sua implementação física, o que reduz os riscos associados com implantações no mundo real, e como resultado, reduzindo drasticamente os custos gerais.
 
-\section{Software Architecture}
-\cite{Bernardo2025, ROSWebsite} Robot Operating System was designed based on a modular and interoperable architecture based on packages, making them well-suited for architecture-oriented projects. It offers a collection of software tools for robot software development and testing, which can be easily reused across different hardware platforms and integrated onto each other.
+\section{Arquitetura de Software}
+\cite{Bernardo2025, ROSWebsite} O Robot Operating System foi desenvolvido para sustentar uma arquitetura modular e interoperável baseada em pacotes independentes, tornando seu uso adequado para projetos orientados a arquitetura. ROS oferece uma coleção de ferramentas de software para desenvolvimento robótico e testagem, que podem ser reutilizadas facilmente entre diferentes plataformas de hardware.
 
-\section{Autonomous Systems}
-According to \cite{Wahde2016, Bensalem2009}, autonomous robotic systems are complex systems that require the interaction or cooperation of numerous heterogeneous software components, freely moving and operating without direct human supervision. They are expected to function in complex, unstructured environments, and to make their own decisions concerning which action to take in any given situation
+\section{Sistemas Autônomos}
+De acordo com \cite{Wahde2016, Bensalem2009}, sistemas autônomos são sistemas complexos que requerem a interação ou cooperação de inúmeros componentes de software heterogêneos, se movimentando e operando sem a necessidade de supervisão humana direta. É esperado que funcionem em ambientes complexos e não estruturados, e que tomem suas próprias decisões em qualquer situação.
 
 \section{Automatic Code Generation}
-OSATE and its tool RAMSES 2, developed by Dominique Blouin and his team at the Institut Polytechnique de Paris, allow for developers to generate code automatically based on the system's models and specific necessities.
+OSATE e sua ferramenta experimental RAMSES 2 permitem que desenvolvedores gerem código automaticamente baseado nos modelos e necessidades específicas do sistema.
+TODO
 
 \section{Computer Vision Algorithms}
-TODOTODOTODOTODOTODOTODOTODOTODOTODO
+A fazer. Explicar como o sistema utiliza algoritmos de visão computacional, e como o ROS facilita o uso/desempenho.
+TODO
+
+\section{Robinho}
+Robinho é um sistema robótico (autônomo?) que emprega o ROS2 como framework para comunicação entre seus componentes. O sistema é composto por um ESPCam, um RaspBerryPi e duas rodas atuando como um carrinho de direção diferencial.
+A infraestrutura do sistema é melhor descrita em \ref{cap:infra}
+TODO
