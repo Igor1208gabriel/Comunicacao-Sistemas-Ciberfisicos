@@ -1,21 +1,4 @@
 \chapter{Modelagem em AADL}
 \label{cap:model}
-Para sistemas complexos e robustos, a comunicação eficiente é um fator chave para garantir confiabilidade e performance em tempo real. Para conquistar a eficiência, AADL é empregado para analisar todos os aspectos de Robinho. 
 
-O AADL provê uma representação formal da arquitetura do sistema, permitindo a identificação de erros de design, gargalos de performance ou ineficiências na comunicação antes da implantação. \cite{Santos2024}. Seu uso é crucial para a arquitetura porque AADL permite a análise da performance e requisitos do sistema. Robinho é modelado desta forma, com o editor visual de diagramas:
-
-ADICIONAR IMAGEM DO Robinho
-
-Por mais que o ROS2 ajude a manipular diversas mensagens distribuidas em diferentes dispositivos, decisões arquiteturais devem ser feitas somente após extensa análise para garantir a melhor eficiência e confiabilidade.
-
-Para iniciar o processo de modelagem, é necessário definir o fluxo de comunicação e os dispositivos utilizados. Então, os componentes são identificados, incluindo sensores, atuadores, unidades de processamento, e os componentes de software que orquestram seu comportamento. Cada um destes é representado por um componente AADL, junto com suas interfaces e caminhos de comunicação.
-
-Assim que os componentes são identificados, uma hierarquia modular de pacotes é criada, sempre visando reutilização e clareza. Estes pacotes representam agrupamentos lógicos de componentes, como lógica de controles, interfaces de sensores e subsistemas de mobilidade. Por exemplo, na modelagem de Robinho, o sistema de direção diferencial e o sensor ultrasônico são modelados como dispositivos separados, enquanto a unidade de processamento principal é definida como um processo que integra informações de sensores e gera comandos para o motor.
-
-Após a definição da estrutura lógica, os próximos passos envolvem alimentar o modelo com propriedades relacionadas as performance, como tempo de execução de threads, latência de comunicação, frequências, e propriedades de escalonamento de processos. Estas propriedades permitem uma análise formal de agendamento e contagem de tempo usando o OSATE.
-
-Neste ponto, o modelo é instanciado, gerando um gráfico completo de sua instância. Isto permite checagem de validação para consistência arquitetural, corretude de fluxo de dados e restrições temporais. No caso de Robinho, isto inclui verificar se o dado consegue ser processado dentro do tempo esperado para gerar comandos de movimento com latência mínima e máxima eficiência.
-
-Finalmente, depois de o modelo ser instanciado, o OSATE permite o uso das ferramentas de análise integradas, como análise de latência, simulação de escalonamento e previsão de uso de recursos, para definir se a arquitetura atual cumpre os requisitos do sistema. Caso quaisquer gargalos ou violações sejam detectadas, o modelo pode ser refinado iterativamente, suportando uma metodologia de design antes da implementação, que reduz significativamente os riscos de integração durante a implantação.
-
-Esta abordagem dirigida a modelagem garante que as decisões arquiteturais por trás dos sistemas Ciberfísicos sejam documentadas e validadas contra métricas quantitativas de performance muito cedo no ciclo de desenvolvimento.
+Descrever os modelos e os códigos, apresentar diagramas e resultados de análise quantitativa.
