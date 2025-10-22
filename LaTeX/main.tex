@@ -4,222 +4,36 @@ Explicar o que é autônomo, várias unidades de processamento, sistema distribu
 
 Análise e Modelagem da Comunicação Eficiente em Sistemas Ciberfísicos: Uma Abordagem com AADL e ROS2 para Integração de Microcontroladores em Aplicações Robóticas
 \fi
-\documentclass[
-    12pt, 
-    a4paper, 
-    chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-    section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-    oneside,            % não otimiza pra printar nos dois lados
-    english
-]{abntex2}
 
-% Força Times New Roman no texto e títulos
-\usepackage{newtxtext,newtxmath}
-
-% Redefine os estilos de títulos do abntex2 para usar serifada (Times)
-\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries} % capítulos
-\renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries} % seções
-\renewcommand{\ABNTEXsubsectionfont}{\normalfont\bfseries} % subseções
-\renewcommand{\ABNTEXsubsubsectionfont}{\normalfont\bfseries} % subsubseções
-
-
-
-% Pacotes essenciais ABNT
-\usepackage{indentfirst}    %Identa o primeiro parágrafo
-\usepackage{csquotes}       %Retira um warning
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}    %Bordas ABNT
-
-% Estilo da bibliografia
-\usepackage[backend=biber,style=abnt,sorting=none]{biblatex}
-\addbibresource{artigos.bib}  
-% Configuração do formato do parágrafo e espaçamento
-\setlength{\parindent}{1.25cm}  % Recuo correto de 1,25 cm
-\setlength{\parskip}{0cm}       % Sem espaçamento extra entre parágrafos
-\linespread{1.5}                % Espaçamento 1,5 entre linhas (correto)
-
-
-% Configuração do trabalho
-\titulo{Modelagem e Análise Primitiva com AADL de Sistemas Ciberfísicos Baseados em ROS2}
-\autor{Igor Gabriel dos Santos}
-\local{Natal - RN}
-\orientador{Dr. Jorgiano Marcio Bruno Vidal}
-\coorientador{Dr. Ivanilson França Vieira Junior}
-\instituicao{Instituto Federal do Rio Grande do Norte}
-\data{Fevereiro de 2025}
-\tipotrabalho{Trabalho de Conclusão de Curso}
-\preambulo{
-Trabalho de Conclusão de Curso apresentado ao Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte, em cumprimento às exigências legais como requisito parcial à obtenção do título de Tecnólogo.
-}
-
-
-
-
-
-
-
-
-
-
-
-
+\input{preambulo.tex}
 
 \begin{document}
 
-
-\frontmatter  % Parte pré-textual (sem numeração ou numeração romana)
+\frontmatter
 \setcounter{page}{1}
 \pagenumbering{roman}
+
 \imprimircapa
 \imprimirfolhaderosto
 
-
-\begin{epigrafe}
-\begin{flushright} 
-\vspace*{\fill}
-
-    \textit{Tradução: "Que palavra poderosa, "futuro". De todas as abstrações que podemos articular, de todos os conceitos que possuímos e os outros animais não, como é extraordinária a capacidade de enxergar um tempo que nunca foi vivenciado. [...] E como é trágico não acreditar nele, quando ele tem a capacidade infinita de ser importante e um número infinito de significados que podem ser encontrados ao longo dele."}
-    
-    (David Levithan)
-
-\end{flushright}
-\end{epigrafe}
-
-
-
-%\maketitle
-
-\begin{resumo}
-O avanço dos Sistemas Ciberfísicos (CPS) tem impulsionado pesquisa e desenvolvimento de plataformas robóticas cada vez mais complexas, exigindo arquiteturas modulares e escaláveis. Entretanto, a integração entre múltiplas unidades de processamento, sensores e atuadores ainda representa um desafio significativo para garantir comunicação eficiente com uso otimizado dos recursos disponíveis.
-Este trabalho apresenta um estudo sobre a construção e análise da modelagem de arquitetura em sistemas ciberfísicos utilizando Robot Operating System 2 (ROS2) e Architecture Analysis Design Language (AADL). O objetivo é avaliar o desempenho, a comunicação e a integração entre microcontroladores e unidades de processamento distribuídas em uma aplicação robótica real, garantindo o melhor uso dos recursos embarcados na aplicação. 
-O desenvolvimento dirigido a modelagem se mostrou capaz de prever gargalos de comunicação e limitações computacionais antes mesmo do sistema ser implantado fisicamente, garantindo maior confiabilidade e eficiência. Os resultados obtidos são favoráveis ao uso combinado de AADL e ROS2 para uma arquitetura mais estruturada, previsível e escalável, favorecendo o desenvolvimento de sistemas com alto grau de integração, complexidade e desempenho.
-
-\textbf{Palavras-chave}: ROS 2. AADL. Sistemas Ciberfísicos. Sistemas Autônomos. Comunicação distribuída.
-\end{resumo}
-
-% Resumo em inglês
-\begin{resumo}[Abstract]
-\begin{otherlanguage*}{english}
-This study is a use case analysis for the Cyber-Physical application called Robinho, the autonomous, distributed robot that employs computer vision algorithms, the Robot Operating System and its modeling using the Architecture Analysis Design Language, which serves the purpose of representing and analyzing both the application and the robot, including its embedded computers and many devices.
-
-\textbf{Keywords}: ROS 2. AADL. Cyber-Physical Systems. Autonomous Systems.
-\end{otherlanguage*}
-\end{resumo}
+%Pré-textuais
+\input{capitulos/dedicatoria.tex}
+\input{capitulos/epigrafe.tex}
+\input{capitulos/resumo.tex}
+\input{capitulos/abstract.tex}
 
 \tableofcontents
 
-
-
-\mainmatter  % Início da numeração em algarismos arábicos
+\mainmatter
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-\chapter{Introdução}
-A crescente evolução de sistemas ciberfísicos e a demanda para plataformas robóticas autônomas intensificam a demanda de arquiteturas robustas, flexíveis e modulares. Quanto mais sistemas robóticos são empregados em ambientes industriais, comerciais e domésticos, a necessidade de metodologias que garantem confiabilidade, adaptabilidade e escalabilidade aumenta.
-
-Este trabalho aplica conceitos chave de engenharia de software, análise de sistemas e arquitetura no contexto de sistemas robóticos. A modelagem destes demanda uma abordagem multidisciplinar, combinando conhecimento de design de software e hardware, sistemas embarcados, computação distribuída e análise em tempo real.
-
-O tópico foi escolhido devido a importância crescente de sistemas autônomos e a relevância da engenharia baseada em modelos no desenvolvimento de software moderno. A modelagem com a Linguagem de Análise de Arquitetura e Design (AADL) provê uma oportunidade de aplicar conhecimento acadêmico em um contexto altamente prático e relevante industrialmente.
-
-Como apontado por \cite{Mikusz2014}, no campo industrial e empresarial, sistemas robóticos avançados tendem ao aumento da interatividade e cooperação, levando a uma perspectiva onde sistemas Ciberfísicos integram software, hardware e serviços eficientemente. Esta tendência demanda uma abordagem estruturada focada em design de sistemas e validação para garantir confiabilidade, escalabilidade e performance. Em ambientes modernos, é esperado que robôs não apenas executem tarefas pré-programadas, mas também consigam se adaptar a mudanças e desafios inesperados.
-
-O principal objetivo deste trabalho é apresentar um estudo de caso da modelagem arquitetural, com foco na descrição dos processos de desenvolvimento do robô autônomo Robinho, que integra visão computacional, mapeamento de ambiente e algoritmos de reconhecimento de objetos usando o Sistema Operacional Robótico, ROS2, que facilita interações complexas entre unidades de processamento distribuídas, sensores e atuadores.
-
-Para realizar a análise da arquitetura do robô, a AADL é utilizada, tornando possível representar detalhes precisos de hardware e software, além de suas comunicações internas e com o ambiente, garantindo que a integração entre diferentes componentes seja coerente e gargalos na performance possam ser identificados e mitigados antes de uma implantação física.
-
-Os objetivos específicos deste trabalho são:
-\begin{itemize}
-    \item Descrever a arquitetura de hardware, software e comunicação do sistema robótico Robinho.
-    \item Modelar os componentes e suas comunicações dentro do sistema.
-    \item Identificar potenciais gargalos ou problemas de integração durante o processo de modelagem.
-    \item Medir os benefícios do uso da AADL nos estágios primitivos do desenvolvimento do sistema robótico.
-\end{itemize}
-
-A metodologia utilizada preenche a lacuna entre design teórico e aplicação prática, permitindo uma abordagem sistemática para o desenvolvimento de aplicações ciberfísicas confiáveis e eficientes, potencializando o uso de cada componente, físico ou computacional.
-
-O documento é estruturado desta forma: O capítulo 1 introduz a motivação e objetivos do estudo. Capítulo 2 apresenta as fundamentações teóricas de sistemas ciberfísicos, o sistema operacional de robôs, plataformas robóticas e AADL. O Capítulo 3 detalha o estudo de caso envolvendo o robô Robinho, incluindo sua arquitetura e modelagem. O capítulo 4 discute os resultados e desafios encontrados durante o estudo. Finalmente, o capítulo 5 conclui o trabalho e indica sugestões para trabalhos futuros.
-
-\chapter{Fundamentação Teórica}
-\section{Sistemas Ciberfísicos}
-De acordo com \cite{Moraes2013}, sistemas ciberfísicos integram componentes computacionais com interações físicas, biológicas e de engenharia, incorporando novas capacidades. O custo computacional de um sistema é diretamente proporcional ao número de processos e tarefas simultâneas. Como consequência, um sistema complexo pode chegar rapidamente ao seu limite, causando consequências imprevisíveis se o hardware não for corretamente adequado aos seus casos de uso previstos. \cite{SennBourdon2022}
-
-\section{Modelagem de Sistemas}
-
-O design e validação de sistemas ciberfísicos requer metologias robustas para farantir a integração de componentes de hardware e software mantendo performance, confiabilidade e escalabilidade. Neste estudo, a Linguagem de Análise de Arquitetura e Design (AADL) é empregada para modelar a arquitetura de Robinho, provendo uma representação estruturada de seus componentes físicos e computacionais
-AADL permite a definição de componentes de software, como nós de ROS2, elementos de hardware, como microcontroladores e sensores, a interação entre diversos componentes e a implantação de cada pedaço de software em seu respectivo hardware. Esta abordagem garante que todos os aspectos da arquitetura de Robinho sejam bem documentados e analisados antes da implantação, reduzindo gargalos potenciais e melhorando performance e eficiência geral.
-Robinho é composto de diversos componentes conectados, cada um mapeado em AADL, com diagramas mostrando claramente suas interações. Isto facilita validação primitiva de escolhas de design. 
-Ademais, usando o Open Source AADL Tool Environment, OSATE, a modelagem do sistema é analisada para garantir conformidade com exigências de performance. O processo de modelagem permite identificação prévia de necessidades de recursos, verificação de limites na comunicação e estimativa de carga computacional nas unidades de processamento distribuídas.
-
-Through this approach, Robinho's architecture is optimized before physical implementation, reducing risks associated with real-world deployment, and as a result, reducing overall costs as well.
-
-\section{Software Architecture}
-\cite{Bernardo2025, ROSWebsite} Robot Operating System was designed based on a modular and interoperable architecture based on packages, making them well-suited for architecture-oriented projects. It offers a collection of software tools for robot software development and testing, which can be easily reused across different hardware platforms and integrated onto each other.
-
-\section{Autonomous Systems}
-According to \cite{Wahde2016, Bensalem2009}, autonomous robotic systems are complex systems that require the interaction or cooperation of numerous heterogeneous software components, freely moving and operating without direct human supervision. They are expected to function in complex, unstructured environments, and to make their own decisions concerning which action to take in any given situation
-
-\section{Automatic Code Generation}
-OSATE and its tool RAMSES 2, developed by Dominique Blouin and his team at the Institut Polytechnique de Paris, allow for developers to generate code automatically based on the system's models and specific necessities.
-
-\section{Computer Vision Algorithms}
-TODOTODOTODOTODOTODOTODOTODOTODOTODO
-
-\chapter{Methodology}
-TODOTODOTODOTODOTODOTODOTODOTODOTODO
-
-\chapter{Robotic System Infrastructure}
-Robinho is designed as an autonomous, distributed platform which integrate various hardware and software components to enable real-time perception, decision making and actuation. Its infrastructure is built to ensure efficient communication, scalability and robustness in dynamic environments.
-\section{Hardware components}
-Robinho consists of the following hardware elements: 
-\begin{itemize}
-    \item \textbf{Raspberry Pi 2B} - The main processing unit, responsible for executing the ROS 2 environment.
-    \item \textbf{ESP-CAM} - A microcontroller equipped with a camera module, used to capture a video stream and transmit it to the Raspberry Pi.
-    \item \textbf{H-Bridge motor driver} - Controls the motion of the two DC motors.
-\end{itemize}
-
-\section{Software components}
-Robinho's software is mainly built on ROS 2, which enables modular, flexible and distributed system design. The key software components include:
-\begin{itemize}
-    \item \textbf{ESP-CAM module} - not present in the Raspberry Pi, this module reads data from the camera, pre-processes it and sends it to Raspberry Pi.
-    \item \textbf{ESP communication node} - node responsible for capturing the ESP-CAM input data and forwarding it for further processing.
-    \item \textbf{Computer Vision nodes} - A set of nodes that process the input stream from the camera, applies vision algorithms to extract relevant features.
-    \item \textbf{Motor controller nodes} - nodes responsible for interpreting the computer vision algorithm results and generating velocity commands for the motors
-\end{itemize}
-These software components exchange messages following a specific communication flow, with well-defined message types. A detailed representation of this flow is provided in the \textit{Modeling in AADL} chapter through modeling diagrams.
-
-\section{System Operation}
-The system operates in a continuous loop, where:
-\begin{enumerate}
-    \item The ESP-CAM captures a video frame and sends it to the Raspberry Pi
-    \item the Raspberry Pi communication node receives the video input from ESP-CAM and sends it to the Computer Vision nodes 
-    \item The Raspberry Pi Computer Vision Algorithms module finds a point in the image, based on the algorithm choice
-    \item the Motor Controller nodes receive the treated image and sends a motor command
-\end{enumerate}
-
-\chapter{Modeling in AADL}
-For more complex and robust systems, efficient communication is a key factor in ensuring reliability and real-time performance. To achieve it, AADL is employed to model all aspects of Robinho.
-AADL provides a formal representation of a system architecture, enabling the identification of potential design flaws, performance bottlenecks and communication inefficiencies before deployment. \cite{Santos2024}. It is crucial for the system's architecture because with AADL it is possible to analyze performance and the system's requirements. Robinho is modeled as such, with the visual diagram editor:
-
-In systems composed of multiple computing cores distributed across different devices, managing the communication flow without message loss or delays become increasingly difficult. While ROS 2 assists in handling such communication, key architectural decisions must be carefully evaluated through precise analysis, which is enabled by using AADL tools.
-
-Firstly, it is necessary to define the communication flow and all used devices. The programmer then begins the modeling process by identifying the system’s main functional blocks, including sensors, actuators, processing units, and the software components that orchestrate their behavior. Each of these is represented as an AADL component (such as `device`, `process`, `thread`, or `data`), along with their interfaces and communication ports.
-
-Once the architectural elements are identified, the engineer creates a modular hierarchy of packages, promoting reusability and clarity. These packages represent logical groupings of components, such as the control logic, sensor interfaces, and mobility subsystems. For example, in Robinho’s model, the differential drive system and the ultrasonic sensor are modeled as separate devices, while the main control unit is modeled as a process that integrates sensor inputs and generates motor commands.
-
-After defining the structure, the next step involves annotating the model with performance-related properties, such as thread execution times, communication latencies, periodic rates, and scheduling priorities. These annotations allow for formal timing and schedulability analysis using OSATE.
-
-At this point, the model is instantiated, generating a complete system instance graph. This enables validation checks for architectural consistency, data flow correctness, and timing constraints. In Robinho’s case, this includes verifying that the controller can process ultrasonic data within the required deadline and issue motor commands with minimal latency.
-
-Finally, the engineer uses analysis tools integrated into OSATE — such as latency analysis, scheduling simulation, and resource usage estimation — to assess whether the current architecture meets the system requirements. If any bottlenecks or violations are detected, the model can be iteratively refined, supporting a design-before-implementation methodology that significantly reduces integration risks during deployment.
-
-This model-driven approach ensures that the architectural decisions behind Robinho are not only documented but also validated against quantitative performance metrics early in the development lifecycle.
-
-
-
-
-
-
-
+%Textuais
+\input{capitulos/introducao.tex}
+\input{capitulos/fundamentacao.tex}
+\input{capitulos/metodologia.tex}
+\input{capitulos/infraestrutura.tex}
+\input{capitulos/modelagem.tex}
 
 \printbibliography
-
 \end{document}

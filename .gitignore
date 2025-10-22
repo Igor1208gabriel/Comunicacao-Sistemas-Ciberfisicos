@@ -61,7 +61,5 @@ AADL/workspace/*/diagrams
 AADL/workspace/*/.aadlbin-gen
 AADL/workspace/.metadata
 
-*.log
-*.aux
-*.fdb_latexmk
-*.fls
+main.*
+!main.tex

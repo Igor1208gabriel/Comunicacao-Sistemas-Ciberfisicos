@@ -19,7 +19,6 @@
     "extensions": [
       "Ranch-Hand-Robotics.rde-pack",
       "ms-vscode.cpptools",
-      "JamesYu.latex-workshop",
       "github.vscode-github-actions",
       "ms-python.python"
     ]
