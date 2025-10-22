@@ -1,0 +1,19 @@
+package System_implementation
+public
+	with Devices;
+	with Nodes;
+	
+	system webcamsystem
+	end webcamsystem;
+	
+	system implementation webcamsystem.impl
+		subcomponents 
+			Webcam: device Devices::webcam.impl;
+			Publishercamera: process Nodes::publishercamera.impl;
+			Displaycamera: process Nodes::displaycamera.impl;
+		connections
+			con1: port Webcam.cam_out -> Publishercamera.Webcam_Stream_In;
+			con2: port Publishercamera.Video_Stream_Out -> Displaycamera.Video_Stream_In;
+	end webcamsystem.impl;
+	
+end System_implementation;

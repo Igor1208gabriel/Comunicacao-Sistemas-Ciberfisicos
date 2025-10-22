@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="40072f3d-8bd1-419f-9417-eb842a2b0c4a" manual="true">
+    <element uuid="a44275a6-d23b-42f7-a779-e47a906749b9" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>webcam</seg>
+      </bo>
+      <position x="76.421875" y="38.0"/>
+      <size width="101.64843368530273" height="35.0"/>
+    </element>
+    <bo>
+      <seg>package</seg>
+      <seg>Devices</seg>
+    </bo>
+    <position/>
+    <size width="200.0" height="100.0"/>
+  </element>
+  <config type="package" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>package</seg>
+      <seg>Devices</seg>
+    </context>
+  </config>
+</diagram:Diagram>

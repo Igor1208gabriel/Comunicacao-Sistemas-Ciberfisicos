@@ -1,0 +1,12 @@
+package Devices
+public
+	with Other_Properties;
+	
+	device webcam
+		features 
+			cam_out: out data port Other_Properties::videostream.atumalaca_impl;
+	end webcam;
+	device implementation webcam.impl
+	end webcam.impl;
+	
+end Devices;

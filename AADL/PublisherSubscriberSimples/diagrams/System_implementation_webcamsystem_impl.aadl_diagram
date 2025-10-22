@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="2218e600-2517-4053-bf6b-d41cb4ba312e" manual="true">
+    <element uuid="ef9f5711-d4fc-455d-9fce-8906ad9f6e8e" manual="true">
+      <element uuid="f995e2a4-ed0d-4051-8bac-ae5fd256d278" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>con1</seg>
+      </bo>
+    </element>
+    <element uuid="32185c19-ec76-4f3a-9dd6-4cc54be80fda" manual="true">
+      <element uuid="1c2d3adc-73c4-45d5-b161-f1831d8e16e9" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>con2</seg>
+      </bo>
+    </element>
+    <element uuid="fee8ba3b-f286-4129-89a8-f73e0f9cfee4" manual="true">
+      <element uuid="6dd421e4-6784-47bc-af2d-2b13ceb95560" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>Video_Stream_in</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Displaycamera</seg>
+      </bo>
+      <position x="710.8815307617188" y="38.0"/>
+      <size width="373.93621826171875" height="60.0"/>
+    </element>
+    <element uuid="7f50ae11-84d4-44e6-a818-ad4981d8d8f9" manual="true">
+      <element uuid="4a3896a9-8195-431f-88ed-8cffd125d7c5" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Video_Stream_out</seg>
+        </bo>
+        <position x="300.3672103881836" y="10.0"/>
+      </element>
+      <element uuid="92b0b1ef-7670-43b0-9433-efd5a9f56974" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>Webcam_Stream_in</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Publishercamera</seg>
+      </bo>
+      <position x="268.07159423828125" y="38.0"/>
+      <size width="422.80992889404297" height="60.0"/>
+    </element>
+    <element uuid="bbcb0b7e-baf5-47b3-86dc-70804a8ecea7" manual="true">
+      <element uuid="d967148d-bf38-448c-a33e-36be36c3e2ef" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>cam_out</seg>
+        </bo>
+        <position x="172.93228149414062" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Webcam</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="236.07159805297852" height="60.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>webcamsystem.impl</seg>
+    </bo>
+    <position x="80.0" y="260.0"/>
+    <size width="1096.8177490234375" height="110.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>System_implementation::webcamsystem.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>
