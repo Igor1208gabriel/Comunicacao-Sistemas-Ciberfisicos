@@ -1,0 +1,46 @@
+package Nodes
+public
+	With Ros_properties;
+	with Other_Properties;
+	--with Devices;
+	
+	process node
+	end node;
+	process implementation node.impl
+	end node.impl;
+	
+	-----------------------------------------------------------------------------
+	
+	process publishercamera extends node
+		features
+			Webcam_Stream_in: in event data port Other_Properties::videostream.atumalaca_impl;
+			Video_Stream_out: out event data port Ros_Properties::image.atumalaca_impl;
+	end publishercamera;
+	
+	process implementation publishercamera.impl extends node.impl
+		subcomponents 
+			Pub: thread Ros_properties::publishthread.impl;
+		connections 
+			cam_in: port Webcam_Stream_in -> Pub.in_port;
+			cam_out: port Pub.out_port -> Video_Stream_out;
+	end publishercamera.impl;
+	
+	-----------------------------------------------------------------------------
+	
+	process displaycamera extends node
+		features
+			Video_Stream_in: in event data port Ros_Properties::image.atumalaca_impl;
+	end displaycamera;
+	
+	process implementation displaycamera.impl extends node.impl
+		-- TODO: implementar saida do vídeo por CV2
+		subcomponents 
+			Sub: thread Ros_Properties::subscriberthread.impl;
+		connections
+			cam_in: port Video_Stream_in -> Sub.in_port;
+	end displaycamera.impl;
+	
+	-----------------------------------------------------------------------------
+	
+		
+end Nodes;

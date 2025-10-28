@@ -1,0 +1,16 @@
+package USB
+public
+	with Bus_Properties;
+	
+	bus USB
+	end USB;
+	
+	bus implementation USB.Impl
+	end USB.Impl;
+	
+	bus implementation USB.USB2
+		properties
+			Bus_Properties::Available_Bandwidth => (60 MBytesps);
+	end USB.USB2;
+	
+end USB;
