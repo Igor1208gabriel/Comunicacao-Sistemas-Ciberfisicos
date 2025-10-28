@@ -1,11 +1,52 @@
-\iffalse
-Foco em montar o robô
-Explicar o que é autônomo, várias unidades de processamento, sistema distribuído, fazer algoritmos de mapeamento exclusivos do ROS, arquitetura do projeto, foco na escalabilidade, modelagem do ROS
 
-Análise e Modelagem da Comunicação Eficiente em Sistemas Ciberfísicos: Uma Abordagem com AADL e ROS2 para Integração de Microcontroladores em Aplicações Robóticas
-\fi
+\documentclass[
+    12pt, 
+    a4paper, 
+    chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+    section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+    oneside,            % não otimiza pra printar nos dois lados
+    english
+]{abntex2}
 
-\input{preambulo.tex}
+% Força Times New Roman no texto e títulos 
+\usepackage{newtxtext,newtxmath}
+
+% Redefine os estilos de títulos do abntex2 para usar serifada (Times)
+\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries} % capítulos
+\renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries} % seções
+\renewcommand{\ABNTEXsubsectionfont}{\normalfont\bfseries} % subseções
+\renewcommand{\ABNTEXsubsubsectionfont}{\normalfont\bfseries} % subsubseções
+
+
+
+% Pacotes essenciais ABNT
+\usepackage{indentfirst}    %Identa o primeiro parágrafo
+\usepackage{csquotes}       %Retira um warning
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}    %Bordas ABNT
+\usepackage{graphicx}
+
+% Estilo da bibliografia
+\usepackage[backend=biber,style=abnt,sorting=none]{biblatex}
+\addbibresource{artigos.bib}  
+% Configuração do formato do parágrafo e espaçamento
+\setlength{\parindent}{1.25cm}  % Recuo correto de 1,25 cm
+\setlength{\parskip}{0cm}       % Sem espaçamento extra entre parágrafos
+\linespread{1.5}                % Espaçamento 1,5 entre linhas (correto)
+
+
+% Configuração do trabalho
+\titulo{Modelagem e Análise Primitiva com AADL de Sistemas Ciberfísicos Baseados em ROS2}
+\autor{Igor Gabriel dos Santos}
+\local{Natal - RN}
+\orientador{Dr. Jorgiano Marcio Bruno Vidal}
+\coorientador{Dr. Ivanilson França Vieira Junior}
+\instituicao{Instituto Federal do Rio Grande do Norte}
+\data{Fevereiro de 2025}
+\tipotrabalho{Trabalho de Conclusão de Curso}
+\preambulo{
+Trabalho de Conclusão de Curso apresentado ao Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas do Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte, em cumprimento às exigências legais como requisito parcial à obtenção do título de Tecnólogo.
+}
+
 
 \begin{document}
 
@@ -17,7 +58,7 @@ Análise e Modelagem da Comunicação Eficiente em Sistemas Ciberfísicos: Uma A
 \imprimirfolhaderosto
 
 %Pré-textuais
-\input{capitulos/dedicatoria.tex}
+%\input{capitulos/dedicatoria.tex}
 \input{capitulos/epigrafe.tex}
 \input{capitulos/resumo.tex}
 \input{capitulos/abstract.tex}
@@ -33,7 +74,7 @@ Análise e Modelagem da Comunicação Eficiente em Sistemas Ciberfísicos: Uma A
 \input{capitulos/fundamentacao.tex}
 \input{capitulos/infraestrutura.tex}
 \input{capitulos/metodologia.tex}
-%\input{capitulos/modelagem.tex}
+\input{capitulos/modelagem.tex}
 \input{capitulos/conclusao.tex}
 
 \printbibliography

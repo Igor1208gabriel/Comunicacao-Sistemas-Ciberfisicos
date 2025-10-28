@@ -63,3 +63,6 @@ AADL/workspace/.metadata
 
 main.*
 !main.tex
+
+preambulo.*
+!preambulo.tex
