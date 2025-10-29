@@ -15,27 +15,13 @@ RUN apt-get update && \
     echo "$USERNAME ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME && \
     chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Switch from root to user
 USER $USERNAME
+RUN sudo usermod -aG video $USERNAME
 
-# Add user to video group to allow access to webcam
-RUN sudo usermod --append --groups video $USERNAME
+RUN sudo apt-get update && sudo apt-get upgrade -y && \
+    sudo apt-get install -y git curl wget make cmake build-essential
 
-# Update all packages
-RUN sudo apt update && sudo apt upgrade -y
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc && \
+    echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc
 
-# Install Git
-RUN sudo apt install -y git
-
-# Rosdep update
-RUN rosdep update
-
-# Source the ROS setup file
-RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
-
-
-################################
-## ADD ANY CUSTOM SETUP BELOW ##
-################################
-# Source do workspace para todo shell
-RUN echo "source /home/$USERNAME/ROS2/workspace/install/setup.bash" >> ~/.bashrc
+RUN sudo rosdep update

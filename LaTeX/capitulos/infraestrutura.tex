@@ -1,0 +1,33 @@
+\chapter{Infraestrutura do Sistema}
+\label{cap:infra}
+Robinho é desenhado como uma plataforma autônoma e distribuida que emprega diversos componentes de software para permitir percepção, tomada de decisões e atuação em tempo real. Sua infraestrutura é construida para garantir comunicação eficiente, escalabilidade de robustez em ambientes dinâmicos.
+
+\section{Componentes de Hardware}
+Robinho consiste dos seguintes componentes de hardware: 
+\begin{itemize}
+    \item \textbf{Raspberry Pi 2B} - A unidade de processamento principal, responsável por executar o ambiente ROS2.
+    \item \textbf{ESP-Cam} - Um microcontrolador equipado com um módulo de câmera, responsável por transmitir o vídeo para o RaspBerry Pi.
+    \item \textbf{Driver de motor Ponte H} - Controla o movimento de ambos os motores.
+\end{itemize}
+
+\section{Componentes de Software}
+O Software de Robinho é majoritariamente construido com o ROS2 em Python, visando flexibilidade e modularidade. O software executado no ESP-CAM é escrito em C++.
+
+Os componentes de software incluem:
+\begin{itemize}
+    \item \textbf{Módulo ESP-Cam} - O módulo do ESP-Cam lê a entrada da câmera, processa a imagem e envia para o RaspBerry Pi.
+    \item \textbf{Nó de Comunicação com ESP} - Nó ROS responsável por capturar o input do ESP-Cam e encaminhar para mais processamentos de imagem.
+    \item \textbf{Nós de visão computacional} - Um conjunto de nós que processam a tranmissão de vídeo e aplica algoritmos de visão computacional a fim de extrair dados relevantes.
+    \item \textbf{Nó de controle do Motor} - Nó responsável por interpretar o resultado dos algoritmos de visão computacional e gerar comandos de velocidade para os motores.
+\end{itemize}
+Estes componentes realizam trocas de mensagens seguindo um caminho de comunicação específico, com tipagem de mensagens bem definidas. Uma representação deste fluxo é apresentada no próximo capítulo por meio de diagramas de modelos.
+
+
+\section{Operação do Sistema}
+O sistema opera em um laço contínuo, onde:
+\begin{enumerate}
+    \item O ESP-CAM captura um frame de vídeo e envia para o RaspBerry Pi.
+    \item Os nós de comunicação do Raspberry Pi recebem a transmissão de vídeo e a envia para os nós de Visão Computacional.
+    \item Um dos algoritmos de visão computacional encontra um ponto na imagem, baseado na escolha do objeto a ser seguido.
+    \item O nó de controle do motor recebe o ponto na imagem e calcula um comando de velocidade para controlar o motor.
+\end{enumerate}

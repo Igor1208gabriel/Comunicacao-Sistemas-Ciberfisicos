@@ -17,9 +17,10 @@
 "customizations": {
   "vscode": {
     "extensions": [
-      "ms-iot.vscode-ros",
       "Ranch-Hand-Robotics.rde-pack",
-      "ms-vscode.cpptools"
+      "ms-vscode.cpptools",
+      "github.vscode-github-actions",
+      "ms-python.python"
     ]
   }
 }

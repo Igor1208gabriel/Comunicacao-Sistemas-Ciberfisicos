@@ -1,0 +1,15 @@
+\chapter{Metodologia}
+O AADL é empregado desde o início do processo do desenvolvimento, decisões arquiteturais são feitas após extensa análise para garantir a melhor eficiência e confiabilidade. Os modelos dos componentes são gerados e refinados iterativamente.
+No início do processo de modelagem, o fluxo da comunicação, os dispositivos e os comportamentos são definidos. Então, os componentes são descritos com AADL. Isto inclui sensores, atuadores, unidades de processamento e o software que orquestra as funções finais do sistema. 
+
+Assim que os componentes são identificados, uma hierarquia modular de pacotes é criada, sempre visando reutilização e clareza. Estes pacotes representam agrupamentos de componentes, como lógica de controles, interfaces de sensores e subsistemas de mobilidade. Na modelagem de Robinho, o sistema de direção diferencial e o sensor ultrasônico são modelados como dispositivos separados, enquanto a unidade de processamento principal é definida como um sistema com processos que integram informações de sensores e geram comandos para o motor.
+
+Após a definição da estrutura lógica, os próximos passos envolvem alimentar o modelo com propriedades relacionadas a performance, como tempo de execução de threads, latência de comunicação, frequências, e propriedades de escalonamento de processos. Estas propriedades permitem uma análise formal de agendamento e contagem de tempo usando o OSATE.
+
+Neste ponto, o modelo é instanciado, gerando um gráfico completo de sua instância. Isto permite checagem de validação para consistência arquitetural, corretude de fluxo de dados e restrições temporais. No caso de Robinho, isto inclui verificar se o dado consegue ser processado dentro do tempo esperado para gerar comandos de movimento com latência mínima e máxima eficiência.
+
+Finalmente, depois de o modelo ser instanciado, o OSATE permite o uso das ferramentas de análise integradas, como análise de latência, simulação de escalonamento e previsão de uso de recursos, para definir se a arquitetura atual cumpre os requisitos do sistema. Caso quaisquer gargalos ou violações sejam detectadas, o modelo pode ser refinado iterativamente, suportando uma metodologia de design antes da implementação, que reduz significativamente os riscos de integração durante a implantação.
+
+Esta abordagem dirigida a modelagem garante que as decisões arquiteturais por trás dos sistemas sejam documentadas e validadas contra métricas quantitativas de performance muito cedo no ciclo de desenvolvimento.
+
+Ao finalizar todos os processos de análise, é possível implantar o sistema em dispositivos reais com significativamente menos probabilidade de erros por gargalos ou riscos.

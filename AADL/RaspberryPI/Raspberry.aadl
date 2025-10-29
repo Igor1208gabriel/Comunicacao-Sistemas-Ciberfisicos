@@ -1,0 +1,33 @@
+package Raspberry
+public
+	with USB;
+
+	--with Utils::USB;
+	-- CPU BCM2836
+	-- 4 Cores ARM Cortex-A53
+	-- 900MHz CPU Speed
+	-- 1GB RAM LPDDR2
+	-- Ethernet
+	-- Sem Wi-fi (?)
+	-- Sem Bluetooth
+	-- Saída HDMI
+	-- Saída ana´logida vídeo
+	-- Socket de MicroSD
+	-- 4 portas USB 2.0 OK
+	--
+	--
+	--
+	--
+	--
+	--Este pacote descreve um modelo do computador Single-Board Raspberry Pi2B
+	--Esta placa inclui um chip BCM2836, quad-cortex A53 ARM
+	system Raspberry
+		features
+			USB1: provides bus access USB::USB.USB2;
+			USB2: provides bus access USB::USB.USB2;
+			USB3: provides bus access USB::USB.USB2;
+			USB4: provides bus access USB::USB.USB2;
+	end Raspberry;
+
+	
+end Raspberry;

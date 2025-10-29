@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="bbd78dbf-a604-4e98-8949-df8ddca11191" manual="true">
+    <element uuid="e9bd0f6d-7d9c-404f-b54e-87f598799647" manual="true">
+      <element uuid="99561fc7-b5be-4181-bfe7-099a062b0a30" manual="true">
+        <bo>
+          <seg>type_extension</seg>
+        </bo>
+        <bendpoints>
+          <point x="431.20574951171875" y="220.5"/>
+          <point x="437.20574951171875" y="220.5"/>
+          <point x="437.20574951171875" y="175.5"/>
+          <point x="443.20574951171875" y="175.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>displaycamera</seg>
+      </bo>
+      <position x="284.0534133911133" y="203.0"/>
+      <size width="143.15235137939453" height="35.0"/>
+    </element>
+    <element uuid="fa059bb0-57dd-4331-a1c3-47268ff238ee" manual="true">
+      <element uuid="298ee213-f5e0-40a6-b842-7d28c9247364" manual="true">
+        <bo>
+          <seg>implementation_extension</seg>
+        </bo>
+        <bendpoints>
+          <point x="255.44924926757812" y="159.6666717529297"/>
+          <point x="282.763916015625" y="159.6666717529297"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>displaycamera.impl</seg>
+      </bo>
+      <position x="80.14583587646484" y="142.16666666666666"/>
+      <size width="171.30340576171875" height="35.0"/>
+    </element>
+    <element uuid="d2b0e4b7-d5f3-4c92-9fea-a93b9076b942" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>node</seg>
+      </bo>
+      <position x="447.2057571411133" y="145.5"/>
+      <size width="81.66145706176758" height="40.0"/>
+    </element>
+    <element uuid="8ab2a624-3233-4f96-a1f0-fc7ab33dad58" manual="true">
+      <element uuid="e7efcec0-a3fa-493d-b562-81d600ccfea7" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="400.576416015625" y="165.5"/>
+          <point x="443.20574951171875" y="165.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>node.impl</seg>
+      </bo>
+      <position x="286.7639185587565" y="148.0"/>
+      <size width="109.81249237060547" height="35.0"/>
+    </element>
+    <element uuid="ec9ebecc-745c-4f48-a651-c979abbc4bc2" manual="true">
+      <element uuid="ae7def6b-6496-4c44-a247-e81f63b4b8f2" manual="true">
+        <bo>
+          <seg>type_extension</seg>
+        </bo>
+        <bendpoints>
+          <point x="431.20574951171875" y="110.5"/>
+          <point x="437.20574951171875" y="110.5"/>
+          <point x="437.20574951171875" y="155.5"/>
+          <point x="443.20574951171875" y="155.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>publishercamera</seg>
+      </bo>
+      <position x="271.4492416381836" y="93.0"/>
+      <size width="155.75652313232422" height="35.0"/>
+    </element>
+    <element uuid="597f5e54-fb7c-400f-9c64-a2c92deab906" manual="true">
+      <element uuid="c4183681-9cc5-490e-a1b9-fd0f3359e86d" manual="true">
+        <bo>
+          <seg>implementation_extension</seg>
+        </bo>
+        <bendpoints>
+          <point x="255.44924926757812" y="214.6666717529297"/>
+          <point x="261.4492492675781" y="214.6666717529297"/>
+          <point x="261.4492492675781" y="171.3333282470703"/>
+          <point x="282.763916015625" y="171.3333282470703"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>publishercamera.impl</seg>
+      </bo>
+      <position x="67.54166412353516" y="197.16666666666666"/>
+      <size width="183.90757751464844" height="35.0"/>
+    </element>
+    <element uuid="e46daf28-9feb-41b8-8360-d669d00b10ce" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>webcam</seg>
+      </bo>
+      <position x="222.52994537353516" y="38.0"/>
+      <size width="101.64843368530273" height="35.0"/>
+    </element>
+    <element uuid="bf856791-cb1e-4fb2-b586-b246b35ff1ed" manual="true">
+      <element uuid="0417eb78-7bd5-4fac-9e89-714c93fa7f45" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="206.52993774414062" y="55.5"/>
+          <point x="218.52993774414062" y="55.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>webcam.impl</seg>
+      </bo>
+      <position x="67.54166412353516" y="38.0"/>
+      <size width="134.98828125" height="35.0"/>
+    </element>
+    <bo>
+      <seg>package</seg>
+      <seg>Nodes</seg>
+    </bo>
+    <position/>
+    <size width="540.8672256469727" height="250.0"/>
+  </element>
+  <config type="package" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>package</seg>
+      <seg>Nodes</seg>
+    </context>
+  </config>
+</diagram:Diagram>
