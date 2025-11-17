@@ -2,7 +2,7 @@ name: compilar-latex
 
 on:
   push:
-    branches: 
+    branches:
       - main
       - dev
       - artigo*
@@ -10,27 +10,12 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/xu-cheng/texlive-full:latest
+
     steps:
       - uses: actions/checkout@v4
-      
-      # Cache da instalação completa do TeXLive (VITAL pra ganhar performance)
-      - name: Cache TeXLive completo
-        uses: actions/cache@v4
-        with:
-          path: /usr/local/texlive
-          key: texlive-install-${{ runner.os }}-v1
-
-      # Instalação (fica instantânea se o cache acima bate)
-      - name: Instalar TeXLive
-        uses: TeX-Live/setup-texlive-action@v3
-        with:
-          packages: >
-            scheme-basic collection-latexextra collection-bibtexextra
-            collection-fontsextra collection-langportuguese
-            collection-fontsrecommended biber latexmk abntex2 
-            biblatex-abnt tex-gyre
-          cache: true
-          update-all-packages: false
 
       - name: Compilar LaTeX
         run: |
