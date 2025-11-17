@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="afa86a2b-de0f-475c-9f94-cbe034b4ca37" manual="true">
+    <element uuid="64ca3913-15a6-4b45-9593-779fbb9f5c2f" manual="true">
+      <element uuid="ae9c8bfd-6ca3-441b-a385-a8ddd4af5608" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI01</seg>
+      </bo>
+      <bendpoints>
+        <point x="181.046875" y="800.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="01a2ca46-41b9-46e3-ac18-019da342c1b7" manual="true">
+      <element uuid="4b02ee74-ec07-4279-8fff-4fdefe7581ea" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI02</seg>
+      </bo>
+      <bendpoints>
+        <point x="181.046875" y="745.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="d7add86c-1354-49d0-a524-a2a0afc4dc22" manual="true">
+      <element uuid="057b2b96-5c5f-4ff3-baad-d7206e771287" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI03</seg>
+      </bo>
+      <bendpoints>
+        <point x="181.046875" y="690.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="2fe1472c-fe05-4c50-a071-0f39b39bbaea" manual="true">
+      <element uuid="fd8cf80b-17d5-4164-9714-757d788e7f79" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI04</seg>
+      </bo>
+      <bendpoints>
+        <point x="181.046875" y="635.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="b49b311f-b5ad-4e61-b396-e3d3e11259e5" manual="true">
+      <element uuid="0bf25272-51fa-45f8-99b7-db4cc4330dfa" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI05</seg>
+      </bo>
+      <bendpoints>
+        <point x="754.93359375" y="820.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="20b30655-6a4d-40e8-860e-ed9bf81783e2" manual="true">
+      <element uuid="a986ec77-c282-4a42-b8ad-080e034a661a" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI06</seg>
+      </bo>
+    </element>
+    <element uuid="5ad79cf2-8519-45a7-8a90-0fa5bc13b6be" manual="true">
+      <element uuid="2cb96505-3641-42f7-a11a-d8a1eb1a2777" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI07</seg>
+      </bo>
+      <bendpoints>
+        <point x="621.546875" y="450.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="e6e0220d-2bc5-48f8-9a03-c70ea151027b" manual="true">
+      <element uuid="74370a73-a06f-42c5-a617-59a89656f295" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI08</seg>
+      </bo>
+      <bendpoints>
+        <point x="586.9505004882812" y="290.0"/>
+        <point x="586.9505004882812" y="430.0"/>
+        <point x="617.546875" y="430.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="7ed867ba-443e-4cfc-b62a-1d6cb36c2ea4" manual="true">
+      <element uuid="c130131b-1c58-4708-9736-fe51632eab87" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI09</seg>
+      </bo>
+      <bendpoints>
+        <point x="576.9505004882812" y="370.0"/>
+        <point x="576.9505004882812" y="440.0"/>
+        <point x="617.546875" y="440.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="9cb2fec5-39aa-4dff-a327-435bcb23f04d" manual="true">
+      <element uuid="d89e7264-8c7d-4a4e-a2cb-ce2db6e97b19" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI10</seg>
+      </bo>
+      <bendpoints>
+        <point x="586.9505004882812" y="610.0"/>
+        <point x="586.9505004882812" y="470.0"/>
+        <point x="617.546875" y="470.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="bffada64-f169-46e2-bc0c-6fda3f6594b9" manual="true">
+      <element uuid="07e271a2-4500-499c-824b-c438d9c3d92b" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI11</seg>
+      </bo>
+      <bendpoints>
+        <point x="576.9505004882812" y="530.0"/>
+        <point x="576.9505004882812" y="460.0"/>
+        <point x="617.546875" y="460.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="4c88796c-f150-4d91-a8f7-5bcdb6d743ff" manual="true">
+      <element uuid="816120f2-2cfc-4981-bff8-4584ff77517a" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI12</seg>
+      </bo>
+      <bendpoints>
+        <point x="596.9505004882812" y="210.0"/>
+        <point x="596.9505004882812" y="420.0"/>
+        <point x="617.546875" y="420.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="e7758e80-e9cf-4219-856d-4654e41a935e" manual="true">
+      <element uuid="65992887-c759-43c3-86f3-59d2ed9311ef" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI13</seg>
+      </bo>
+      <bendpoints>
+        <point x="606.9505004882812" y="770.0"/>
+        <point x="606.9505004882812" y="490.0"/>
+        <point x="617.546875" y="490.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="a4308e10-6826-46a1-8a7e-20cc0d0303ec" manual="true">
+      <element uuid="aff6ec10-e49e-49da-8e63-4236c0603f0c" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI14</seg>
+      </bo>
+      <bendpoints>
+        <point x="616.9505004882812" y="820.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="016ac85a-bc61-497d-b696-db350607551e" manual="true">
+      <element uuid="b5d561eb-761c-4fcd-bb8b-ab6d5d270c09" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI15</seg>
+      </bo>
+      <bendpoints>
+        <point x="1186.0325927734375" y="450.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="c301fae9-b235-47eb-80b0-3840a92e5e1b" manual="true">
+      <element uuid="b9a215b8-56cc-4d84-b668-90d0708e6437" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI16</seg>
+      </bo>
+      <bendpoints>
+        <point x="606.9505004882812" y="130.0"/>
+        <point x="606.9505004882812" y="410.0"/>
+        <point x="617.546875" y="410.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="613280a3-7731-428c-8e87-3b450c304513" manual="true">
+      <element uuid="e240efd6-8b0e-4621-9432-2acb7f7def4b" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI17</seg>
+      </bo>
+      <bendpoints>
+        <point x="273.3619689941406" y="800.0"/>
+        <point x="279.3619689941406" y="800.0"/>
+        <point x="279.3619689941406" y="690.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="31552a9a-8b60-43b7-9f1b-b700a27ae958" manual="true">
+      <element uuid="2bf1a105-9d4b-459c-b808-3a821294beaf" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI18</seg>
+      </bo>
+      <bendpoints>
+        <point x="273.3619689941406" y="745.0"/>
+        <point x="279.3619689941406" y="745.0"/>
+        <point x="279.3619689941406" y="690.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="ffcbc6e1-b48c-4637-91a3-75c3155c2ebf" manual="true">
+      <element uuid="e69476f3-acbb-4fee-9787-dcbc18b85631" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI19</seg>
+      </bo>
+      <bendpoints>
+        <point x="269.3619689941406" y="690.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="95bf24c6-1ca2-4635-b0f7-e65637d2a62f" manual="true">
+      <element uuid="304f90e9-a692-4c60-9708-ca41675afcec" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI20</seg>
+      </bo>
+      <bendpoints>
+        <point x="273.3619689941406" y="635.0"/>
+        <point x="279.3619689941406" y="635.0"/>
+        <point x="279.3619689941406" y="690.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="7cf7f2c0-ca09-4cff-a11e-ad872d5c1be8" manual="true">
+      <element uuid="7b4e1630-4250-451c-8fd9-78ee29caabcc" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI21</seg>
+      </bo>
+      <bendpoints>
+        <point x="596.9505004882812" y="690.0"/>
+        <point x="596.9505004882812" y="480.0"/>
+        <point x="617.546875" y="480.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="bb255515-03a5-4546-9d84-0f1766227968" manual="true">
+      <element uuid="265ca4ba-974c-4e0a-91c5-403758949e69" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI22</seg>
+      </bo>
+      <bendpoints>
+        <point x="1072.5286865234375" y="450.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="0211b961-133f-4d3a-a7a4-cf71f214cab5" manual="true">
+      <element uuid="948f548e-f7fc-4300-8a85-856ff710b1f6" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>RPI23</seg>
+      </bo>
+      <bendpoints>
+        <point x="713.56640625" y="450.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="f48fb77a-8e18-42aa-8357-aa09d0796c09" manual="true" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>Ethernet</seg>
+      </bo>
+      <position x="1276.7383270263672" y="788.0"/>
+    </element>
+    <element uuid="04e6ccd6-5319-4786-b5ad-e559dc5f220f" manual="true" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>Gpio_Bus</seg>
+      </bo>
+      <position x="1268.5872802734375" y="418.0"/>
+    </element>
+    <element uuid="71b08e6e-ead6-4afc-852b-3d382fb3afbd" manual="true" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>Hdmi_1</seg>
+      </bo>
+      <position x="1281.1979598999023" y="48.0"/>
+    </element>
+    <element uuid="1abadbb6-8339-4e4b-8601-fa7d570918b2" manual="true" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>USB_1</seg>
+      </bo>
+      <position y="768.0"/>
+    </element>
+    <element uuid="82066345-c512-4c8a-b495-0fc694222eff" manual="true" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>USB_2</seg>
+      </bo>
+      <position y="713.0"/>
+    </element>
+    <element uuid="ccfbfcda-d416-4f53-9327-8d21a2f2d615" manual="true" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>USB_3</seg>
+      </bo>
+      <position y="658.0"/>
+    </element>
+    <element uuid="84a164e5-fbf8-4d2e-80db-24e202437f49" manual="true" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>USB_4</seg>
+      </bo>
+      <position y="603.0"/>
+    </element>
+    <element uuid="93e8ffc5-3d50-40c9-9a3b-b401aa328ceb" manual="true">
+      <element uuid="09c115d4-69b3-4af3-b66c-6b5c8cd1234b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>CPU_Bus</seg>
+        </bo>
+        <position x="185.54946899414062" y="10.0"/>
+      </element>
+      <element uuid="1c236409-b1d2-4f97-b3c4-7da761dffa5f" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Eth</seg>
+        </bo>
+        <position x="224.0781135559082" y="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Ethernet1</seg>
+      </bo>
+      <position x="310.859375" y="728.0"/>
+      <size width="256.0911331176758" height="110.0"/>
+    </element>
+    <element uuid="ad237439-03b4-409a-9db9-88cfb5c903e5" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Ethernet_Bus</seg>
+      </bo>
+      <position x="616.9505004882812" y="802.5"/>
+      <size width="137.98307037353516" height="35.0"/>
+    </element>
+    <element uuid="d04a326b-a9f2-4df1-95c7-a6ed855bc9c3" manual="true">
+      <element uuid="23671077-ec58-4305-8c35-fd4a7184e3a5" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>Cpu_Bus</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="65cbbbb4-79ee-467a-b50f-62ca3e4ff44b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Gpio_Bus</seg>
+        </bo>
+        <position x="207.04037475585938" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>GPIO_Bridge</seg>
+      </bo>
+      <position x="774.93359375" y="408.0"/>
+      <size width="277.5950622558594" height="60.0"/>
+    </element>
+    <element uuid="68e2363b-db49-4a4a-909a-6fd0f96c4fb4" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>GPIOBus</seg>
+      </bo>
+      <position x="1072.5286865234375" y="432.5"/>
+      <size width="113.50390243530273" height="35.0"/>
+    </element>
+    <element uuid="792f5ef5-28b9-455b-9d56-fcc851c9f38f" manual="true">
+      <element uuid="ca285c9f-c929-4666-bb19-a19d4a436999" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>CPU_Bus</seg>
+        </bo>
+        <position x="170.67968368530273" y="60.0"/>
+      </element>
+      <element uuid="4b320406-9e93-498c-bde0-c7e7e15794e9" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Hdmi_Port</seg>
+        </bo>
+        <position x="166.2395782470703" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>HDMI</seg>
+      </bo>
+      <position x="325.7291603088379" y="38.0"/>
+      <size width="241.2213478088379" height="110.0"/>
+    </element>
+    <element uuid="5683bc90-e9b9-4d40-9a60-e900cd85d81e" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>PiBus</seg>
+      </bo>
+      <position x="621.5468547821044" y="400.0"/>
+      <size width="92.01952743530273" height="100.0"/>
+    </element>
+    <element uuid="987798a7-63ba-493b-81d0-02916dd6360a" manual="true">
+      <element uuid="f74b02f2-cacb-4bab-89be-f4550949e0af" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_bus</seg>
+        </bo>
+        <position x="160.34764862060547" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Proc1</seg>
+      </bo>
+      <position x="338.2747383117676" y="408.0"/>
+      <size width="228.6757698059082" height="60.0"/>
+    </element>
+    <element uuid="87acde82-1da7-47c7-b486-77c1c057aec3" manual="true">
+      <element uuid="b2f53bad-b29c-4a43-bbea-4181160f8250" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_bus</seg>
+        </bo>
+        <position x="160.34764862060547" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Proc2</seg>
+      </bo>
+      <position x="338.2747383117676" y="248.0"/>
+      <size width="228.6757698059082" height="60.0"/>
+    </element>
+    <element uuid="77ee13ea-bb8b-478d-a73d-08e03eda0b5e" manual="true">
+      <element uuid="7475e3ba-91e0-4ec1-898b-5a8834ada7d2" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_bus</seg>
+        </bo>
+        <position x="160.34764862060547" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Proc3</seg>
+      </bo>
+      <position x="338.2747383117676" y="328.0"/>
+      <size width="228.6757698059082" height="60.0"/>
+    </element>
+    <element uuid="722dfed8-f2d7-4b80-bd7b-c13356a9b82b" manual="true">
+      <element uuid="f2ec677d-df03-4650-8293-704e1eaee952" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_bus</seg>
+        </bo>
+        <position x="160.34764862060547" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Proc4</seg>
+      </bo>
+      <position x="338.2747383117676" y="568.0"/>
+      <size width="228.6757698059082" height="60.0"/>
+    </element>
+    <element uuid="cc2f1b47-6fdb-49b9-bcf3-112224396d61" manual="true">
+      <element uuid="c978f1be-a781-4b40-93f3-c03eedea95d1" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_bus</seg>
+        </bo>
+        <position x="186.2721290588379" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>RaspRAM</seg>
+      </bo>
+      <position x="312.35025787353516" y="168.0"/>
+      <size width="254.60025024414062" height="60.0"/>
+    </element>
+    <element uuid="e8fe022b-dce9-419e-83c6-13c8e0ca34a6" manual="true">
+      <element uuid="c437af2c-3b64-44e6-b3fb-7b35dab75854" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_bus</seg>
+        </bo>
+        <position x="175.1653594970703" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>RaspSD</seg>
+      </bo>
+      <position x="323.45702743530273" y="488.0"/>
+      <size width="243.49348068237305" height="60.0"/>
+    </element>
+    <element uuid="9b521107-e426-43eb-ad16-5688021d552d" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Usb1</seg>
+      </bo>
+      <position x="181.04686737060547" y="782.5"/>
+      <size width="88.31510162353516" height="35.0"/>
+    </element>
+    <element uuid="bb3f5b84-6ef2-4ded-892b-198afbf91262" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Usb2</seg>
+      </bo>
+      <position x="181.04686737060547" y="727.5"/>
+      <size width="88.31510162353516" height="35.0"/>
+    </element>
+    <element uuid="203ceb48-fa90-48f3-98d7-52024572afa5" manual="true">
+      <element uuid="01b4fd42-e053-4a78-8cea-ab207f402422" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Proc_Bus</seg>
+        </bo>
+        <position x="207.78255462646484" y="10.0"/>
+      </element>
+      <element uuid="e7ce045f-e438-43c7-ab1d-e0e4158ccf08" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>Usb_Bus</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>USB2_Bridge</seg>
+      </bo>
+      <position x="289.3619689941406" y="648.0"/>
+      <size width="277.58853912353516" height="60.0"/>
+    </element>
+    <element uuid="89ecc8df-8dc1-43ad-8716-9d2f3bd36987" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Usb3</seg>
+      </bo>
+      <position x="181.04686737060547" y="672.5"/>
+      <size width="88.31510162353516" height="35.0"/>
+    </element>
+    <element uuid="b667622e-63f4-4d2f-b2cc-ff2c5be3c833" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Usb4</seg>
+      </bo>
+      <position x="181.04686737060547" y="617.5"/>
+      <size width="88.31510162353516" height="35.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>Raspberry.impl</seg>
+    </bo>
+    <position/>
+    <size width="1339.1419677734375" height="850.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>Raspberry::Raspberry.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

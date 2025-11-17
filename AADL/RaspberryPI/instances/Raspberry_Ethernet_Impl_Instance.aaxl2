@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<instance:SystemInstance xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance" name="Ethernet_Impl_Instance" category="bus">
+  <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+    <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.BandWidthCapacity"/>
+    <ownedValue>
+      <ownedValue xsi:type="aadl2:RealLiteral" value="253.0">
+        <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.17/@ownedLiteral.6"/>
+      </ownedValue>
+    </ownedValue>
+    <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.0"/>
+  </ownedPropertyAssociation>
+  <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.Ethernet.Impl"/>
+  <systemOperationMode name="No Modes"/>
+  <componentImplementation xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.Ethernet.Impl"/>
+</instance:SystemInstance>

@@ -1,0 +1,403 @@
+package Ros_Data
+public
+
+--*******************************************************************************
+--*******************************************************************************
+-- DATAs and DATAs TYPES DEFINITION----------------------------------------------
+--*******************************************************************************
+--*******************************************************************************
+-- contributor: Eric SENN
+-- TOPICS ---------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+	data Topic
+	end Topic;
+
+	data implementation Topic.Impl
+	end Topic.Impl;
+
+--ACTIONLIB MSGS -----------------------------------------------
+	data Actionlib_Msgs extends Topic
+	end Actionlib_Msgs;
+
+	data GoalID extends Actionlib_Msgs
+	end GoalID;
+
+	data implementation GoalID.Impl
+	end GoalID.Impl;
+
+--GEOMETRY MSGS -------------------------------------------------	
+	data Geometry_Msgs extends Topic
+	end Geometry_Msgs;
+
+	data implementation Geometry_Msgs.Impl
+	end Geometry_Msgs.impl;
+
+	data AccelWithCovarianceStamped
+	end AccelWithCovarianceStamped;
+
+	data implementation AccelWithCovarianceStamped.Impl
+	end AccelWithCovarianceStamped.Impl;
+
+	data Twist extends Geometry_Msgs
+	end Twist;
+
+	data implementation Twist.Impl extends Geometry_Msgs.Impl
+		properties
+			data_Size => 50 Bytes;
+	end Twist.Impl;
+
+	data Point extends Geometry_Msgs
+		properties
+			data_Size => 24 Bytes;
+	end Point;
+
+	data implementation Point.Impl extends Geometry_Msgs.Impl
+	end Point.Impl;
+
+	data Pose extends Geometry_Msgs
+	end Pose;
+
+	data implementation Pose.Impl extends Geometry_Msgs.Impl
+	end Pose.Impl;
+
+	data Polygon extends Geometry_Msgs
+	end Polygon;
+
+	data implementation Polygon.Rover extends Geometry_Msgs.Impl
+	end Polygon.Rover;
+
+	data implementation Polygon.leo_rover extends Geometry_Msgs.Impl
+	end Polygon.leo_rover;
+
+--MOVE_BASE MSGS-------------------------------------------------------
+	data Move_Base_Msgs extends Topic
+	end Move_Base_Msgs;
+
+	data implementation Move_Base_Msgs.Impl extends Topic.Impl
+	end Move_Base_Msgs.Impl;
+
+	data MoveBaseActionGoal extends Move_Base_Msgs
+	end MoveBaseActionGoal;
+
+	data implementation MoveBaseActionGoal.Impl extends move_base_msgs.Impl
+	end MoveBaseActionGoal.Impl;
+
+	data MoveBaseGoal extends Move_Base_Msgs
+	end MoveBaseGoal;
+
+	data implementation MoveBaseGoal.Impl extends Move_Base_Msgs.Impl
+	end MoveBaseGoal.Impl;
+
+--NAV MSGS--------------------------------------------------------------
+	data Nav_Msgs extends Topic
+	end Nav_Msgs;
+
+	data implementation Nav_Msgs.Impl extends Topic.Impl
+	end Nav_Msgs.Impl;
+
+	data OccupancyGrid extends Nav_Msgs
+	end OccupancyGrid;
+
+	data implementation OccupancyGrid.Impl
+	end OccupancyGrid.Impl;
+
+	data Odometry extends Nav_Msgs
+	end Odometry;
+
+	data implementation Odometry.Impl extends Nav_Msgs.Impl
+	end Odometry.Impl;
+
+	data MapMetadata extends Nav_Msgs
+	end MapMetadata;
+
+	data implementation MapMetadata.Impl extends Nav_Msgs.Impl
+	end MapMetadata.Impl;
+
+	data GetMap extends Nav_Msgs
+	end GetMap;
+
+	data implementation GetMap.Impl extends Nav_Msgs.Impl
+	end GetMap.Impl;
+
+--MAP MSGS--------------------------------------------------------------
+	data Map_Msgs extends Topic
+	end Map_Msgs;
+
+	data implementation Map_Msgs.Impl
+	end Map_Msgs.Impl;
+
+	data OccupancyGridUpdate extends Map_Msgs
+	end OccupancyGridUpdate;
+
+	data implementation OccupancyGridUpdate.Impl extends Map_Msgs.Impl
+	end OccupancyGridUpdate.Impl;
+
+--SENSOR MSGS ----------------------------------------------------------
+	data Sensor_Msgs extends Topic
+	end Sensor_Msgs;
+
+	data implementation Sensor_Msgs.Impl extends Topic.Impl
+	end Sensor_Msgs.Impl;
+
+	data Imu extends Sensor_Msgs
+	end Imu;
+
+	data implementation Imu.Impl extends Sensor_Msgs.Impl
+	end Imu.Impl;
+
+	data Joy extends Sensor_Msgs
+	end Joy;
+
+	data implementation Joy.Impl extends Sensor_Msgs.Impl
+	end Joy.Impl;
+
+	data PointCloud extends Sensor_Msgs
+	end PointCloud;
+
+	data implementation PointCloud.Impl
+	end PointCloud.Impl;
+
+	data Sonarscan extends PointCloud
+	end Sonarscan;
+
+	data implementation Sonarscan.Impl extends PointCloud.Impl
+		properties
+			data_Size => 220 Bytes;
+	end Sonarscan.Impl;
+
+	data PointCloud2 extends Sensor_Msgs
+	end PointCloud2;
+
+	data implementation PointCloud2.Impl
+	end PointCloud2.Impl;
+
+	data Laserscan extends Sensor_Msgs
+	end LaserScan;
+
+	data implementation Laserscan.Impl extends Sensor_Msgs.Impl
+	end LaserScan.Impl;
+
+	data implementation Laserscan.A2M8 extends sensor_msgs.impl
+		properties
+			data_Size => 2940 Bytes;
+	end Laserscan.A2M8;
+
+	data implementation Laserscan.tb3GZ extends Sensor_Msgs.Impl
+		properties
+			data_Size => 2940 Bytes;
+	end Laserscan.Tb3GZ;
+
+	data Image extends Sensor_Msgs
+	end Image;
+
+	data implementation Image.Impl extends Sensor_Msgs.Impl
+	end Image.Impl;
+
+--640x480 RGB images 8bits per channel, 3 channels	
+	data implementation Image.rgb extends Image.impl
+		properties
+			--640x480x3=921600 Bytes #0.92MBytes
+			data_Size => 921 KByte;
+	end Image.Rgb;
+
+--STANDARD STD MESSAGES------------------------------------------------
+	data Std_Msgs extends Topic
+	end Std_Msgs;
+
+	data Bool extends Std_Msgs
+	end Bool;
+
+	data implementation Bool.Impl
+		properties
+			data_Size => 1 Bytes;
+	end Bool.Impl;
+
+--std_msgs/UInt8.msg
+	data Int8 extends Std_Msgs
+	end Int8;
+
+	data implementation Int8.Impl
+	end Int8.Impl;
+
+	data Float32 extends Std_Msgs
+	end Float32;
+
+	data implementation Float32.Impl
+	end Float32.Impl;
+
+	data Float64 extends Std_Msgs
+	end Float64;
+
+	data implementation Float64.Impl
+	end Float64.Impl;
+
+--STANDARD SERVICES MESSAGES------------------------------------------------
+	data Std_Srvs extends Topic
+	end Std_Srvs;
+
+	data implementation Std_Srvs.Impl extends Topic.Impl
+	end Std_Srvs.Impl;
+
+	data Empty extends STD_SRVS
+	end Empty;
+
+	data implementation Empty.Impl extends Std_Srvs.Impl
+	end Empty.Impl;
+
+--TF MESSAGES----------------------------------------------------------
+	data Tf extends Topic
+	end Tf;
+
+	data TfMessage extends Tf
+	end TfMessage;
+
+	data implementation TfMessage.Impl
+	end TfMessage.Impl;
+
+--LEO ROVER MESSAGES---------------------------------------------------
+	data Leo_Msgs extends Topic
+	end Leo_Msgs;
+
+	data implementation Leo_Msgs.Impl extends Topic.Impl
+	end Leo_Msgs.Impl;
+
+	data WheelStates extends Leo_Msgs
+	end WheelStates;
+
+	data implementation WheelStates.Impl extends Leo_Msgs.Impl
+	end WheelStates.Impl;
+
+	data WheelOdom extends Leo_Msgs
+	end WheelOdom;
+
+	data implementation WheelOdom.Impl extends Leo_Msgs.Impl
+	end WheelOdom.Impl;
+
+	data leo_Imu extends Leo_Msgs
+	end Leo_Imu;
+
+	data implementation Leo_Imu.Impl extends Leo_Msgs.Impl
+	end Leo_Imu.Impl;
+
+	data Leo_Battery extends Leo_Msgs
+	end Leo_Battery;
+
+	data implementation Leo_Battery.Impl extends Leo_Msgs.Impl
+	end Leo_Battery.Impl;
+
+--*******************************************************************************
+--*******************************************************************************
+--IN / OUT data STREAMS----------------------------------------------------------
+--from /to devices in robots-----------------------------------------------------
+--*******************************************************************************
+--**********DATA*********************************************************************
+	data Data_Stream
+	end Data_Stream;
+
+	data implementation Data_Stream.Impl
+	end Data_Stream.Impl;
+
+-------------------------------------
+	DATA keybd_stream extends Data_Stream
+	end keybd_stream;
+
+	data implementation Keybd_Stream.Impl extends Data_Stream.Impl
+	end keybd_Stream.Impl;
+
+-------------------------------------
+	DATA Touchscreen_Stream extends Data_Stream
+	end Touchscreen_Stream;
+
+	data implementation Touchscreen_Stream.Impl extends Data_Stream.Impl
+	end Touchscreen_Stream.Impl;
+
+-------------------------------------	
+	data Video_Stream extends Data_Stream
+	end Video_Stream;
+
+	data implementation Video_Stream.Ir
+	end Video_Stream.Ir;
+
+	data implementation Video_Stream.Rgb
+		properties
+			--640x480x3=921600 Bytes #0.92MBytes
+			Data_Size => 921 KByte;
+	end Video_Stream.Rgb;
+
+	data implementation Video_Stream.Rgbd
+	end Video_Stream.Rgbd;
+
+-------------------------------------??
+	data Rgbd_Stream extends Data_Stream
+	end Rgbd_Stream;
+
+	data implementation Rgbd_Stream.Impl
+	end Rgbd_Stream.Impl;
+
+-------------------------------------??
+	data Audio_Stream extends Data_Stream
+	end Audio_Stream;
+
+	data implementation Audio_Stream.Impl
+	end Audio_Stream.Impl;
+
+-------------------------------------
+	data Lidar_Stream extends Data_Stream
+	end Lidar_Stream;
+
+	data implementation Lidar_Stream.Impl
+	end Lidar_Stream.Impl;
+
+-------------------------------------
+	data Joy_Stream extends Data_Stream
+	end Joy_Stream;
+
+	data implementation Joy_Stream.Impl extends Data_Stream.Impl
+	end Joy_Stream.Impl;
+
+------------------------------------------------------------------------
+	data Sonar_Stream extends Data_Stream
+	end Sonar_Stream;
+
+	data implementation Sonar_Stream.Impl
+		properties
+			Data_Size => 220 Bytes;
+	end Sonar_Stream.Impl;
+
+	data Motors_Cmd_Stream
+	end Motors_Cmd_Stream;
+
+	data implementation Motors_Cmd_Stream.Impl
+	end Motors_Cmd_Stream.Impl;
+
+	DATA Wheel_States_Stream
+	end Wheel_States_Stream;
+
+	data implementation Wheel_States_Stream.Impl
+	end Wheel_States_Stream.Impl;
+
+	data Imu_Data_Stream
+	end Imu_Data_Stream;
+
+	data implementation Imu_Data_Stream.Impl
+	end Imu_Data_Stream.Impl;
+
+	data Imu_Data
+		properties
+			Data_Size => 128 Bytes;
+	end Imu_Data;
+
+	data implementation Imu_Data.Leo
+	end Imu_Data.Leo;
+
+--data implementation Imu.impl
+--subcomponents
+--linear_acceleration_covariance: data Base_Types::Float_64[];
+--orientation: data middleware::ros::geometry_msgs::Quaternion.impl;
+--angular_velocity_covariance: data Base_Types::Float_64[];
+--orientation_covariance: data Base_Types::Float_64[];
+--header: data middleware::ros::std_msgs::Header.impl;
+--linear_acceleration:data middleware::ros::geometry_msgs::Vector3.impl;
+--angular_velocity:data middleware::ros::geometry_msgs::Vector3.impl;
+--end Imu.impl;
+end Ros_Data;

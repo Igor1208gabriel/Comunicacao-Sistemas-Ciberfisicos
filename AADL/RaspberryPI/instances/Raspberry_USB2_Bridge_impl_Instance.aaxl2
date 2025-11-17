@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance">
+  <instance:SystemInstance name="USB2_Bridge_impl_Instance" category="device">
+    <featureInstance name="Proc_Bus" category="busAccess" type="/1">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.24/@ownedBusAccess.0"/>
+    </featureInstance>
+    <featureInstance name="Usb_Bus" category="busAccess" type="/2">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.24/@ownedBusAccess.1"/>
+    </featureInstance>
+    <classifier xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.USB2_Bridge.impl"/>
+    <systemOperationMode name="No Modes"/>
+    <componentImplementation xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.USB2_Bridge.impl"/>
+  </instance:SystemInstance>
+  <instance:ComponentInstance name="Raspberry::AMBA.impl" category="bus">
+    <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.AMBA.impl"/>
+  </instance:ComponentInstance>
+  <instance:ComponentInstance name="USB::USB.USB2" category="bus">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="../Bus_Properties.aadl#Bus_Properties.Available_Bandwidth"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:ListValue">
+          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="60">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.3"/>
+          </ownedListElement>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../USB.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <classifier xsi:type="aadl2:BusImplementation" href="../USB.aadl#USB.USB.USB2"/>
+  </instance:ComponentInstance>
+</xmi:XMI>

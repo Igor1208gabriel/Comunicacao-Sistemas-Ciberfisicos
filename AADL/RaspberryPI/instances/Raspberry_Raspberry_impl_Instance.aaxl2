@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance">
+  <instance:SystemInstance name="Raspberry_impl_Instance" category="system">
+    <featureInstance name="USB_1" category="busAccess" direction="out" type="/3">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.0"/>
+    </featureInstance>
+    <featureInstance name="USB_2" category="busAccess" direction="out" type="/3">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.1"/>
+    </featureInstance>
+    <featureInstance name="USB_3" category="busAccess" direction="out" type="/3">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.2"/>
+    </featureInstance>
+    <featureInstance name="USB_4" category="busAccess" direction="out" type="/3">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.3"/>
+    </featureInstance>
+    <featureInstance name="Ethernet" category="busAccess" direction="out" type="/1">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.4"/>
+    </featureInstance>
+    <featureInstance name="Gpio_Bus" category="busAccess" direction="out" type="/4">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.5"/>
+    </featureInstance>
+    <featureInstance name="Hdmi_1" category="eventDataPort" direction="out">
+      <feature xsi:type="aadl2:EventDataPort" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedEventDataPort.0"/>
+    </featureInstance>
+    <componentInstance name="PiBus" category="bus">
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.AMBA.impl"/>
+    </componentInstance>
+    <componentInstance name="Ethernet_Bus" category="bus">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.BandWidthCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="253.0">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.17/@ownedLiteral.6"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.1"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.Ethernet.Impl"/>
+    </componentInstance>
+    <componentInstance name="Usb1" category="bus">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="../Bus_Properties.aadl#Bus_Properties.Available_Bandwidth"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="aadl2:IntegerLiteral" value="60">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.3"/>
+            </ownedListElement>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../USB.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.2"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../USB.aadl#USB.USB.USB2"/>
+    </componentInstance>
+    <componentInstance name="Usb2" category="bus">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="../Bus_Properties.aadl#Bus_Properties.Available_Bandwidth"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="aadl2:IntegerLiteral" value="60">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.3"/>
+            </ownedListElement>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../USB.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.3"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../USB.aadl#USB.USB.USB2"/>
+    </componentInstance>
+    <componentInstance name="Usb3" category="bus">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="../Bus_Properties.aadl#Bus_Properties.Available_Bandwidth"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="aadl2:IntegerLiteral" value="60">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.3"/>
+            </ownedListElement>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../USB.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.4"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../USB.aadl#USB.USB.USB2"/>
+    </componentInstance>
+    <componentInstance name="Usb4" category="bus">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="../Bus_Properties.aadl#Bus_Properties.Available_Bandwidth"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="aadl2:IntegerLiteral" value="60">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.3"/>
+            </ownedListElement>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../USB.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.5"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../USB.aadl#USB.USB.USB2"/>
+    </componentInstance>
+    <componentInstance name="GPIOBus" category="bus">
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.6"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.GPIO.impl"/>
+    </componentInstance>
+    <componentInstance name="Ethernet1" category="device">
+      <featureInstance name="Eth" category="busAccess" type="/1">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedBusAccess.0"/>
+      </featureInstance>
+      <featureInstance name="CPU_Bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceType" href="../Raspberry.aadl#Raspberry.Pi_Ethernet"/>
+    </componentInstance>
+    <componentInstance name="HDMI" category="device">
+      <featureInstance name="Hdmi_Port" category="eventDataPort" direction="out">
+        <feature xsi:type="aadl2:EventDataPort" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedEventDataPort.0"/>
+      </featureInstance>
+      <featureInstance name="CPU_Bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.1"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.HDMI.impl"/>
+    </componentInstance>
+    <componentInstance name="USB2_Bridge" category="device">
+      <featureInstance name="Proc_Bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.24/@ownedBusAccess.0"/>
+      </featureInstance>
+      <featureInstance name="Usb_Bus" category="busAccess" type="/3">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.24/@ownedBusAccess.1"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.2"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.USB2_Bridge.impl"/>
+    </componentInstance>
+    <componentInstance name="GPIO_Bridge" category="device">
+      <featureInstance name="Cpu_Bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.22/@ownedBusAccess.0"/>
+      </featureInstance>
+      <featureInstance name="Gpio_Bus" category="busAccess" type="/4">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.22/@ownedBusAccess.1"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.3"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.Gpio_Bridge.impl"/>
+    </componentInstance>
+    <componentInstance name="RaspRAM" category="memory">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.RAMCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="1.0">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.15/@ownedLiteral.4"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="Proc_bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:MemorySubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedMemorySubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:MemoryImplementation" href="../Raspberry.aadl#Raspberry.RAM.G1"/>
+    </componentInstance>
+    <componentInstance name="RaspSD" category="memory">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.RAMCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="16.0">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.15/@ownedLiteral.4"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="Proc_bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:MemorySubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedMemorySubcomponent.1"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:MemoryImplementation" href="../Raspberry.aadl#Raspberry.SDCard.G16"/>
+    </componentInstance>
+    <componentInstance name="Proc1" category="processor">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="1300.0">
+            <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="Proc_bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:ProcessorImplementation" href="../Raspberry.aadl#Raspberry.Cortex_A53.c1"/>
+    </componentInstance>
+    <componentInstance name="Proc2" category="processor">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="1300.0">
+            <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="Proc_bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.1"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:ProcessorImplementation" href="../Raspberry.aadl#Raspberry.Cortex_A53.c2"/>
+    </componentInstance>
+    <componentInstance name="Proc3" category="processor">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="1300.0">
+            <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="Proc_bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.2"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:ProcessorImplementation" href="../Raspberry.aadl#Raspberry.Cortex_A53.c3"/>
+    </componentInstance>
+    <componentInstance name="Proc4" category="processor">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RealLiteral" value="1300.0">
+            <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="Proc_bus" category="busAccess" type="/2">
+        <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.3"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:ProcessorImplementation" href="../Raspberry.aadl#Raspberry.Cortex_A53.c4"/>
+    </componentInstance>
+    <connectionInstance name="USB_1 -> Usb1" kind="accessConnection" destination="/0/@componentInstance.2" source="/0/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@featureInstance.0" destination="/0/@componentInstance.2">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.0"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="USB_2 -> Usb2" kind="accessConnection" destination="/0/@componentInstance.3" source="/0/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@featureInstance.1" destination="/0/@componentInstance.3">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.1"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="USB_3 -> Usb3" kind="accessConnection" destination="/0/@componentInstance.4" source="/0/@featureInstance.2">
+      <connectionReference context="/0" source="/0/@featureInstance.2" destination="/0/@componentInstance.4">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.2"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="USB_4 -> Usb4" kind="accessConnection" destination="/0/@componentInstance.5" source="/0/@featureInstance.3">
+      <connectionReference context="/0" source="/0/@featureInstance.3" destination="/0/@componentInstance.5">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.3"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="PiBus -> GPIO_Bridge.Cpu_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.10/@featureInstance.0" source="/0/@componentInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.0" destination="/0/@componentInstance.10/@featureInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.16"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Ethernet_Bus -> Ethernet" kind="accessConnection" destination="/0/@featureInstance.4" source="/0/@componentInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.1" destination="/0/@featureInstance.4">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.4"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Usb1 -> USB2_Bridge.Usb_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.9/@featureInstance.1" source="/0/@componentInstance.2">
+      <connectionReference context="/0" source="/0/@componentInstance.2" destination="/0/@componentInstance.9/@featureInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.17"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Usb2 -> USB2_Bridge.Usb_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.9/@featureInstance.1" source="/0/@componentInstance.3">
+      <connectionReference context="/0" source="/0/@componentInstance.3" destination="/0/@componentInstance.9/@featureInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.18"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Usb3 -> USB2_Bridge.Usb_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.9/@featureInstance.1" source="/0/@componentInstance.4">
+      <connectionReference context="/0" source="/0/@componentInstance.4" destination="/0/@componentInstance.9/@featureInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.19"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Usb4 -> USB2_Bridge.Usb_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.9/@featureInstance.1" source="/0/@componentInstance.5">
+      <connectionReference context="/0" source="/0/@componentInstance.5" destination="/0/@componentInstance.9/@featureInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.20"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="GPIOBus -> Gpio_Bus" kind="accessConnection" destination="/0/@featureInstance.5" source="/0/@componentInstance.6">
+      <connectionReference context="/0" source="/0/@componentInstance.6" destination="/0/@featureInstance.5">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.14"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Ethernet1.Eth -> Ethernet_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.1" source="/0/@componentInstance.7/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.7/@featureInstance.0" destination="/0/@componentInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.13"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Ethernet1.CPU_Bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.7/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.7/@featureInstance.1" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.12"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="HDMI.Hdmi_Port -> Hdmi_1" kind="portConnection" destination="/0/@featureInstance.6" source="/0/@componentInstance.8/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.8/@featureInstance.0" destination="/0/@featureInstance.6">
+        <connection xsi:type="aadl2:PortConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPortConnection.0"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="HDMI.CPU_Bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.8/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.8/@featureInstance.1" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.5"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="USB2_Bridge.Proc_Bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.9/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.9/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.21"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="GPIO_Bridge.Gpio_Bus -> GPIOBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.6" source="/0/@componentInstance.10/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.10/@featureInstance.1" destination="/0/@componentInstance.6">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.15"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="RaspRAM.Proc_bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.11/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.11/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.11"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="RaspSD.Proc_bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.12/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.12/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.10"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Proc1.Proc_bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.13/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.13/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.6"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Proc2.Proc_bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.14/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.14/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.7"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Proc3.Proc_bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.15/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.15/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.8"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Proc4.Proc_bus -> PiBus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.16/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.16/@featureInstance.0" destination="/0/@componentInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedAccessConnection.9"/>
+      </connectionReference>
+    </connectionInstance>
+    <classifier xsi:type="aadl2:SystemImplementation" href="../Raspberry.aadl#Raspberry.Raspberry.impl"/>
+    <systemOperationMode name="No Modes"/>
+    <componentImplementation xsi:type="aadl2:SystemImplementation" href="../Raspberry.aadl#Raspberry.Raspberry.impl"/>
+  </instance:SystemInstance>
+  <instance:ComponentInstance name="Raspberry::Ethernet.Impl" category="bus">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.BandWidthCapacity"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:RealLiteral" value="253.0">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.17/@ownedLiteral.6"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.Ethernet.Impl"/>
+  </instance:ComponentInstance>
+  <instance:ComponentInstance name="Raspberry::AMBA.impl" category="bus">
+    <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.AMBA.impl"/>
+  </instance:ComponentInstance>
+  <instance:ComponentInstance name="USB::USB.USB2" category="bus">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="../Bus_Properties.aadl#Bus_Properties.Available_Bandwidth"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:ListValue">
+          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="60">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.3"/>
+          </ownedListElement>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../USB.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <classifier xsi:type="aadl2:BusImplementation" href="../USB.aadl#USB.USB.USB2"/>
+  </instance:ComponentInstance>
+  <instance:ComponentInstance name="Raspberry::GPIO.impl" category="bus">
+    <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.GPIO.impl"/>
+  </instance:ComponentInstance>
+</xmi:XMI>

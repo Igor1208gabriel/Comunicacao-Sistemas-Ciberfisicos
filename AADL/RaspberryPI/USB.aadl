@@ -13,4 +13,6 @@ public
 			Bus_Properties::Available_Bandwidth => (60 MBytesps);
 	end USB.USB2;
 	
+
+	
 end USB;

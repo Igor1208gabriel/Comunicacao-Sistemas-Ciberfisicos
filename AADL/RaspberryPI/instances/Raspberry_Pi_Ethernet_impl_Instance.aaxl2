@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance">
+  <instance:SystemInstance name="Pi_Ethernet_impl_Instance" category="device">
+    <featureInstance name="Eth" category="busAccess" type="/1">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedBusAccess.0"/>
+    </featureInstance>
+    <featureInstance name="CPU_Bus" category="busAccess" type="/2">
+      <feature xsi:type="aadl2:BusAccess" href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedBusAccess.0"/>
+    </featureInstance>
+    <classifier xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.Pi_Ethernet.impl"/>
+    <systemOperationMode name="No Modes"/>
+    <componentImplementation xsi:type="aadl2:DeviceImplementation" href="../Raspberry.aadl#Raspberry.Pi_Ethernet.impl"/>
+  </instance:SystemInstance>
+  <instance:ComponentInstance name="Raspberry::Ethernet.Impl" category="bus">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.BandWidthCapacity"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:RealLiteral" value="253.0">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.17/@ownedLiteral.6"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../Raspberry.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.Ethernet.Impl"/>
+  </instance:ComponentInstance>
+  <instance:ComponentInstance name="Raspberry::AMBA.impl" category="bus">
+    <classifier xsi:type="aadl2:BusImplementation" href="../Raspberry.aadl#Raspberry.AMBA.impl"/>
+  </instance:ComponentInstance>
+</xmi:XMI>
