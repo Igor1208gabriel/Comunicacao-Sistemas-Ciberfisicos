@@ -1,0 +1,103 @@
+package Ros_Messages_Properties
+public
+	with Other_Properties; 
+	data topic
+	end topic;
+	
+	data implementation topic.impl
+	end topic.impl;
+	
+	-- Topicos
+	
+	data std_msgs extends topic --Pacote onde o to´pico esta´descrito
+		end std_msgs;
+	data implementation std_msgs.impl 
+		end std_msgs.impl;
+	
+	data string extends std_msgs --Tópico String. Tamanho é variavel, mas aqui botei fixo
+		end string;
+	data implementation string.impl extends std_msgs.impl
+		end string.impl;
+	
+	data sensor_msgs extends topic
+		end sensor_msgs;
+	data implementation sensor_msgs.impl extends topic.impl
+		end sensor_msgs.impl;
+	
+	data image extends sensor_msgs
+		end image;
+	data implementation image.atumalaca_impl extends sensor_msgs.impl
+		properties 
+			data_Size => 95040 Bytes; --360 * 264 * 3 canais RGB
+		end image.atumalaca_impl;
+		
+	data Geometry_Msgs extends Topic
+	end Geometry_Msgs;
+	
+	data implementation Geometry_Msgs.Impl
+	end Geometry_Msgs.impl;
+	
+	data Twist extends sensor_msgs
+	end Twist;
+		
+	data implementation Twist.Impl extends sensor_msgs.Impl
+		properties
+			data_Size => 50 Bytes;
+	end Twist.Impl;
+
+	data Point extends Geometry_Msgs
+		properties
+			data_Size => 24 Bytes;
+	end Point;
+
+	data implementation Point.Impl extends Geometry_Msgs.Impl
+	end Point.Impl;
+		
+		
+		
+	thread PublisherImage
+		features
+	  in_port: in event data port Other_Properties::videostream.atumalaca_impl;
+      out_port: out event data port image.atumalaca_impl; -- publica mensagens
+  		end PublisherImage;
+	thread implementation PublisherImage.impl
+	  end PublisherImage.impl;
+	 
+	thread SubscriberImage
+    features
+      in_port: in event data port image.atumalaca_impl; -- recebe mensagens
+  		end SubscriberImage;
+	thread implementation SubscriberImage.impl
+	  end SubscriberImage.impl;
+	  
+	  
+	  
+	 thread PublisherPoint
+		features
+      out_port: out event data port Point.Impl; -- publica mensagens
+  		end PublisherPoint;
+	thread implementation PublisherPoint.impl
+	  end PublisherPoint.impl;
+	 
+	thread SubscriberPoint
+    features
+      in_port: in event data port Point.Impl; -- recebe mensagens
+  		end SubscriberPoint;
+	thread implementation SubscriberPoint.impl
+	  end SubscriberPoint.impl;
+	  
+	  thread PublisherTwist
+		features
+      out_port: out event data port Twist.Impl; -- publica mensagens
+  		end PublisherTwist;
+	thread implementation PublisherTwist.impl
+	  end PublisherTwist.impl;
+	 
+	thread SubscriberTwist
+    features
+      in_port: in event data port Twist.Impl; -- recebe mensagens
+  		end SubscriberTwist;
+	thread implementation SubscriberTwist.impl
+	  end SubscriberTwist.impl;
+	
+end Ros_Messages_Properties;

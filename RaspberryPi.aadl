@@ -1,0 +1,236 @@
+property set Bus_Properties is
+	Bandwidth: Data_Volume applies to (bus);
+
+	Bandwidth_Range: type range of Data_Volume;
+
+	Bandwidth_Scale: Bus_Properties::Bandwidth_Range applies to (bus);
+
+	Available_Bandwidth: list of Data_Volume applies to (bus);
+
+	Required_Bandwidth: Data_Volume applies to (abstract, system, device, bus access, connection);
+
+	Channel_Type: enumeration (Simplex, Half_Duplex, Full_Duplex) applies to (bus);
+
+	Bus_Type: enumeration (mtp, ptp) applies to (bus, system, abstract);
+	--  mtp: multi-point bus
+	--  ptp: point-to-point bus
+	Expected_Latency: Time_Range applies to (bus, bus access, abstract);
+
+	Max_Latency: Time applies to (bus, bus access, abstract);
+
+	Message_Priority: aadlinteger applies to (connection);
+end Bus_Properties;
+
+package Raspberry
+public
+	with USB;
+	with SEI;
+
+	--with Utils::USB;
+	-- CPU BCM2836 SoC
+	-- 4 Cores ARM Cortex-A53
+	-- 900MHz CPU Speed
+	-- 1GB RAM LPDDR2
+	-- Ethernet
+	-- Saída HDMI
+	-- Saída ana´logida vídeo
+	-- Socket de MicroSD
+	-- 4 portas USB 2.0 OK
+	--
+	--
+	-- FAZER BENCHMARK 7Z Do Raspberry
+	--
+	--
+	--Este pacote descreve um modelo do computador Single-Board Raspberry Pi2B
+	--Esta placa inclui um chip BCM2836, quad-cortex A53 ARM
+	system Raspberry
+	features
+		USB_1: provides bus access USB::USB.USB2;
+		USB_2: provides bus access USB::USB.USB2;
+		USB_3: provides bus access USB::USB.USB2;
+		USB_4: provides bus access USB::USB.USB2;
+		Ethernet: provides bus access Ethernet.impl;
+		Hdmi_1: out event data port;
+		Gpio_Bus: provides bus access GPIO.impl;
+end Raspberry;
+
+	
+	system implementation Raspberry.impl
+		subcomponents
+			Proc1: processor Cortex_A53.c1;
+			Proc2: processor Cortex_A53.c2;
+			Proc3: processor Cortex_A53.c3;
+			Proc4: processor Cortex_A53.c4;
+			PiBus: bus AMBA.impl;
+			Ethernet_Bus: bus Ethernet.impl;
+			Ethernet1: device Pi_Ethernet;
+			Usb1: bus USB::USB.USB2;
+			Usb2: bus USB::USB.USB2;
+			Usb3: bus USB::USB.USB2;
+			Usb4: bus USB::USB.USB2;
+			HDMI: device HDMI.impl;
+			RaspRAM: memory RAM.G1;
+			RaspSD: memory SDCard.G16;
+			USB2_Bridge: device Usb2_Bridge.impl;
+			GPIO_Bridge: device GPIO_Bridge.impl;
+			GPIOBus: bus GPIO.impl;
+		connections
+			RPI01: bus access USB_1 -> Usb1;
+			RPI02: bus access USB_2 -> Usb2;
+			RPI03: bus access USB_3 -> Usb3;
+			RPI04: bus access USB_4 -> Usb4;
+			
+			RPI05: bus access Ethernet_Bus -> Ethernet;
+			RPI06: port HDMI.Hdmi_Port -> Hdmi_1;
+			RPI16: bus access HDMI.CPU_Bus -> PiBus;
+			
+			RPI07: bus access Proc1.Proc_Bus -> PiBus;
+			RPI08: bus access Proc2.Proc_Bus -> PiBus;
+			RPI09: bus access Proc3.Proc_Bus -> PiBus;
+			RPI10: bus access Proc4.Proc_Bus -> PiBus;
+			
+			RPI11: bus access RaspSD.Proc_bus -> PiBus;
+			RPI12: bus access RaspRAM.Proc_Bus -> PiBus;
+			RPI13: bus access Ethernet1.Cpu_Bus -> PiBus;
+			RPI14: bus access Ethernet1.Eth -> Ethernet_Bus;
+			RPI15: bus access GPIOBus -> GPIO_Bus;
+			RPI22: bus access GPIO_Bridge.GPIO_Bus -> GPIOBus;
+			RPI23: bus access PiBus -> GPIO_Bridge.CPU_Bus;
+			
+			RPI17: bus access USB1 -> USB2_Bridge.USB_Bus;
+			RPI18: bus access USB2 -> USB2_Bridge.USB_Bus;
+			RPI19: bus access USB3 -> USB2_Bridge.USB_Bus;
+			RPI20: bus access USB4 -> USB2_Bridge.USB_Bus;
+			RPI21: bus access USB2_Bridge.Proc_Bus -> PiBus;
+			
+	end Raspberry.impl;
+
+	--Bus para comunicação
+	bus AMBA
+	end AMBA;
+
+	bus implementation AMBA.impl
+	end AMBA.impl;
+
+	--Processador
+	processor Cortex_A53
+		features
+			Proc_bus: requires bus access AMBA.impl;
+		properties
+			SEI::MIPSCapacity => 1300.0 MIPS; --Alterar após benchmarking
+	end Cortex_A53;
+	
+
+	processor implementation Cortex_A53.c1
+	end Cortex_A53.c1;
+
+	processor implementation Cortex_A53.c2
+	end Cortex_A53.c2;
+
+	processor implementation Cortex_A53.c3
+	end Cortex_A53.c3;
+
+	processor implementation Cortex_A53.c4
+	end Cortex_A53.c4;
+
+	--DRAM
+	memory RAM
+		features
+			Proc_bus: requires bus access AMBA.impl;
+	end RAM;
+	
+	memory implementation RAM.G1
+		properties
+			SEI::RAMCapacity => 1.0 GByte;
+	end RAM.G1;
+	
+	--Armazenamento 
+	memory SDCard
+		features
+			Proc_bus: requires bus access AMBA.impl;
+	end SDCard;
+	
+	memory implementation SDCard.G16
+		properties
+			SEI::RAMCapacity => 16.0 GByte; 
+	end SDCard.G16;
+	
+	--Ethernet
+	bus Ethernet
+	end Ethernet;
+
+	bus implementation Ethernet.Impl
+		properties
+			Sei::BandWidthCapacity => 253.0 MBytesps;
+	end Ethernet.Impl;
+
+	device Generic_ethernet
+		features
+			Eth: requires bus access Ethernet.Impl;
+	end Generic_ethernet;
+	
+	device Pi_Ethernet EXTENDS Generic_Ethernet
+		features 
+			CPU_Bus: requires bus access AMBA.impl;
+	end Pi_Ethernet;
+	
+	device implementation Pi_Ethernet.impl
+	end Pi_Ethernet.impl;
+	
+	--HDMI
+	device HDMI 
+		features
+			Hdmi_Port: out event data port;
+			CPU_Bus: requires bus access AMBA.impl;
+	end HDMI;
+	
+	device implementation HDMI.impl
+	end HDMI.impl;
+	
+	--GPIO
+	bus GPIO
+	end GPIO;
+
+	bus implementation GPIO.impl
+	end GPIO.impl;
+	
+		
+	--Pontes
+	device Gpio_Bridge
+		features
+			Cpu_Bus: requires bus access AMBA.impl;
+			Gpio_Bus: requires bus access GPIO.impl;
+	end Gpio_Bridge;
+	
+	device implementation Gpio_Bridge.impl
+	end Gpio_Bridge.impl;
+	
+	device USB2_Bridge
+		features 
+			Proc_Bus: requires bus access AMBA.impl;
+			Usb_Bus: requires bus access USB::USB.USB2;
+	end USB2_Bridge;
+	
+	device implementation USB2_Bridge.impl
+	end USB2_Bridge.impl;
+	
+end Raspberry;
+
+package USB
+public
+	with Bus_Properties;
+	
+	bus USB
+	end USB;
+	
+	bus implementation USB.Impl
+	end USB.Impl;
+	
+	bus implementation USB.USB2
+		properties
+			Bus_Properties::Available_Bandwidth => (60 MBytesps);
+	end USB.USB2;
+	
+
+	
+end USB;

@@ -1,0 +1,27 @@
+package SoftwareSystem
+public
+	with Nodes;
+	
+	system SoftwareSystem
+	end SoftwareSystem;
+	
+	system implementation SoftwareSystem.color_tracker
+
+	subcomponents
+		usb_cam: process Nodes::usb_cam_node.impl;
+		img_filter: process Nodes::image_filter.impl;
+		img_display1: process Nodes::image_display.one_impl;
+		img_display2: process Nodes::image_display.two_impl;
+		color_tracker: process Nodes::color_tracker.impl;
+		pos2cmd: process Nodes::pos2cmd_vel.impl;
+
+	connections
+		SoftwareSystem_color_tracker_new_connection: port usb_cam.image_raw -> img_display1.image_in;
+		SoftwareSystem_color_tracker_new_connection2: port usb_cam.image_raw -> img_filter.image_in;
+		SoftwareSystem_color_tracker_new_connection3: port img_filter.filtered_out -> color_tracker.filtered_in;
+		SoftwareSystem_color_tracker_new_connection4: port color_tracker.pos_color_out -> pos2cmd.posicao_in;
+		SoftwareSystem_color_tracker_new_connection5: port img_filter.filtered_out -> img_display2.image_in;
+end SoftwareSystem.color_tracker;
+
+
+end SoftwareSystem;

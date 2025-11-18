@@ -1,46 +1,97 @@
 package Nodes
 public
-	With Ros_properties;
+	With Ros_Messages_Properties;
 	with Other_Properties;
-	--with Devices;
+	with Ros;
+	node renames process Ros::Node;
 	
-	process node
-	end node;
-	process implementation node.impl
-	end node.impl;
-	
-	-----------------------------------------------------------------------------
-	
-	process publishercamera extends node
+---------------------------------------------------------------------------------
+
+	process usb_cam_node extends node
 		features
-			Webcam_Stream_in: in event data port Other_Properties::videostream.atumalaca_impl;
-			Video_Stream_out: out event data port Ros_Properties::image.atumalaca_impl;
-	end publishercamera;
+			image_raw: out event data port Ros_Messages_Properties::image.atumalaca_impl;
+	end usb_cam_node;
 	
-	process implementation publishercamera.impl extends node.impl
-		subcomponents 
-			Pub: thread Ros_properties::publishthread.impl;
-		connections 
-			cam_in: port Webcam_Stream_in -> Pub.in_port;
-			cam_out: port Pub.out_port -> Video_Stream_out;
-	end publishercamera.impl;
-	
-	-----------------------------------------------------------------------------
-	
-	process displaycamera extends node
-		features
-			Video_Stream_in: in event data port Ros_Properties::image.atumalaca_impl;
-	end displaycamera;
-	
-	process implementation displaycamera.impl extends node.impl
-		-- TODO: implementar saida do vídeo por CV2
-		subcomponents 
-			Sub: thread Ros_Properties::subscriberthread.impl;
+	process implementation usb_cam_node.impl
+		subcomponents
+			Pub: thread Ros_Messages_Properties::PublisherImage.impl;
 		connections
-			cam_in: port Video_Stream_in -> Sub.in_port;
-	end displaycamera.impl;
+			frame: port Pub.out_port -> image_raw;
+	end usb_cam_node.impl;
 	
-	-----------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+	process image_filter extends node
+		features
+			image_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+			filtered_out: out event data port Ros_Messages_Properties::image.atumalaca_impl;
+	end image_filter;
+	
+	process implementation image_filter.impl 
+		subcomponents
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+			Pub: thread Ros_Messages_Properties::PublisherImage.impl;
+		connections 
+			img_in: port image_in -> Sub.in_port;
+			flt_out: port Pub.out_port -> filtered_out;
+	end image_filter.impl;
+
+---------------------------------------------------------------------------------
+
+	process image_display extends node
+		features
+			image_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+	end image_display;
+
+	process implementation image_display.one_impl 
+		subcomponents 
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+		connections
+			img_in: port image_in -> Sub.in_port;
+	end image_display.one_impl;
+	
+	process implementation image_display.two_impl 
+		subcomponents 
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+		connections
+			img_in: port image_in -> Sub.in_port;
+	end image_display.two_impl;
+
+---------------------------------------------------------------------------------
+
+	process color_tracker extends node
+	    features
+	        filtered_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+	        pos_color_out: out event data port Ros_Messages_Properties::Point.impl;
+	end color_tracker;
+	
+	process implementation color_tracker.impl
+	    subcomponents
+	        Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+	        Pub: thread Ros_Messages_Properties::PublisherPoint.impl;
+	    connections
+	        recv_filtered: port filtered_in -> Sub.in_port;
+	        send_pos: port Pub.out_port -> pos_color_out;
+	end color_tracker.impl;
+
+
+---------------------------------------------------------------------------------
+
+	process pos2cmd_vel extends node
+		features
+			posicao_in: in event data port Ros_Messages_Properties::Point.impl;
+			cmd_vel_out: out event data port Ros_Messages_Properties::Twist.impl;
+	end pos2cmd_vel;
+	
+	process implementation pos2cmd_vel.impl
+		subcomponents
+			Pub: thread Ros_Messages_Properties::PublisherTwist;
+			Sub: thread Ros_Messages_Properties::SubscriberPoint;
+		connections 
+			pos_in: port posicao_in -> Sub.in_port;
+			cmdvel_out: port Pub.out_port -> cmd_vel_out;
+	end pos2cmd_vel.impl;
+
 	
 		
 end Nodes;

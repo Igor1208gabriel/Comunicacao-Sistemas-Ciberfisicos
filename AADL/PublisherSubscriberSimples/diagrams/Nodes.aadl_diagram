@@ -7,18 +7,18 @@
           <seg>type_extension</seg>
         </bo>
         <bendpoints>
-          <point x="431.20574951171875" y="220.5"/>
-          <point x="437.20574951171875" y="220.5"/>
-          <point x="437.20574951171875" y="175.5"/>
-          <point x="443.20574951171875" y="175.5"/>
+          <point x="661.0" y="261.0"/>
+          <point x="667.0" y="261.0"/>
+          <point x="667.0" y="216.0"/>
+          <point x="673.0" y="216.0"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>displaycamera</seg>
       </bo>
-      <position x="284.0534133911133" y="203.0"/>
-      <size width="143.15235137939453" height="35.0"/>
+      <position x="284.0" y="203.0"/>
+      <size width="143.0" height="35.0"/>
     </element>
     <element uuid="fa059bb0-57dd-4331-a1c3-47268ff238ee" manual="true">
       <element uuid="298ee213-f5e0-40a6-b842-7d28c9247364" manual="true">
@@ -26,24 +26,24 @@
           <seg>implementation_extension</seg>
         </bo>
         <bendpoints>
-          <point x="255.44924926757812" y="159.6666717529297"/>
-          <point x="282.763916015625" y="159.6666717529297"/>
+          <point x="485.0" y="200.0"/>
+          <point x="513.0" y="200.0"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>displaycamera.impl</seg>
       </bo>
-      <position x="80.14583587646484" y="142.16666666666666"/>
-      <size width="171.30340576171875" height="35.0"/>
+      <position x="80.0" y="142.0"/>
+      <size width="171.0" height="35.0"/>
     </element>
     <element uuid="d2b0e4b7-d5f3-4c92-9fea-a93b9076b942" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>node</seg>
       </bo>
-      <position x="447.2057571411133" y="145.5"/>
-      <size width="81.66145706176758" height="40.0"/>
+      <position x="447.0" y="146.0"/>
+      <size width="82.0" height="40.0"/>
     </element>
     <element uuid="8ab2a624-3233-4f96-a1f0-fc7ab33dad58" manual="true">
       <element uuid="e7efcec0-a3fa-493d-b562-81d600ccfea7" manual="true">
@@ -51,16 +51,16 @@
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="400.576416015625" y="165.5"/>
-          <point x="443.20574951171875" y="165.5"/>
+          <point x="631.0" y="206.0"/>
+          <point x="673.0" y="206.0"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>node.impl</seg>
       </bo>
-      <position x="286.7639185587565" y="148.0"/>
-      <size width="109.81249237060547" height="35.0"/>
+      <position x="287.0" y="148.0"/>
+      <size width="110.0" height="35.0"/>
     </element>
     <element uuid="ec9ebecc-745c-4f48-a651-c979abbc4bc2" manual="true">
       <element uuid="ae7def6b-6496-4c44-a247-e81f63b4b8f2" manual="true">
@@ -68,18 +68,18 @@
           <seg>type_extension</seg>
         </bo>
         <bendpoints>
-          <point x="431.20574951171875" y="110.5"/>
-          <point x="437.20574951171875" y="110.5"/>
-          <point x="437.20574951171875" y="155.5"/>
-          <point x="443.20574951171875" y="155.5"/>
+          <point x="661.0" y="151.0"/>
+          <point x="667.0" y="151.0"/>
+          <point x="667.0" y="196.0"/>
+          <point x="673.0" y="196.0"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>publishercamera</seg>
       </bo>
-      <position x="271.4492416381836" y="93.0"/>
-      <size width="155.75652313232422" height="35.0"/>
+      <position x="271.0" y="93.0"/>
+      <size width="156.0" height="35.0"/>
     </element>
     <element uuid="597f5e54-fb7c-400f-9c64-a2c92deab906" manual="true">
       <element uuid="c4183681-9cc5-490e-a1b9-fd0f3359e86d" manual="true">
@@ -87,50 +87,77 @@
           <seg>implementation_extension</seg>
         </bo>
         <bendpoints>
-          <point x="255.44924926757812" y="214.6666717529297"/>
-          <point x="261.4492492675781" y="214.6666717529297"/>
-          <point x="261.4492492675781" y="171.3333282470703"/>
-          <point x="282.763916015625" y="171.3333282470703"/>
+          <point x="485.0" y="255.0"/>
+          <point x="491.0" y="255.0"/>
+          <point x="491.0" y="211.0"/>
+          <point x="513.0" y="211.0"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>publishercamera.impl</seg>
       </bo>
-      <position x="67.54166412353516" y="197.16666666666666"/>
-      <size width="183.90757751464844" height="35.0"/>
+      <position x="68.0" y="197.0"/>
+      <size width="184.0" height="35.0"/>
     </element>
-    <element uuid="e46daf28-9feb-41b8-8360-d669d00b10ce" manual="true">
-      <bo>
-        <seg>classifier</seg>
-        <seg>webcam</seg>
-      </bo>
-      <position x="222.52994537353516" y="38.0"/>
-      <size width="101.64843368530273" height="35.0"/>
-    </element>
-    <element uuid="bf856791-cb1e-4fb2-b586-b246b35ff1ed" manual="true">
-      <element uuid="0417eb78-7bd5-4fac-9e89-714c93fa7f45" manual="true">
+    <element uuid="ef9a062c-6410-415e-a279-18d89666cca3" manual="true">
+      <element uuid="f3a94ae1-4690-48c0-8f38-fc2967f431ef" manual="true">
         <bo>
-          <seg>realization</seg>
+          <seg>implementation_extension</seg>
         </bo>
-        <bendpoints>
-          <point x="206.52993774414062" y="55.5"/>
-          <point x="218.52993774414062" y="55.5"/>
-        </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
-        <seg>webcam.impl</seg>
+        <seg>Ros_Node.color_tracker</seg>
       </bo>
-      <position x="67.54166412353516" y="38.0"/>
-      <size width="134.98828125" height="35.0"/>
+      <position x="500.00000000000006" y="29.999999999999986"/>
+      <size width="157.76953125" height="48.0"/>
+    </element>
+    <element uuid="ecd1993b-2699-4390-98f6-3b3f544ad849" manual="true">
+      <element uuid="3c9e123e-75d9-4ff5-8c24-064226f6b7a8" manual="true">
+        <bo>
+          <seg>implementation_extension</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>Ros_Node.image_filter</seg>
+      </bo>
+      <position x="51.19999999999997" y="34.66666666666664"/>
+      <size width="157.76953125" height="48.0"/>
+    </element>
+    <element uuid="0b51cdae-a53b-4b85-b619-1fd6b52870a4" manual="true">
+      <element uuid="2ca1d65b-2809-4575-ae37-c0c66478efdb" manual="true">
+        <bo>
+          <seg>implementation_extension</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>Ros_Node.pos2cmd_vel</seg>
+      </bo>
+      <position x="344.5333333333333" y="297.99999999999994"/>
+      <size width="159.2669219970703" height="48.0"/>
+    </element>
+    <element uuid="f8930fb4-e900-43ba-b3b1-8e8afba10eaa" manual="true">
+      <element uuid="155b1f4a-9fd0-40b1-9687-2d0de74b164c" manual="true">
+        <bo>
+          <seg>implementation_extension</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>Ros_Node.usb_cam_nd</seg>
+      </bo>
+      <position x="105.19999999999996" y="71.99999999999999"/>
+      <size width="157.76953125" height="48.0"/>
     </element>
     <bo>
       <seg>package</seg>
       <seg>Nodes</seg>
     </bo>
-    <position/>
-    <size width="540.8672256469727" height="250.0"/>
+    <position x="230.0" y="40.0"/>
+    <size width="710.0" height="370.0"/>
   </element>
   <config type="package" connectionPrimaryLabelsVisible="false">
     <enabledAadlProperties/>
