@@ -26,7 +26,7 @@ public
 		USB_2: provides bus access USB::USB.USB2;
 		USB_3: provides bus access USB::USB.USB2;
 		USB_4: provides bus access USB::USB.USB2;
-		Ethernet: provides bus access Ethernet.impl;
+		Ethernet: provides bus access Ethernet.Impl;
 		Hdmi_1: out event data port;
 		Gpio_Bus: provides bus access GPIO.impl;
 end Raspberry;
@@ -34,23 +34,32 @@ end Raspberry;
 	
 	system implementation Raspberry.impl
 		subcomponents
+			--Processadores
 			Proc1: processor Cortex_A53.c1;
 			Proc2: processor Cortex_A53.c2;
 			Proc3: processor Cortex_A53.c3;
 			Proc4: processor Cortex_A53.c4;
+			
+			--Buses internos
 			PiBus: bus AMBA.impl;
-			Ethernet_Bus: bus Ethernet.impl;
-			Ethernet1: device Pi_Ethernet;
+			Ethernet_Bus: bus Ethernet.Impl;
+			GPIOBus: bus GPIO.impl;
+			
+			--Devices
+			Ethernet1: device Pi_Ethernet.impl;
+			HDMI: device HDMI.impl;
+			USB2_Bridge: device Usb2_Bridge.impl;
+			GPIO_Bridge: device GPIO_Bridge.impl;
+			
+			--USB
 			Usb1: bus USB::USB.USB2;
 			Usb2: bus USB::USB.USB2;
 			Usb3: bus USB::USB.USB2;
 			Usb4: bus USB::USB.USB2;
-			HDMI: device HDMI.impl;
+			
+			--Memória
 			RaspRAM: memory RAM.G1;
 			RaspSD: memory SDCard.G16;
-			USB2_Bridge: device Usb2_Bridge.impl;
-			GPIO_Bridge: device GPIO_Bridge.impl;
-			GPIOBus: bus GPIO.impl;
 		connections
 			RPI01: bus access USB_1 -> Usb1;
 			RPI02: bus access USB_2 -> Usb2;
@@ -87,6 +96,9 @@ end Raspberry;
 	end AMBA;
 
 	bus implementation AMBA.impl
+		properties
+        	SEI::BandwidthCapacity => 800.0 MBytesps;
+	        --Para o AADL não reclamar, coloquei um limite alto arbitrário
 	end AMBA.impl;
 
 	--Processador
@@ -146,7 +158,7 @@ end Raspberry;
 			Eth: requires bus access Ethernet.Impl;
 	end Generic_ethernet;
 	
-	device Pi_Ethernet EXTENDS Generic_Ethernet
+	device Pi_Ethernet EXTENDS Generic_ethernet
 		features 
 			CPU_Bus: requires bus access AMBA.impl;
 	end Pi_Ethernet;
@@ -169,6 +181,10 @@ end Raspberry;
 	end GPIO;
 
 	bus implementation GPIO.impl
+		properties
+        	SEI::BandwidthCapacity => 50.0 MBytesps;
+	        --Para o AADL não reclamar, coloquei um limite alto arbitrário
+	
 	end GPIO.impl;
 	
 		

@@ -1,0 +1,18 @@
+Bound Resource Budget Analysis Report
+
+
+Processor Summary Report: 
+*   Processor Raspberry.Proc1: Bound app's have no MIPS budget.
+No application components bound to Raspberry.Proc2 with MIPS capacity 1300,000 MIPS
+No application components bound to Raspberry.Proc3 with MIPS capacity 1300,000 MIPS
+No application components bound to Raspberry.Proc4 with MIPS capacity 1300,000 MIPS
+
+Memory Summary Report: 
+  No application components bound to Raspberry.RaspRAM with RAM capacity 1000000,000 KBYTE
+  No application components bound to Raspberry.RaspSD with RAM capacity 16000000,000 KBYTE
+
+
+Detailed Workload Report:  for Processor Raspberry.Proc1 with Capacity 1300,000 MIPS
+
+Component,Budget,Actual
+Total,,0,000 MIPS

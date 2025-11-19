@@ -1,8 +1,8 @@
 package Nodes
 public
 	With Ros_Messages_Properties;
-	with Other_Properties;
 	with Ros;
+	with SEI;
 	node renames process Ros::Node;
 	
 ---------------------------------------------------------------------------------
@@ -10,6 +10,8 @@ public
 	process usb_cam_node extends node
 		features
 			image_raw: out event data port Ros_Messages_Properties::image.atumalaca_impl;
+		properties
+			SEI::MIPSBudget => 150.0 MIPS;
 	end usb_cam_node;
 	
 	process implementation usb_cam_node.impl
@@ -25,6 +27,8 @@ public
 		features
 			image_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
 			filtered_out: out event data port Ros_Messages_Properties::image.atumalaca_impl;
+		properties
+			SEI::MIPSBudget => 250.0 MIPS;
 	end image_filter;
 	
 	process implementation image_filter.impl 
@@ -41,6 +45,8 @@ public
 	process image_display extends node
 		features
 			image_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+		properties
+			SEI::MIPSBudget => 80.0 MIPS;
 	end image_display;
 
 	process implementation image_display.one_impl 
@@ -63,6 +69,8 @@ public
 	    features
 	        filtered_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
 	        pos_color_out: out event data port Ros_Messages_Properties::Point.impl;
+	    properties
+			SEI::MIPSBudget => 120.0 MIPS;
 	end color_tracker;
 	
 	process implementation color_tracker.impl
@@ -81,6 +89,8 @@ public
 		features
 			posicao_in: in event data port Ros_Messages_Properties::Point.impl;
 			cmd_vel_out: out event data port Ros_Messages_Properties::Twist.impl;
+		properties
+			SEI::MIPSBudget => 50.0 MIPS;
 	end pos2cmd_vel;
 	
 	process implementation pos2cmd_vel.impl

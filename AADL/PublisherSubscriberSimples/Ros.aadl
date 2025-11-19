@@ -3,7 +3,6 @@ public
 
 	with Sei;
 	with Ros_Properties;
-	with Ros_Data;
 
 -- This package is intended to model fundamental mechanisms in the ROS middle-ware.
 -- A ROS based application is made of nodes communicating through topics, thanks to
@@ -150,15 +149,7 @@ public
 -- from [Bardaro19] "From Models To Software Through Automatic Transformations:
 -- An AADL To ROS end-to-end Toolchain"
 --------------------------------------------------------------------
-	thread Callback extends Ros_Thread
-		--features
-		--message: out data port;
-	end Callback;
 
-	thread implementation Callback.Impl extends Ros_Thread.Impl
-		subcomponents
-			Message: data Ros_Data::Topic;
-	end Callback.Impl;
 
 -------------------------------------------------------------------
 -- A thread type to implement publishers in nodes--
@@ -189,13 +180,6 @@ public
 -------------------------------------------------------------------
 -- A thread type to implement TF broadcaster in nodes
 -------------------------------------------------------------------
-	thread TransformBroadcaster extends Ros_Thread
-		features
-			Tf_Broadcasted: out event data port Ros_Data::TfMessage.Impl;
-	end TransformBroadcaster;
-
-	thread implementation TransformBroadcaster.Impl extends Ros_Thread.Impl
-	end TransformBroadcaster.Impl;
 
 -------------------------------------------------------------------
 -- A thread type to implement TF listener in nodes

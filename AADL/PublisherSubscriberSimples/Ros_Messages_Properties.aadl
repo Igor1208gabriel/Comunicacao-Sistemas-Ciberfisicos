@@ -1,6 +1,8 @@
 package Ros_Messages_Properties
 public
 	with Other_Properties; 
+	with SEI;
+	
 	data topic
 	end topic;
 	
@@ -57,15 +59,19 @@ public
 		
 	thread PublisherImage
 		features
-	  in_port: in event data port Other_Properties::videostream.atumalaca_impl;
-      out_port: out event data port image.atumalaca_impl; -- publica mensagens
+		  in_port: in event data port Other_Properties::videostream.atumalaca_impl;
+	      out_port: out event data port image.atumalaca_impl; -- publica mensagens
+	    properties
+			SEI::MIPSBudget => 15.0 MIPS;
   		end PublisherImage;
 	thread implementation PublisherImage.impl
 	  end PublisherImage.impl;
 	 
 	thread SubscriberImage
-    features
-      in_port: in event data port image.atumalaca_impl; -- recebe mensagens
+	    features
+	      in_port: in event data port image.atumalaca_impl; -- recebe mensagens
+	    properties
+			SEI::MIPSBudget => 15.0 MIPS;
   		end SubscriberImage;
 	thread implementation SubscriberImage.impl
 	  end SubscriberImage.impl;
@@ -74,28 +80,36 @@ public
 	  
 	 thread PublisherPoint
 		features
-      out_port: out event data port Point.Impl; -- publica mensagens
+      		out_port: out event data port Point.Impl; -- publica mensagens
+      	properties
+			SEI::MIPSBudget => 15.0 MIPS;
   		end PublisherPoint;
 	thread implementation PublisherPoint.impl
 	  end PublisherPoint.impl;
 	 
 	thread SubscriberPoint
-    features
-      in_port: in event data port Point.Impl; -- recebe mensagens
+	    features
+	      in_port: in event data port Point.Impl; -- recebe mensagens
+	    properties
+			SEI::MIPSBudget => 15.0 MIPS;
   		end SubscriberPoint;
 	thread implementation SubscriberPoint.impl
 	  end SubscriberPoint.impl;
 	  
 	  thread PublisherTwist
 		features
-      out_port: out event data port Twist.Impl; -- publica mensagens
+      		out_port: out event data port Twist.Impl; -- publica mensagens
+      	properties
+			SEI::MIPSBudget => 15.0 MIPS;
   		end PublisherTwist;
 	thread implementation PublisherTwist.impl
 	  end PublisherTwist.impl;
 	 
 	thread SubscriberTwist
-    features
-      in_port: in event data port Twist.Impl; -- recebe mensagens
+    	features
+      		in_port: in event data port Twist.Impl; -- recebe mensagens
+      	properties
+			SEI::MIPSBudget => 15.0 MIPS;
   		end SubscriberTwist;
 	thread implementation SubscriberTwist.impl
 	  end SubscriberTwist.impl;

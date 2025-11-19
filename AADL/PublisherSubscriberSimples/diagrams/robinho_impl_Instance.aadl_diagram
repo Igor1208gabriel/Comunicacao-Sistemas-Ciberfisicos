@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="099ca3d8-67f1-45a7-b18f-bb9ebdcc537c" manual="true">
+    <element uuid="9839f3a7-b785-42fa-9d7d-ba1f3ba57cf5" manual="true">
+      <element uuid="ddc9652a-e413-4ed3-947d-b437f924df69" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>Ethernet</seg>
+        </bo>
+        <position y="310.0"/>
+      </element>
+      <element uuid="6240faac-bfa6-46fd-873f-5c448535588c" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>Gpio_Bus</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="55fec154-1c1a-4953-a742-b3e9de6c13b3" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>Hdmi_1</seg>
+        </bo>
+        <position y="260.0"/>
+      </element>
+      <element uuid="71302267-f05a-49c1-8709-663aec1e4951" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>USB_1</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="1d163513-e640-4241-abe2-39a2045c0ac1" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>USB_2</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="d4772f9c-f8d4-4251-b871-433ca6c76e5c" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>USB_3</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="659b4818-f8d9-4563-8343-9e1f3a46a17f" manual="true" dockArea="left">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>feature_instance</seg>
+          <seg>USB_4</seg>
+        </bo>
+        <position y="210.0"/>
+      </element>
+      <bo>
+        <seg>org.osate.ge.diagrams.instance</seg>
+        <seg>component_instance</seg>
+        <seg>Raspberry</seg>
+      </bo>
+      <position x="118.08203125" y="38.0"/>
+      <size width="259.80208587646484" height="360.0"/>
+    </element>
+    <element uuid="66b802a7-32f1-4b4b-a61c-8b4f8db2784e" manual="true">
+      <bo>
+        <seg>org.osate.ge.diagrams.instance</seg>
+        <seg>component_instance</seg>
+        <seg>ROS</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="86.08203125" height="35.0"/>
+    </element>
+    <bo>
+      <seg>org.osate.ge.diagrams.instance</seg>
+      <seg>system_instance</seg>
+      <seg>/system/instances/robinho_robinho_impl_instance.aaxl2</seg>
+    </bo>
+    <position x="110.0" y="140.0"/>
+    <size width="389.8841247558594" height="410.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>org.osate.ge.diagrams.instance</seg>
+      <seg>system_instance</seg>
+      <seg>/system/instances/robinho_robinho_impl_instance.aaxl2</seg>
+    </context>
+  </config>
+</diagram:Diagram>

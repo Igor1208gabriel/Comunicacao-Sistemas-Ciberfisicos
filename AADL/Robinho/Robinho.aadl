@@ -1,0 +1,17 @@
+package Robinho
+public
+
+	system robinho
+	end robinho;
+
+	system implementation robinho.impl
+		subcomponents
+			rpi: system;
+			ros: system;
+	end robinho.impl;
+
+	system new_classifier
+		prototypes
+			new_classifier_new_prototype: data;
+	end new_classifier;
+end Robinho;

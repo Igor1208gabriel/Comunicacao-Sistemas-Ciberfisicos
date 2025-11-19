@@ -1,0 +1,45 @@
+Not Bound Resource Budget Analysis Report
+
+Resource Summary: 
+  MIPS capacity 5200,000 MIPS : MIPS budget 0,000 MIPS
+  4 out of 4 with MIPS capacity
+*   0 out of 1 with MIPS budget
+
+  RAM capacity 17000000,000 KBYTE : RAM budget 0,000 KBYTE
+  4 out of 4 with RAM capacity
+*   0 out of 1 with RAM budget
+
+
+
+Detailed Processor MIPS Capacity Report 
+
+Component,Capacity
+processor Raspberry.Proc1, 1300,000 MIPS,
+processor Raspberry.Proc2, 1300,000 MIPS,
+processor Raspberry.Proc3, 1300,000 MIPS,
+processor Raspberry.Proc4, 1300,000 MIPS,
+Total, 5200,000 MIPS,
+
+
+Detailed MIPS Budget Report 
+
+Component,Budget,Actual,Notes
+  device Raspberry.HDMI,   0,000 MIPS,  0,000 MIPS,
+system Raspberry, 0,000 MIPS,0,000 MIPS,
+Total, ,0,000 MIPS,
+
+
+Detailed RAM Capacity Report 
+
+Component,Capacity
+memory Raspberry.RaspRAM, 1000000,000 KBYTE,
+memory Raspberry.RaspSD, 16000000,000 KBYTE,
+Total, 17000000,000 KBYTE,
+
+
+Detailed RAM Budget Report 
+
+Component,Budget,Actual,Notes
+  device Raspberry.HDMI,   0,000 KBYTE,  0,000 KBYTE,
+system Raspberry, 0,000 KBYTE,0,000 KBYTE,
+Total, ,0,000 KBYTE,
