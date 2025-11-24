@@ -1,0 +1,218 @@
+package Raspberry
+public
+	with USB;
+	with SEI;
+	with SoftwareSystem;
+	with Other_Properties;
+	with Ros_Messages_Properties;
+
+	--with Utils::USB;
+	-- CPU BCM2836 SoC
+	-- 4 Cores ARM Cortex-A53
+	-- 900MHz CPU Speed
+	-- 1GB RAM LPDDR2
+	-- Ethernet
+	-- Saída HDMI
+	-- Saída ana´logida vídeo
+	-- Socket de MicroSD
+	-- 4 portas USB 2.0 OK
+	--
+	--
+	-- FAZER BENCHMARK 7Z Do Raspberry
+	--
+	--
+	--Este pacote descreve um modelo do computador Single-Board Raspberry Pi2B
+	--Esta placa inclui um chip BCM2836, quad-cortex A53 ARM
+	system Raspberry
+		features
+			USB_1: provides bus access USB::USB.USB2;
+			USB_2: provides bus access USB::USB.USB2;
+			USB_3: provides bus access USB::USB.USB2;
+			USB_4: provides bus access USB::USB.USB2;
+			Ethernet: provides bus access Ethernet.Impl;
+			Hdmi_1: out event data port;
+
+			GPIO_in: in event data port Other_Properties::videostream.res_360x640;
+			GPIO_out: out event data port Ros_Messages_Properties::Point.Impl;
+	end Raspberry;
+
+	system implementation Raspberry.impl
+	subcomponents
+		--Processadores
+		Proc1: processor Cortex_A53.c1;
+		Proc2: processor Cortex_A53.c2;
+		Proc3: processor Cortex_A53.c3;
+		Proc4: processor Cortex_A53.c4;
+
+		--Buses internos
+		PiBus: bus AMBA.impl;
+		Ethernet_Bus: bus Ethernet.Impl;
+
+		--Devices
+		Usb1: bus USB::USB.USB2;
+		Usb2: bus USB::USB.USB2;
+		Usb3: bus USB::USB.USB2;
+		Usb4: bus USB::USB.USB2;
+
+		--Memória
+		RaspRAM: memory RAM.G1;
+		RaspSD: memory SDCard.G16;
+		SoftwareSystem: system SoftwareSystem::SoftwareSystem.color_tracker;
+		Ethernet1: device Pi_Ethernet.impl;
+		HDMI: device HDMI.impl;
+		USB2_Bridge: device Usb2_Bridge.impl;
+		GPIO_Bridge: device GPIO_Bridge.impl;
+	connections
+		RPI06: port HDMI.Hdmi_Port -> Hdmi_1;
+		RPI01: bus access USB_1 -> Usb1;
+		RPI02: bus access USB_2 -> Usb2;
+		RPI03: bus access USB_3 -> Usb3;
+		RPI04: bus access USB_4 -> Usb4;
+
+		RPI05: bus access Ethernet_Bus -> Ethernet;
+		RPI16: bus access HDMI.CPU_Bus -> PiBus;
+
+		RPI07: bus access Proc1.Proc_Bus -> PiBus;
+		RPI08: bus access Proc2.Proc_Bus -> PiBus;
+		RPI09: bus access Proc3.Proc_Bus -> PiBus;
+		RPI10: bus access Proc4.Proc_Bus -> PiBus;
+
+		RPI11: bus access RaspSD.Proc_bus -> PiBus;
+		RPI12: bus access RaspRAM.Proc_Bus -> PiBus;
+		RPI13: bus access Ethernet1.Cpu_Bus -> PiBus;
+		RPI14: bus access Ethernet1.Eth -> Ethernet_Bus;
+		--RPI15: bus access GPIOBus -> Gpio_Bus;
+		--RPI22: bus access GPIO_Bridge.GPIO_Bus -> GPIOBus;
+		RPI23: bus access PiBus -> GPIO_Bridge.CPU_Bus;
+
+		RPI17: bus access USB1 -> USB2_Bridge.USB_Bus;
+		RPI18: bus access USB2 -> USB2_Bridge.USB_Bus;
+		RPI19: bus access USB3 -> USB2_Bridge.USB_Bus;
+		RPI20: bus access USB4 -> USB2_Bridge.USB_Bus;
+		RPI21: bus access USB2_Bridge.Proc_Bus -> PiBus;
+
+		Raspberry_impl_new_connection2: bus access PiBus -> SoftwareSystem.Cam_in;
+		Raspberry_impl_new_connection3: bus access SoftwareSystem.HDMI_Out -> PiBus;
+
+		Raspberry_impl_new_connection: feature SoftwareSystem.GPIO_Out -> GPIO_Bridge.Cmd_in;
+		Raspberry_impl_new_connection4: feature GPIO_in -> GPIO_Bridge.Image_in;
+		Raspberry_impl_new_connection6: feature GPIO_Bridge.Position_Out -> GPIO_out;
+end Raspberry.impl;
+
+	--Bus para comunicação
+	bus AMBA
+	end AMBA;
+
+	bus implementation AMBA.impl
+		properties
+			SEI::BandwidthCapacity => 800.0 MBytesps;
+	--Para o AADL não reclamar, coloquei um limite alto arbitrário
+	end AMBA.impl;
+
+	--Processador
+	processor Cortex_A53
+		features
+			Proc_bus: requires bus access AMBA.impl;
+		properties
+			SEI::MIPSCapacity => 1300.0 MIPS; --Alterar após benchmarking
+	end Cortex_A53;
+
+	processor implementation Cortex_A53.c1
+	end Cortex_A53.c1;
+
+	processor implementation Cortex_A53.c2
+	end Cortex_A53.c2;
+
+	processor implementation Cortex_A53.c3
+	end Cortex_A53.c3;
+
+	processor implementation Cortex_A53.c4
+	end Cortex_A53.c4;
+
+	--DRAM
+	memory RAM
+		features
+			Proc_bus: requires bus access AMBA.impl;
+	end RAM;
+
+	memory implementation RAM.G1
+		properties
+			SEI::RAMCapacity => 1.0 GByte;
+	end RAM.G1;
+
+	--Armazenamento 
+	memory SDCard
+		features
+			Proc_bus: requires bus access AMBA.impl;
+	end SDCard;
+
+	memory implementation SDCard.G16
+		properties
+			SEI::RAMCapacity => 16.0 GByte;
+	end SDCard.G16;
+
+	--Ethernet
+	bus Ethernet
+	end Ethernet;
+
+	bus implementation Ethernet.Impl
+		properties
+			Sei::BandWidthCapacity => 253.0 MBytesps;
+	end Ethernet.Impl;
+
+	device Generic_ethernet
+		features
+			Eth: requires bus access Ethernet.Impl;
+	end Generic_ethernet;
+
+	device Pi_Ethernet EXTENDS Generic_ethernet
+		features
+			CPU_Bus: requires bus access AMBA.impl;
+	end Pi_Ethernet;
+
+	device implementation Pi_Ethernet.impl
+	end Pi_Ethernet.impl;
+
+	--HDMI
+	device HDMI
+		features
+			Hdmi_Port: out event data port;
+			CPU_Bus: requires bus access AMBA.impl;
+	end HDMI;
+
+	device implementation HDMI.impl
+	end HDMI.impl;
+
+	--GPIO
+	bus GPIO
+	end GPIO;
+
+	bus implementation GPIO.impl
+		properties
+			SEI::BandwidthCapacity => 50.0 MBytesps;
+	--Para o AADL não reclamar, coloquei um limite alto arbitrário
+	end GPIO.impl;
+
+	--Pontes
+	device Gpio_Bridge
+	features
+		Cpu_Bus: requires bus access AMBA.impl;
+
+		Cmd_in: requires bus access;
+		Image_in: in event data port;
+		Position_Out: out event data port;
+end Gpio_Bridge;
+
+	device implementation Gpio_Bridge.impl
+	end Gpio_Bridge.impl;
+
+	device USB2_Bridge
+		features
+			Proc_Bus: requires bus access AMBA.impl;
+			Usb_Bus: requires bus access USB::USB.USB2;
+	end USB2_Bridge;
+
+	device implementation USB2_Bridge.impl
+	end USB2_Bridge.impl;
+
+end Raspberry;

@@ -59,7 +59,7 @@ public
 		
 	thread PublisherImage
 		features
-		  in_port: in event data port Other_Properties::videostream.atumalaca_impl;
+		  in_port: in event data port Other_Properties::videostream.res_360x640;
 	      out_port: out event data port image.atumalaca_impl; -- publica mensagens
 	    properties
 			SEI::MIPSBudget => 15.0 MIPS;

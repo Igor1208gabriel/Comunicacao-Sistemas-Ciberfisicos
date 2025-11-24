@@ -1,0 +1,40 @@
+package Devices
+public
+	with Other_Properties;
+	with Ros_Messages_Properties;
+
+	--Aqui, ESP é simplificado para só dar output da câmera
+	device ESP32_res_360x640
+		features
+			cam_out: out data port Other_Properties::videostream.res_360x640;
+			pos_in: in data port Ros_Messages_Properties::Point.Impl;
+	end ESP32_res_360x640;
+
+	device implementation ESP32_res_360x640.impl
+	end ESP32_res_360x640.impl;
+
+	device ESP32_res_720x1080
+		features
+			cam_out: out data port Other_Properties::videostream.res_720x1080;
+			pos_in: in data port Other_Properties::point.impl;
+	end ESP32_res_720x1080;
+
+	device implementation ESP32_res_720x1080.impl
+	end ESP32_res_720x1080.impl;
+
+	device mouse
+		features
+			mouse_out: out event data port;
+	end mouse;
+
+	device implementation mouse.impl
+	end mouse.impl;
+
+	device teclado
+		features
+			teclado_out: out event data port;
+	end teclado;
+
+	device implementation teclado.impl
+	end teclado.impl;
+end Devices;
