@@ -97,6 +97,14 @@ public
 		Raspberry_impl_new_connection: feature SoftwareSystem.GPIO_Out -> GPIO_Bridge.Cmd_in;
 		Raspberry_impl_new_connection4: feature GPIO_in -> GPIO_Bridge.Image_in;
 		Raspberry_impl_new_connection6: feature GPIO_Bridge.Position_Out -> GPIO_out;
+
+		properties 
+			Actual_Processor_Binding => (reference(Proc1)) applies to SoftwareSystem.usb_cam;
+		    Actual_Processor_Binding => (reference(Proc2)) applies to SoftwareSystem.img_filter;
+		    Actual_Processor_Binding => (reference(Proc3)) applies to SoftwareSystem.img_display1;
+		    Actual_Processor_Binding => (reference(Proc4)) applies to SoftwareSystem.img_display2;
+		    Actual_Processor_Binding => (reference(Proc2)) applies to SoftwareSystem.color_tracker;
+		    Actual_Processor_Binding => (reference(Proc1)) applies to SoftwareSystem.pos2cmd;
 end Raspberry.impl;
 
 	--Bus para comunicação

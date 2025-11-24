@@ -63,6 +63,8 @@ public
 	      out_port: out event data port image.atumalaca_impl; -- publica mensagens
 	    properties
 			SEI::MIPSBudget => 15.0 MIPS;
+			Compute_Execution_Time => 5 ms .. 8 ms;
+   			Period => 33 ms; -- 30fps
   		end PublisherImage;
 	thread implementation PublisherImage.impl
 	  end PublisherImage.impl;
@@ -83,6 +85,8 @@ public
       		out_port: out event data port Point.Impl; -- publica mensagens
       	properties
 			SEI::MIPSBudget => 15.0 MIPS;
+			Compute_Execution_Time => 3 ms .. 5 ms;
+   			Period => 33 ms; -- 30fps
   		end PublisherPoint;
 	thread implementation PublisherPoint.impl
 	  end PublisherPoint.impl;
@@ -101,6 +105,8 @@ public
       		out_port: out event data port Twist.Impl; -- publica mensagens
       	properties
 			SEI::MIPSBudget => 15.0 MIPS;
+			Compute_Execution_Time => 3 ms .. 5 ms;
+   			Period => 33 ms; -- 30fps
   		end PublisherTwist;
 	thread implementation PublisherTwist.impl
 	  end PublisherTwist.impl;
