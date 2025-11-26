@@ -8,21 +8,22 @@ public
 	end robinho;
 
 	system implementation robinho.impl
-	subcomponents
-		Raspberry: system Raspberry::Raspberry.impl;
+		subcomponents
+			Raspberry: system Raspberry::Raspberry.impl;
 
-		ESP32: device Devices::ESP32_res_360x640.impl;
+			ESP32: device Devices::ESP32_res_360x640.impl;
 
-		Monitor: device Other_Properties::Monitor.impl;
-		Mouse: device Devices::mouse.impl;
-		Teclado: device Devices::teclado.impl;
-	connections
-		robinho_impl_new_connection: feature Raspberry.Hdmi_1 -> Monitor.HDMI_in;
+			Monitor: device Other_Properties::Monitor.impl;
+			Mouse: device Devices::mouse.impl;
+			Teclado: device Devices::teclado.impl;
+			Ponte_L298N: device;
+		connections
+			robinho_impl_new_connection: feature Raspberry.Hdmi_1 -> Monitor.HDMI_in;
 
-		robinho_impl_new_connection4: feature Mouse.mouse_out -> Raspberry.USB_1;
-		robinho_impl_new_connection5: feature Teclado.teclado_out -> Raspberry.USB_2;
-		robinho_impl_new_connection2: feature Raspberry.GPIO_out -> ESP32.pos_in;
-		robinho_impl_new_connection3: feature ESP32.cam_out -> Raspberry.GPIO_in;
-end robinho.impl;
+			robinho_impl_new_connection4: feature Mouse.mouse_out -> Raspberry.USB_1;
+			robinho_impl_new_connection5: feature Teclado.teclado_out -> Raspberry.USB_2;
+			robinho_impl_new_connection2: feature Raspberry.GPIO_out -> ESP32.pos_in;
+			robinho_impl_new_connection3: feature ESP32.cam_out -> Raspberry.GPIO_in;
+	end robinho.impl;
 
 end Robinho;

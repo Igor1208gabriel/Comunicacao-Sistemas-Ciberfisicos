@@ -3,14 +3,29 @@
 Robinho é desenhado como uma plataforma autônoma e distribuida que emprega diversos componentes de software para permitir percepção, tomada de decisões e atuação em tempo real. Sua infraestrutura é construida para garantir comunicação eficiente, escalabilidade de robustez em ambientes dinâmicos.
 
 \section{Componentes de Hardware}
+
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=\linewidth]{images/RobinhoHardware.png}
+    \caption{Modelo do Hardware do Raspberry Pi}\vspace{-0.5cm}
+\end{center}
+\end{figure}
+
 Robinho consiste dos seguintes componentes de hardware: 
 \begin{itemize}
     \item \textbf{Raspberry Pi 2B} - A unidade de processamento principal, responsável por executar o ambiente ROS2.
     \item \textbf{ESP-Cam} - Um microcontrolador equipado com um módulo de câmera, responsável por transmitir o vídeo para o RaspBerry Pi.
-    % \item \textbf{Driver de motor Ponte H} - Controla o movimento de ambos os motores.
+    \item \textbf{Driver de motor Ponte L298N} - Controla o movimento de ambos os motores.
+    \item \textbf{Mouse, Teclado e Monitor}, para interface com o sistema
 \end{itemize}
 
 \section{Componentes de Software}
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Software.png}
+    \caption{Modelo do Software no Raspberry Pi}\vspace{-0.5cm}
+\end{center}
+\end{figure}
 O Software de Robinho é majoritariamente construido com o ROS2 em Python, visando flexibilidade e modularidade. O software executado no ESP-CAM é escrito em C++.
 
 Os componentes de software incluem:
@@ -24,6 +39,12 @@ Estes componentes realizam trocas de mensagens seguindo um caminho de comunicaç
 
 
 \section{Operação do Sistema}
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=\linewidth]{images/RobinhoCompleto.png}
+    \caption{Modelo do sistema completo}\vspace{-0.5cm}
+\end{center}
+\end{figure}
 O sistema opera em um laço contínuo, onde:
 \begin{enumerate}
     \item O ESP-CAM captura um frame de vídeo e envia para o RaspBerry Pi.

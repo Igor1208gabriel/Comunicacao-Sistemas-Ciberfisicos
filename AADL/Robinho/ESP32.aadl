@@ -37,4 +37,12 @@ public
 
 	device implementation teclado.impl
 	end teclado.impl;
+
+	device Ponte_H_L298N
+		features
+			command_in: in event data port;
+	end Ponte_H_L298N;
+
+	device implementation Ponte_H_L298N.impl
+	end Ponte_H_L298N.impl;
 end Devices;
