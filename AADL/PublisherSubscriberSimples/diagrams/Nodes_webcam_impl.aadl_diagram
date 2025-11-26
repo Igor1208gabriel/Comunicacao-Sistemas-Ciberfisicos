@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="901c79a2-04c4-4903-925d-8eb552306077" manual="true">
+    <element uuid="92391e36-561e-46d0-b2af-acab201ae6f2" manual="true">
+      <element uuid="19828e32-f94b-4044-9227-f75af00c8fb1" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>conexao</seg>
+      </bo>
+    </element>
+    <element uuid="dfd686b5-7008-4b33-aa91-c50978771fc9" manual="true">
+      <bo>
+        <seg>realization</seg>
+      </bo>
+    </element>
+    <element uuid="f78b5dea-e0ef-407d-9ad9-d088240eee6e" manual="true">
+      <element uuid="034c4a7d-b9ab-44cb-bb48-5b3c74e4b6c5" manual="true">
+        <element uuid="0082ff50-3194-49f4-98e0-800163800dac" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>cam_in</seg>
+        </bo>
+      </element>
+      <element uuid="8aa48c01-4aa6-4e24-86ee-3c2619b91781" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>Video_Stream_in</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="6f2d6dcf-f0b3-4377-97eb-f8d30941edd4" manual="true">
+        <element uuid="97bbd869-9e84-41f0-bd91-e2442ebfd1e4" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>in_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>Sub</seg>
+        </bo>
+        <position/>
+        <size width="186.44921112060547" height="60.0"/>
+      </element>
+      <element uuid="a1d44c36-9417-4174-9fec-b351c9235a41" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Displaycamera</seg>
+      </bo>
+      <position x="434.11981201171875" y="38.0"/>
+      <size width="373.93621826171875" height="60.0"/>
+    </element>
+    <element uuid="e8a63bdd-f93d-4f75-b007-0d7343eb563c" manual="true">
+      <element uuid="ff0e3e1d-2d6b-4a71-b807-8930a5e66910" manual="true">
+        <element uuid="328d1002-3835-452f-a290-b4bb5d9f2fc2" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>cam_out</seg>
+        </bo>
+      </element>
+      <element uuid="19eb2a27-ad97-4d2f-8dfb-937f980a011f" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Video_Stream_out</seg>
+        </bo>
+        <position x="279.6771011352539" y="10.0"/>
+      </element>
+      <element uuid="5f7c0aac-b9ad-46dc-acc3-26b2f73fb921" manual="true">
+        <element uuid="9380dcf6-ebd0-4334-93af-2e15539395a3" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>out_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>Pub</seg>
+        </bo>
+        <position/>
+        <size width="202.76431274414062" height="60.0"/>
+      </element>
+      <element uuid="7ea2b4ea-9a50-4452-884a-c9bf0b9630e1" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>Publishercamera</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="402.1198196411133" height="60.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>webcam.impl</seg>
+    </bo>
+    <position y="10.0"/>
+    <size width="820.0560302734375" height="370.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>Nodes::webcam.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>
