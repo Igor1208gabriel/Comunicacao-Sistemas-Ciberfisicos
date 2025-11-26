@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="c253c5b1-3308-473a-a2b7-dd0c3aba30c0" manual="true">
+    <element uuid="0b84dadf-b8db-4d0b-bfb7-1f0762580d78" manual="true">
+      <element uuid="bc60f883-57ef-4e1d-b84f-c98031a97e4e" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>USB1</seg>
+        </bo>
+        <position y="82.0"/>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>Raspberry</seg>
+      </bo>
+      <position x="90.50390625" y="38.0"/>
+      <size width="154.30470275878906" height="122.0"/>
+    </element>
+    <bo>
+      <seg>package</seg>
+      <seg>Raspberry</seg>
+    </bo>
+    <position x="200.0" y="120.0"/>
+    <size width="730.0" height="380.0"/>
+  </element>
+  <config type="package" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>package</seg>
+      <seg>Raspberry</seg>
+    </context>
+  </config>
+</diagram:Diagram>
