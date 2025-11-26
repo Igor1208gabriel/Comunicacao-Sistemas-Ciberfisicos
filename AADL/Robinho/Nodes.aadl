@@ -1,0 +1,104 @@
+package Nodes
+public
+	With Ros_Messages_Properties;
+	with Ros;
+	with SEI;
+	node renames process Ros::Node;
+
+---------------------------------------------------------------------------------
+	process usb_cam_node extends node
+		features
+			image_raw: out event data port Ros_Messages_Properties::image.atumalaca_impl;
+			Cam_in: in event data port;
+		properties
+			SEI::MIPSBudget => 150.0 MIPS;
+	end usb_cam_node;
+
+	process implementation usb_cam_node.impl
+		subcomponents
+			Pub: thread Ros_Messages_Properties::PublisherImage.impl;
+		connections
+			frame: port Pub.out_port -> image_raw;
+	end usb_cam_node.impl;
+
+---------------------------------------------------------------------------------
+	process image_filter extends node
+		features
+			image_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+			filtered_out: out event data port Ros_Messages_Properties::image.atumalaca_impl;
+		properties
+			SEI::MIPSBudget => 250.0 MIPS;
+	end image_filter;
+
+	process implementation image_filter.impl
+		subcomponents
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+			Pub: thread Ros_Messages_Properties::PublisherImage.impl;
+		connections
+			img_in: port image_in -> Sub.in_port;
+			flt_out: port Pub.out_port -> filtered_out;
+	end image_filter.impl;
+
+---------------------------------------------------------------------------------
+	process image_display extends node
+		features
+			image_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+
+			image_out: out event data port;
+		properties
+			SEI::MIPSBudget => 80.0 MIPS;
+	end image_display;
+
+	process implementation image_display.one_impl
+		subcomponents
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+		connections
+			img_in: port image_in -> Sub.in_port;
+	end image_display.one_impl;
+
+	process implementation image_display.two_impl
+		subcomponents
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+		connections
+			img_in: port image_in -> Sub.in_port;
+	end image_display.two_impl;
+
+---------------------------------------------------------------------------------
+	process color_tracker extends node
+		features
+			filtered_in: in event data port Ros_Messages_Properties::image.atumalaca_impl;
+			pos_color_out: out event data port Ros_Messages_Properties::Point.impl;
+		properties
+			SEI::MIPSBudget => 120.0 MIPS;
+	end color_tracker;
+
+	process implementation color_tracker.impl
+		subcomponents
+			Sub: thread Ros_Messages_Properties::SubscriberImage.impl;
+			Pub: thread Ros_Messages_Properties::PublisherPoint.impl;
+		connections
+			recv_filtered: port filtered_in -> Sub.in_port;
+			send_pos: port Pub.out_port -> pos_color_out;
+	end color_tracker.impl;
+
+---------------------------------------------------------------------------------
+	process pos2cmd_vel extends node
+		features
+
+			posicao_in: in event data port Ros_Messages_Properties::Point.impl;
+
+			cmd_vel_out: out event data port Ros_Messages_Properties::Twist.Impl;
+		properties
+			SEI::MIPSBudget => 50.0 MIPS;
+	end pos2cmd_vel;
+
+	process implementation pos2cmd_vel.impl
+		subcomponents
+			Pub: thread Ros_Messages_Properties::PublisherTwist;
+			Sub: thread Ros_Messages_Properties::SubscriberPoint;
+		connections
+			pos_in: port posicao_in -> Sub.in_port;
+			cmdvel_out: port Pub.out_port -> cmd_vel_out;
+	end pos2cmd_vel.impl;
+
+end Nodes;

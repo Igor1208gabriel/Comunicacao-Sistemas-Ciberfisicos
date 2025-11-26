@@ -1,0 +1,40 @@
+package Other_Properties
+public
+	data datastream
+	end datastream;
+
+	data implementation datastream.impl
+	end datastream.impl;
+
+	data videostream extends datastream
+	end videostream;
+
+	data implementation videostream.impl extends datastream.impl
+	end videostream.impl;
+
+	data point extends datastream
+	end point;
+
+	data implementation point.impl
+		properties
+			Data_Size => 24 Bytes;
+	end point.impl;
+
+	data implementation videostream.res_360x640 extends datastream.impl
+		properties
+			Data_size => 691200 Bytes;
+	end videostream.res_360x640;
+
+	data implementation videostream.res_720x1080 extends datastream.impl
+		properties
+			Data_size => 2764800 Bytes;
+	end videostream.res_720x1080;
+
+	device Monitor
+		features
+			HDMI_in: requires bus access;
+	end Monitor;
+
+	device implementation Monitor.impl
+	end Monitor.impl;
+end Other_Properties;
