@@ -8,7 +8,7 @@ updates:
     - package-ecosystem: "pip"
     directory: "/ROS2"
     schedule:
-      interval: "weekly"
+    - interval: "weekly"
     target-branch: "dev"
     open-pull-requests-limit: 5
     allow:
