@@ -68,3 +68,9 @@ preambulo.*
 !preambulo.tex
 
 *.aadlbin
+/.aadlbin*
+.settings
+/diagrams
+/instances
+
+.vscode
