@@ -1,31 +1,49 @@
 name: Build and Analyze ROS2
-on: [push, pull_request]
+
+on:
+  push:
+    paths:
+      - 'ROS2/**'
+  pull_request:
+    paths:
+      - 'ROS2/**'
+
+
 jobs:
   build-and-analyze:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
+      # ==========================
+      #   DOCKER IMAGE CACHE
+      # ==========================
       - name: Cache Docker Image
         uses: actions/cache@v4
         id: docker-cache
         with:
-          path: /tmp/docker-ros2-dev.tar
+          path: /tmp/docker-ros2-dev.tar.gz
           key: docker-ros2-dev-${{ hashFiles('.devcontainer/Dockerfile', '.devcontainer/**') }}
           restore-keys: docker-ros2-dev-
-      
+
       - name: Build DevContainer image
         run: |
           if [ "${{ steps.docker-cache.outputs.cache-hit }}" = "true" ]; then
-            docker load < /tmp/docker-ros2-dev.tar
+            echo "Cache HIT: carregando imagem"
+            docker load < /tmp/docker-ros2-dev.tar.gz
           else
+            echo "Cache MISS: reconstruindo imagem"
             docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
             docker save ros2-dev | gzip > /tmp/docker-ros2-dev.tar.gz
           fi
       
+      # ==========================
+      #   COLCON BUILD CACHE
+      # ==========================
       - name: Cache ROS2 Workspace
         uses: actions/cache@v4
         with:
@@ -34,7 +52,7 @@ jobs:
             ROS2/workspace/build
           key: ${{ runner.os }}-ros2-${{ hashFiles('ROS2/workspace/src/**/package.xml') }}
           restore-keys: ${{ runner.os }}-ros2-
-      
+
       - name: Build ROS2 Workspace
         run: |
           docker run --rm \
@@ -50,9 +68,12 @@ jobs:
             colcon build \
               --symlink-install \
               --event-handlers console_direct+ \
-              --event-handlers console_cohesion+ \
+              --event-handlers console_cohesion+
           "
 
+      # ==========================
+      #   SONARQUBE
+      # ==========================
       - name: SonarQube Scan
         if: success()
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
@@ -60,6 +81,9 @@ jobs:
           SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      # ==========================
+      #   OWASP DEPENDENCY CHECK
+      # ==========================
       - name: Dependency Check OWASP
         uses: dependency-check/Dependency-Check_Action@1.1.0
         with:
@@ -71,13 +95,18 @@ jobs:
             --enableExperimental
             --failOnCVSS 7
 
+      # ==========================
+      #   PYLINT (CORRIGIDO)
+      # ==========================
       - name: PyLint with dynamic badge
         uses: Silleellie/pylint-github-action@v2.1
         with:
-          lint-path: src  # lint src package
-          python-version: 3.11  # python version which will lint the package
+          lint-path: ROS2/workspace/src   # <-- CORRIGIDO
+          python-version: 3.11
 
-
+      # ==========================
+      #   SONAR SUMMARY
+      # ==========================
       - name: Show SonarQube Results
         if: always()
         run: |
@@ -90,7 +119,6 @@ jobs:
           COVERAGE=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="coverage") | .value // "N/A"' | sed 's/\..*//')
           DUPS=$(echo "$RESULTS" | jq -r '.component.measures[] | select(.metric=="duplicated_lines_density") | .value // "N/A"' | sed 's/\..*//')
 
-          # === MARKDOWN SUMMARY ===
           {
             echo "## 🧠 SonarQube Analysis Summary"
             echo ""
@@ -108,4 +136,4 @@ jobs:
             if [ "$COVERAGE" != "N/A" ] && [ "$COVERAGE" -lt 70 ]; then
               echo "> ⚠️ **Cobertura baixa:** recomenda-se acima de 70%."
             fi
-          } >> $GITHUB_STEP_SUMMARY 
+          } >> $GITHUB_STEP_SUMMARY
