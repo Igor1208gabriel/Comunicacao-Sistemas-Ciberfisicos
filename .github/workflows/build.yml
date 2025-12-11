@@ -71,6 +71,12 @@ jobs:
             --enableExperimental
             --failOnCVSS 7
 
+      - name: PyLint with dynamic badge
+        uses: Silleellie/pylint-github-action@v2.1
+        with:
+          lint-path: src  # lint src package
+          python-version: 3.11  # python version which will lint the package
+
 
       - name: Show SonarQube Results
         if: always()
