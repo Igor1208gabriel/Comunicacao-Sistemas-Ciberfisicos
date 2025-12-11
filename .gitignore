@@ -66,3 +66,5 @@ main.*
 
 preambulo.*
 !preambulo.tex
+
+*.aadlbin

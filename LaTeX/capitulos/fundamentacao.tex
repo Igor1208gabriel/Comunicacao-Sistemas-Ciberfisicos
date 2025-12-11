@@ -7,11 +7,11 @@ De acordo com \cite{Moraes2013}, sistemas ciberfísicos integram componentes com
 
 \section{Modelagem de Sistemas}
 
-O design e validação de sistemas ciberfísicos requer metologias robustas para garantir a integração de componentes de hardware e software mantendo performance, confiabilidade e escalabilidade. Neste estudo, a Architecture Analysis Design Language (AADL) é empregada para modelar a arquitetura de Robinho, provendo uma representação estruturada de seus componentes físicos e computacionais.
+O design e validação de sistemas ciberfísicos requer metologias robustas para garantir a integração de componentes de hardware e software mantendo performance, confiabilidade e escalabilidade. Neste estudo, a Architecture Analysis Design Language (AADL) é empregada para modelar a arquitetura e prover uma representação estruturada de seus componentes físicos e computacionais.
 
-AADL permite a definição de componentes de software, como nós de ROS2, elementos de hardware, como microcontroladores e sensores, a interação entre diversos componentes e a implantação de cada pedaço de software em seu respectivo hardware. Esta abordagem garante que todos os aspectos da arquitetura de Robinho sejam bem documentados e analisados antes da implantação, reduzindo gargalos potenciais e melhorando performance e eficiência geral.
+AADL permite a definição de componentes de software, como nós de ROS2, elementos de hardware, como microcontroladores e sensores, a interação entre diversos componentes e a implantação de cada pedaço de software em seu respectivo hardware. Esta abordagem garante que todos os aspectos da arquitetura do sistema sejam bem documentados e analisados antes da implantação, reduzindo gargalos potenciais e melhorando performance e eficiência geral.
 
-Robinho é composto de diversos componentes conectados, cada um mapeado em AADL, com diagramas mostrando claramente suas interações. Isto facilita validação primitiva de escolhas de design. 
+% Robinho é composto de diversos componentes conectados, cada um mapeado em AADL, com diagramas mostrando claramente suas interações. Isto facilita validação primitiva de escolhas de design. 
 
 Ademais, usando o Open Source AADL Tool Environment, OSATE, a modelagem do sistema é analisada para garantir conformidade com exigências de performance. O processo de modelagem permite identificação prévia de necessidades de recursos, verificação de limites na comunicação e estimativa de carga computacional nas unidades de processamento distribuídas.
 
@@ -20,6 +20,10 @@ Ademais, usando o Open Source AADL Tool Environment, OSATE, a modelagem do siste
 \section{Arquitetura de Software}
 \cite{Bernardo2025, ROSWebsite} O Robot Operating System foi desenvolvido para sustentar uma arquitetura modular e interoperável baseada em pacotes independentes, tornando seu uso adequado para projetos orientados a arquitetura. ROS oferece uma coleção de ferramentas de software para desenvolvimento robótico e testagem, que podem ser reutilizadas facilmente entre diferentes plataformas de hardware.
 
-\section{Sistemas Autônomos}
-De acordo com \cite{Wahde2016, Bensalem2009}, sistemas autônomos são sistemas complexos que requerem a interação ou cooperação de inúmeros componentes de software heterogêneos, se movimentando e operando sem a necessidade de supervisão humana direta. É esperado que funcionem em ambientes complexos e não estruturados, e que tomem suas próprias decisões em qualquer situação.
+A arquitetura do ROS é baseada em Grafos, e suas aplicações práticas possuem diversos nós, que se comunicam entre si por meio de Mensagens enviadas pelos Tópicos, usando os conceitos de Publisher-Subscriber. Nós muitas vezes são uma combinação complexa de publishers e subscribers.
 
+ROS permite a escrita de seus pacotes nas linguagens Python e C++, e o uso simultâneo de diversos pacotes, escritos em linguagens diferentes. A comunidade que suporta o framework disponibiliza diversos pacotes e integrações com hardwares existentes, o que torna o uso da ferramenta mais prático e ágil.
+
+
+% \section{Sistemas Autônomos}
+% De acordo com \cite{Wahde2016, Bensalem2009}, sistemas autônomos são sistemas complexos que requerem a interação ou cooperação de inúmeros componentes de software heterogêneos, se movimentando e operando sem a necessidade de supervisão humana direta. É esperado que funcionem em ambientes complexos e não estruturados, e que tomem suas próprias decisões em qualquer situação.
