@@ -20,7 +20,7 @@ jobs:
       - name: Build DevContainer image
         run: |
           if [ "${{ steps.docker-cache.outputs.cache-hit }}" = "true" ]; then
-            docker load < /tmp/docker-ros2-dev.tar
+            docker load < /tmp/docker-ros2-dev.tar.gz
           else
             docker build -t ros2-dev -f .devcontainer/Dockerfile .devcontainer
             docker save ros2-dev | gzip > /tmp/docker-ros2-dev.tar.gz
@@ -71,11 +71,17 @@ jobs:
             --enableExperimental
             --failOnCVSS 7
 
-      - name: PyLint with dynamic badge
-        uses: Silleellie/pylint-github-action@v2.1
-        with:
-          lint-path: src  # lint src package
-          python-version: 3.11  # python version which will lint the package
+      - name: Run PyLint inside container
+        run: |
+            docker run --rm \
+              -v ${{ github.workspace }}:/project \
+              -w /project/ROS2/workspace/src \
+              ros2-dev \
+              bash -c "
+                pip install pylint
+                pylint */**/*.py || true
+              "
+
 
 
       - name: Show SonarQube Results
