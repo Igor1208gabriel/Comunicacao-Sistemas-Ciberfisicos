@@ -1,10 +1,118 @@
-\chapter{Modelagem em AADL} %Trocar o nome do capítulo
-TODO
+\chapter{Modelagem}
 
-Descrever os modelos e os códigos, apresentar diagramas e resultados de análise quantitativa.
+O processo de modelagem seguiu o fluxo descrito no capítulo de metodologia, utilizando o ambiente OSATE para a escrita do código em AADL, com o objetivo de representar, analisar e validar a integração entre hardware, software e canais de comunicação do sistema. Ao longo do processo, o modelo serviu para documentar a arquitetura e estrutura, e foi uma poderosa ferramenta de tomadas de decisões, permitindo identificar gargalos de comunicação e inconsistências na arquitetura antes da implementação física
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\linewidth]{./images/placeholder.png}
-    \centering
+\section{Estrutura Geral da arquitetura}
+A abordagem concentrou-se inicialmente na definição dos dispositivos físicos, dos fluxos da comunicação e dos processos responsáveis pela percepção processamento e atuação. A partir disso, foram especificados os componentes de hardware e os processos e mecanismos de troca de mensagens. 
+
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=\linewidth]{images/robinho_impl.png}
+    \caption{Modelo de Hardware da aplicação Robinho}\vspace{-0.5cm}
+\end{center}
 \end{figure}
+
+A comunicação entre o Raspberry Pi e o ESP-Cam foi modelada utilizando o barramento via I²C. Esta escolha foi motivada pois este método de comunicação garante baixa latência para mensagens pequenas, suporte nativo em ambos os dispositivos, e complexidade reduzida.
+
+\section{Modelagem do Hardware}
+A infraestrutura física do robô foi modelada com ênfase nos recursos computacionais e canais de comunicação. O Raspberry Pi foi representado como um sistema contendo:
+
+Quatro núcleos Cortex-A53 modelados individualmente;
+RAM e cartão SD com capacidades definidas;
+Buses AMBA e USB simplificados;
+Ponte GPIO para interface com a Ponte L298N e comunicação entre os dispositivos;
+Ponte USB para integração com periféricos.
+
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=\linewidth]{images/raspberry_impl.png}
+    \caption{Modelo de Hardware do Raspberry Pi}\vspace{-0.5cm}
+\end{center}
+\end{figure}
+
+A simplificação da arquitetura interna foi deliberada e visa reduzir complexidade sem comprometer a validade das análises. Este nível de abstração é adequado para os tipos de avaliação de Latência, uso de barramento e mapeamento de processos aos processadores.
+
+\section{Modelagem do Software}
+O sistema de software foi representado como um conjunto de processos correspondentes aos nós ROS2, responsáveis pelo pipeline de percepção e controle do Robinho:
+
+\begin{itemize}
+    \item usb\_cam: captura e publicação de quadros;
+    \item image\_filter: processamento e filtragem da imagem;
+    \item image\_display1/2: exibição da imagem em paralelo;
+    \item color\_tracker: determinação da posição do objeto de interesse;
+    \item pos2cmd\_vel: geração dos comandos de velocidade para os motores.
+\end{itemize}
+
+
+Esses processos foram conectados segundo o fluxo real da aplicação ROS2.
+
+Cada processo possui propriedades de carga computacional \verb|SEI::MIPSBudget| que permitiram estimar, pela simulação do OSATE, se os núcleos atribuídos eram suficientes para garantir o processamento em tempo hábil.
+
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=\linewidth]{images/softwaresystem_impl.png}
+    \caption{Modelo de Software da aplicação ROS2}\vspace{-0.5cm}
+\end{center}
+\end{figure}
+
+A análise demonstrou que o nó image\_filter era o mais exigente, o que justificou sua alocação em um núcleo dedicado, evitando interferência com os demais processos de visão computacional.
+
+A interação entre os componentes foi modelada de forma a evidenciar o caminho dos dados da câmera até a geração dos comandos de velocidade, a tipagem das mensagens e a conversão entre portas de software e portas físicas de hardware.
+
+O OSATE permitiu verificar a consistência das conexões, corretude estrutural e temporal
+
+\section{Relatórios de Análise}
+
+A partir da instanciação do modelo Robinho\_impl no OSATE, foram gerados relatórios quantitativos que permitiram avaliar o uso de recursos computacionais, a carga dos barramentos de comunicação e a distribuição das tarefas entre os processadores. Esses resultados complementam a análise qualitativa apresentada anteriormente e reforçam a validade da arquitetura proposta.
+
+\subsection{Bound Resource Budgets}
+
+O relatório de \textit{Bound Resource Budgets} indica a carga total atribuída a cada núcleo Cortex-A53 do Raspberry Pi. Os valores calculados foram:
+
+\begin{itemize}
+\item \textbf{Proc1}: 527,12 MIPS utilizados
+\item \textbf{Proc2}: 542,12 MIPS utilizados
+\item \textbf{Proc3}: 15,00 MIPS utilizados
+\item \textbf{Proc4}: 15,00 MIPS utilizados
+\end{itemize}
+
+A distribuição confirma que os processos mais pesados (usb\_cam, image\_filter e color\_tracker) foram corretamente alocados nos dois primeiros núcleos, enquanto os nós de exibição (image\_display1/2) ocupam apenas carga residual. Essa organização evita saturação e mantém o sistema com ampla margem de processamento.
+
+O relatório também confirma que nenhum componente excedeu seu orçamento de MIPS, indicando viabilidade temporal do fluxo de visão computacional.
+
+\subsection{Bus Load}
+
+O relatório de \textit{Bus Load} avaliou o uso das interfaces AMBA, USB e GPIO. Os resultados mostram que:
+
+\begin{itemize}
+\item O \textbf{AMBA Bus} suporta confortavelmente a carga dos acessos simultâneos dos núcleos, sem gerar saturação;
+\item As interfaces \textbf{USB1-USB4} não possuem valores de capacidade definidos no modelo e, portanto, geram avisos do OSATE, mas isso não compromete a análise — essas portas são utilizadas apenas para periféricos de baixa prioridade;
+\item O \textbf{GPIO Bridge} opera dentro do previsto e transporta corretamente os dados entre o processo pos2cmd\_vel e a Ponte L298N.
+\end{itemize}
+
+Os avisos relacionados aos barramentos USB são esperados, pois a análise concentra-se nos fluxos críticos do sistema.
+
+\subsection{Not Bound Resource Budgets}
+
+O relatório de \textit{Not Bound Resource Budgets} analisa componentes que não possuem alocação explícita de memória RAM ou armazenamento. Os resultados indicam que:
+
+\begin{itemize}
+\item Nenhum processo ultrapassa o orçamento de RAM estimado;
+\item Os processos do SoftwareSystem consomem quantidades desprezíveis de memória em relação à capacidade do Raspberry Pi;
+\item Não há violações relacionadas a armazenamento ou alocação dinâmica.
+\end{itemize}
+
+Esse relatório evidencia que o sistema possui folga significativa de memória, reforçando a segurança da arquitetura para futuras expansões, como novos módulos de visão ou algoritmos de controle.
+
+\subsection{Síntese Final}
+
+Os três relatórios — processamento, barramentos e recursos não vinculados — demonstram que a arquitetura modelada é:
+
+\begin{itemize}
+\item \textbf{coerente} com a demanda computacional dos nós ROS2;
+\item \textbf{estável} em termos de uso de barramento e comunicação;
+\item \textbf{escalável}, pois mantém ampla margem de RAM e MIPS disponíveis;
+\item \textbf{sem gargalos estruturais}, com apenas avisos esperados em interfaces não críticas.
+\end{itemize}
+
+Assim, a etapa de modelagem cumpriu seu objetivo central: identificar previamente pontos sensíveis da arquitetura, validar as escolhas de hardware e software, e fornecer evidências quantitativas de que o Robinho pode operar de forma eficiente e previsível antes mesmo de sua implementação física.
