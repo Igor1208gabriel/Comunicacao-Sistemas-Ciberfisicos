@@ -1,46 +1,50 @@
-
 \documentclass[
-    12pt, 
-    a4paper, 
-    chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-    section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-    oneside,            % não otimiza pra printar nos dois lados
-    english
+    12pt,
+    a4paper,
+    oneside,
+    chapter=TITLE,
+    section=TITLE,
+    english, brazil
 ]{abntex2}
 
-% Força Times New Roman no texto e títulos 
+
+
 \usepackage{newtxtext,newtxmath}
 
-% Redefine os estilos de títulos do abntex2 para usar serifada (Times)
-\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries} % capítulos
-\renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries} % seções
-\renewcommand{\ABNTEXsubsectionfont}{\normalfont\bfseries} % subseções
-\renewcommand{\ABNTEXsubsubsectionfont}{\normalfont\bfseries} % subsubseções
+% Redefine fontes dos títulos (Times + Bold)
+\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXsubsectionfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXsubsubsectionfont}{\normalfont\bfseries}
 
 
+% \usepackage[a4paper,
+%     top=3cm,
+%     bottom=2cm,
+%     left=3cm,
+%     right=2cm]{geometry}
 
-% Pacotes essenciais ABNT
-\usepackage{indentfirst}    %Identa o primeiro parágrafo
-\usepackage{csquotes}       %Retira um warning
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}    %Bordas ABNT
+% \usepackage{indentfirst}
+% \setlength{\parindent}{1.25cm}
+% \setlength{\parskip}{0pt}
+% \linespread{1.5}
+
+
 \usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{caption}
 
-% Estilo da bibliografia
 \usepackage[backend=biber,style=abnt,sorting=none]{biblatex}
-\addbibresource{artigos.bib}  
-% Configuração do formato do parágrafo e espaçamento
-\setlength{\parindent}{1.25cm}  % Recuo correto de 1,25 cm
-\setlength{\parskip}{0cm}       % Sem espaçamento extra entre parágrafos
-\linespread{1.5}                % Espaçamento 1,5 entre linhas (correto)
+\addbibresource{artigos.bib}
 
 
-% Configuração do trabalho
 \titulo{Modelagem e Análise Primitiva com AADL de Sistemas Ciberfísicos Baseados em ROS2}
 \autor{Igor Gabriel dos Santos}
 \local{Natal - RN}
 \orientador{Dr. Jorgiano Marcio Bruno Vidal}
 \coorientador{Dr. Ivanilson França Vieira Junior}
-\instituicao{Instituto Federal do Rio Grande do Norte}
+\instituicao{Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte}
 \data{Fevereiro de 2025}
 \tipotrabalho{Trabalho de Conclusão de Curso}
 \preambulo{
@@ -48,34 +52,34 @@ Trabalho de Conclusão de Curso apresentado ao Curso Superior de Tecnologia em A
 }
 
 
+
 \begin{document}
 
 \frontmatter
-\setcounter{page}{1}
-\pagenumbering{roman}
-
 \imprimircapa
-\imprimirfolhaderosto
+\imprimirfolhaderosto*
 
-%Pré-textuais
-%\input{capitulos/dedicatoria.tex}
+
+
+
+
+\input{capitulos/dedicatoria.tex}
 \input{capitulos/epigrafe.tex}
 \input{capitulos/resumo.tex}
 \input{capitulos/abstract.tex}
 
 \tableofcontents
-
 \mainmatter
-\setcounter{page}{1}
-\pagenumbering{arabic}
 
-%Textuais
 \input{capitulos/introducao.tex}
 \input{capitulos/fundamentacao.tex}
-\input{capitulos/infraestrutura.tex}
 \input{capitulos/metodologia.tex}
+\input{capitulos/infraestrutura.tex}
 \input{capitulos/modelagem.tex}
 \input{capitulos/conclusao.tex}
 
 \printbibliography
+
 \end{document}
+
+
