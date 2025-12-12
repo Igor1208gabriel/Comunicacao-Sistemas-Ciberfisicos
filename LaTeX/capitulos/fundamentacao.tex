@@ -2,28 +2,25 @@
 
 \section{Sistemas Ciberfísicos}
 
-De acordo com \cite{Moraes2013}, sistemas ciberfísicos integram componentes computacionais com interações físicas, biológicas e de engenharia, incorporando novas capacidades. O custo computacional de um sistema é diretamente proporcional ao número de processos e tarefas simultâneas. Como consequência, um sistema complexo pode chegar rapidamente ao seu limite, causando consequências imprevisíveis se o hardware não for corretamente adequado aos seus casos de uso previstos. \cite{SennBourdon2022}
+De acordo com \cite{Moraes2013}, sistemas Ciberfísicos integram componentes computacionais com componentes físicos, biológicos e de engenharia, incorporando novas capacidades. O custo computacional de um sistema é diretamente proporcional ao número de processos e tarefas simultâneas. Como consequência, um sistema complexo pode chegar rapidamente ao seu limite, causando consequências imprevisíveis se o \textit{hardware} não for corretamente adequado aos seus casos de uso previstos. \cite{SennBourdon2022}
 
+Os sistemas Ciberfísicos (CPS) representam a evolução de conceitos como computação ubíqua, proposta por \cite{weiser1991}, que previu computadores invisíveis integrados ao cotidiano, desaparecendo no plano de fundo para focar em objetivos humanos. Weiser argumenta \enquote{As tecnologias mais profundas são as que desaparecem. Se tecem no tecido do cotidiano até se tornarem indistinguíveis dele}. Essa visão antecipa a integração de computadores e processos físicos em CPS, sem necessidade de inteligência artificial complexa, apenas com computadores embarcados e interconectados no dia-a-dia, compartilhando informações em tempo real.Esta ideia se aplica diretamente a sistemas robóticos, onde componentes operam de forma invisível, permitindo adaptação a ambientes dinâmicos sem intervenção constante do usuário.
+
+\cite{Marwedel2021} cita a computação ubíqua de Weiser e a \enquote{miniaturização} para definir sistemas embarcados como \enquote{sistemas de processamento de informação embutidos em produtos}, enfatizando a ligação com o ambiente físico e trazendo exemplos como os sistemas de navegação de carros, aviões, telecomunicação ou equipamento industrial. Também define sistemas Ciberfísicos como \enquote{Integrações de processos computacionais e físicos}.
+
+No contexto deste trabalho, o robô Robinho caracteriza-se como um Sistema Ciberfísico por integrar sensores, atuadores, unidades de processamento distribuídas e algoritmos de percepção e controle que interagem continuamente com o ambiente físico. Essa integração reforça a importância de arquiteturas formais e mecanismos de validação capazes de antecipar limitações de desempenho antes da implantação física, principalmente por limitações de hardware, que precisam ser utilizados de maneira eficiente.
 
 \section{Modelagem de Sistemas}
 
-O design e validação de sistemas ciberfísicos requer metologias robustas para garantir a integração de componentes de hardware e software mantendo performance, confiabilidade e escalabilidade. Neste estudo, a Architecture Analysis Design Language (AADL) é empregada para modelar a arquitetura e prover uma representação estruturada de seus componentes físicos e computacionais.
+O \textit{design} e validação de sistemas Ciberfísicos requer metologias robustas para garantir a integração de componentes de \textit{hardware} e \textit{software} mantendo performance, confiabilidade e escalabilidade. Neste estudo, a \textit{Architecture Analysis Design Language} (AADL) é empregada para modelar a arquitetura e prover uma representação estruturada de seus componentes físicos e computacionais.
 
-AADL permite a definição de componentes de software, como nós de ROS2, elementos de hardware, como microcontroladores e sensores, a interação entre diversos componentes e a implantação de cada pedaço de software em seu respectivo hardware. Esta abordagem garante que todos os aspectos da arquitetura do sistema sejam bem documentados e analisados antes da implantação, reduzindo gargalos potenciais e melhorando performance e eficiência geral.
+AADL permite a definição de componentes de \textit{software}, como nós de ROS2, elementos de \textit{hardware}, como microcontroladores e sensores, a interação entre diversos componentes e a implantação de cada pedaço de \textit{software} em seu respectivo \textit{hardware}. Esta abordagem garante que todos os aspectos da arquitetura do sistema sejam bem documentados e analisados antes da implantação, reduzindo gargalos potenciais e melhorando performance e eficiência geral.
 
-% Robinho é composto de diversos componentes conectados, cada um mapeado em AADL, com diagramas mostrando claramente suas interações. Isto facilita validação primitiva de escolhas de design. 
+Ademais, usando o \textit{Open Source AADL Tool Environment} (OSATE), a modelagem do sistema é analisada para garantir conformidade com exigências de performance. O processo de modelagem permite identificação prévia de necessidades de recursos, verificação de limites na comunicação e estimativa de carga computacional nas unidades de processamento distribuídas.
 
-Ademais, usando o Open Source AADL Tool Environment, OSATE, a modelagem do sistema é analisada para garantir conformidade com exigências de performance. O processo de modelagem permite identificação prévia de necessidades de recursos, verificação de limites na comunicação e estimativa de carga computacional nas unidades de processamento distribuídas.
+\section{Arquitetura de software}
+\cite{Bernardo2025, ROSWebsite} O \textit{Robot Operating System} foi desenvolvido para sustentar uma arquitetura modular e interoperável baseada em pacotes independentes, tornando seu uso adequado para projetos orientados a arquitetura. ROS oferece uma coleção de ferramentas de \textit{software} para desenvolvimento robótico e testagem, que podem ser reutilizadas facilmente entre diferentes plataformas de \textit{hardware}.
 
-% Por meio destas ferramentas, a arquitetura de Robinho é otimizada antes de sua implementação física, o que reduz os riscos associados com implantações no mundo real, e como resultado, reduzindo drasticamente os custos gerais.
+A arquitetura do ROS é baseada em Grafos, e suas aplicações práticas possuem diversos nós, que se comunicam entre si por meio de Mensagens enviadas pelos Tópicos, usando os conceitos de \textit{Publisher-Subscriber}. Nós muitas vezes são uma combinação complexa de \textit{publishers} e \textit{subscribers}.
 
-\section{Arquitetura de Software}
-\cite{Bernardo2025, ROSWebsite} O Robot Operating System foi desenvolvido para sustentar uma arquitetura modular e interoperável baseada em pacotes independentes, tornando seu uso adequado para projetos orientados a arquitetura. ROS oferece uma coleção de ferramentas de software para desenvolvimento robótico e testagem, que podem ser reutilizadas facilmente entre diferentes plataformas de hardware.
-
-A arquitetura do ROS é baseada em Grafos, e suas aplicações práticas possuem diversos nós, que se comunicam entre si por meio de Mensagens enviadas pelos Tópicos, usando os conceitos de Publisher-Subscriber. Nós muitas vezes são uma combinação complexa de publishers e subscribers.
-
-ROS permite a escrita de seus pacotes nas linguagens Python e C++, e o uso simultâneo de diversos pacotes, escritos em linguagens diferentes. A comunidade que suporta o framework disponibiliza diversos pacotes e integrações com hardwares existentes, o que torna o uso da ferramenta mais prático e ágil.
-
-
-% \section{Sistemas Autônomos}
-% De acordo com \cite{Wahde2016, Bensalem2009}, sistemas autônomos são sistemas complexos que requerem a interação ou cooperação de inúmeros componentes de software heterogêneos, se movimentando e operando sem a necessidade de supervisão humana direta. É esperado que funcionem em ambientes complexos e não estruturados, e que tomem suas próprias decisões em qualquer situação.
+ROS permite a escrita de seus pacotes nas linguagens \textit{Python} e \textit{C++}, e o uso simultâneo de diversos pacotes, escritos em linguagens diferentes. A comunidade que suporta o framework disponibiliza diversos pacotes e integrações com hardwares existentes, o que torna o uso da ferramenta mais prático e ágil.
