@@ -1,24 +1,36 @@
-\chapter{Introdução}
-A crescente evolução de sistemas ciberfísicos e a necessidade de plataformas robóticas autônomas intensificam a demanda de arquiteturas robustas, flexíveis e modulares. Quanto mais sistemas robóticos são empregados em ambientes industriais, comerciais e domésticos, mais a necessidade de metodologias confiáveis, adaptáveis e escaláveis aumenta.
+\chapter{Introdução} A evolução dos Sistemas Ciberfísicos (Cyber-Physical Systems – CPS) e o crescimento das plataformas robóticas autônomas têm impulsionado o desenvolvimento de sistemas cada vez mais complexos, distribuídos e fortemente orientados à performance. Esses sistemas integram componentes computacionais, sensores, atuadores e elementos físicos que interagem continuamente com o ambiente, exigindo arquiteturas capazes de lidar com requisitos rigorosos de confiabilidade, escalabilidade e previsibilidade. 
 
-Este trabalho aplica conceitos de engenharia de software, análise de sistemas e arquitetura no contexto de sistemas robóticos. A modelagem destes demanda uma abordagem multidisciplinar, combinando conhecimento de design de software e hardware, sistemas embarcados, computação distribuída e análise em tempo real.
+À medida que sistemas robóticos passam a operar em ambientes dinâmicos e não estruturados, a complexidade de suas arquiteturas aumenta significativamente. A integração entre múltiplas unidades de processamento, dispositivos embarcados e módulos de \textit{software} distribuídos introduz desafios relacionados à comunicação, ao uso eficiente de recursos computacionais e à garantia de requisitos não funcionais, como latência e determinismo temporal. Nesse cenário, decisões arquiteturais tomadas de forma tardia ou empírica podem resultar em gargalos de desempenho, retrabalho e dificuldades de manutenção. 
 
-O tópico foi escolhido devido a importância crescente de sistemas autônomos e a relevância da engenharia baseada em modelos no desenvolvimento de software moderno. A modelagem com a Linguagem de Análise de Arquitetura e Design (AADL) provê uma oportunidade de aplicar conhecimento acadêmico em um contexto altamente prático e relevante industrialmente.
+Diante desse contexto, torna-se fundamental adotar abordagens sistemáticas que permitam avaliar e validar arquiteturas ainda nas fases iniciais do desenvolvimento. A Engenharia Dirigida a Modelos (\textit{Model-Driven Engineering} – MDE) surge como uma alternativa promissora ao possibilitar a descrição formal de arquiteturas, bem como a análise antecipada de propriedades não funcionais, reduzindo riscos durante a etapa de implementação física. 
 
-Como apontado por \cite{Mikusz2014}, no campo industrial e empresarial, plataformas robóticas avançadas tendem ao aumento da interatividade e cooperação, levando a uma perspectiva onde sistemas Ciberfísicos integram software, hardware e serviços eficientemente. Esta tendência demanda uma abordagem estruturada focada em design e validação que garantam confiabilidade, escalabilidade e performance. Em ambientes modernos, é esperado que robôs não apenas executem tarefas pré-programadas, mas também consigam se adaptar a mudanças e desafios inesperados. No âmbito de pesquisa e desenvolvimento brasileiro de sistemas, onde há uma limitação de recursos, é necessário que todos os recursos sejam usados em sua totalidade, com alta eficiência. Este estudo almeja apresentar uma metodologia de tomada de decisões arquiteturais baseada em modelos, de baixo custo e alta eficiência.
+No domínio da robótica, o \textit{Robot Operating System 2} (ROS 2) consolidou-se como um dos principais \textit{frameworks} para o desenvolvimento de aplicações robóticas distribuídas, oferecendo mecanismos robustos de comunicação, modularidade e reutilização de componentes. Entretanto, apesar de sua ampla adoção, o ROS 2 não fornece, de forma nativa, meios formais para a validação arquitetural antecipada, especialmente no que diz respeito à análise de desempenho e uso de recursos computacionais. 
 
-O principal objetivo deste trabalho é apresentar um estudo de caso da modelagem arquitetural, com foco na descrição dos processos de desenvolvimento do robô autônomo Robinho, que integra visão computacional, mapeamento de ambiente e algoritmos de reconhecimento de objetos usando o Robot Operating System 2 (ROS2), que facilita interações complexas entre unidades de processamento distribuídas, sensores e atuadores.
+Paralelamente, a \textit{Architecture Analysis and Design Language} (AADL) destaca-se como uma linguagem formal voltada à modelagem de arquiteturas de sistemas embarcados e ciberfísicos, permitindo a representação integrada de componentes de \textit{hardware}, \textit{software} e comunicação, bem como a realização de análises quantitativas ainda na fase de projeto. Conforme discutido por \cite{Mikusz2014}, a crescente integração entre \textit{software}, \textit{hardware} e serviços em plataformas robóticas demanda abordagens estruturadas de projeto e validação capazes de assegurar confiabilidade, escalabilidade e desempenho. 
 
-Para realizar a análise da arquitetura do robô, a AADL é utilizada, tornando possível representar detalhes precisos de hardware e software, além de suas comunicações internas e com o ambiente, garantindo que a integração entre diferentes componentes seja coerente e gargalos na performance possam ser identificados e mitigados antes de uma implantação física.
+No contexto brasileiro, onde frequentemente há limitações de recursos financeiros e de \textit{hardware}, a adoção de metodologias que favoreçam o uso eficiente dos componentes disponíveis torna-se ainda mais relevante. Assim, a combinação entre ROS 2 e AADL apresenta potencial significativo para apoiar decisões arquiteturais fundamentadas, conciliando flexibilidade de desenvolvimento com rigor analítico. 
 
-Os objetivos específicos deste trabalho são:
-\begin{itemize}
-    \item Descrever a arquitetura de hardware, software e comunicação do sistema robótico Robinho.
-    \item Modelar os componentes e suas comunicações dentro do sistema.
-    \item Identificar potenciais gargalos ou problemas de integração durante o processo de modelagem.
-    \item Medir os benefícios do uso da AADL nos estágios primitivos do desenvolvimento do sistema robótico.
-\end{itemize}
+\section{Proposta} 
 
-A metodologia utilizada preenche a lacuna entre design teórico e aplicação prática, permitindo uma abordagem sistemática para o desenvolvimento de aplicações ciberfísicas confiáveis e eficientes, potencializando o uso de cada componente, físico ou computacional.
+Este trabalho propõe o uso combinado do ROS 2 e da AADL em uma abordagem dirigida a modelos para a validação arquitetural de Sistemas Ciberfísicos. A proposta consiste em empregar a AADL para modelar formalmente a arquitetura de um sistema robótico desenvolvido em ROS 2, possibilitando a análise antecipada de desempenho, comunicação e uso de recursos computacionais antes da implantação física do sistema. 
 
-O documento é estruturado desta forma: O capítulo 1 introduz a motivação e objetivos do estudo. Capítulo 2 apresenta as fundamentações teóricas de sistemas ciberfísicos, o sistema operacional de robôs, plataformas robóticas e AADL. O Capítulo 3 detalha a metodologia do desenvolvimento do robô Robinho. O capítulo 4 apresenta a infraestrutura de hardware e software do sistema. O capítulo 5 se aprofunda sobre a modelagem do sistema, e o capítulo 6 conclui o trabalho e apresenta possíveis trabalhos futuros.
+Como estudo de caso, é apresentada a modelagem arquitetural do robô autônomo Robinho, uma plataforma experimental que integra visão computacional, sensores, atuadores e unidades de processamento distribuídas. O sistema utiliza o ROS 2 como base para a comunicação e orquestração dos módulos de \textit{software}, enquanto a AADL é empregada para descrever, analisar e validar sua arquitetura de forma estruturada. 
+
+\section{Contribuições} 
+
+As principais contribuições deste trabalho são: 
+\begin{itemize}     
+    \item A modelagem arquitetural completa de um sistema robótico real utilizando a AADL;     
+    \item A integração conceitual entre ROS 2 e AADL em uma abordagem dirigida a modelos;     
+    \item A análise antecipada de propriedades não funcionais, como uso de recursos computacionais e carga de comunicação;     
+    \item A apresentação de um estudo de caso reprodutível que evidencia os benefícios da validação arquitetural nas fases iniciais do desenvolvimento de Sistemas Ciberfísicos. 
+\end{itemize} 
+
+A metodologia adotada busca reduzir a distância entre o projeto teórico e a aplicação prática, fornecendo subsídios técnicos para a tomada de decisões arquiteturais fundamentadas e contribuindo para o desenvolvimento de aplicações ciberfísicas mais confiáveis e eficientes. 
+
+O restante deste documento está organizado da seguinte forma: 
+o Capítulo 2 apresenta os fundamentos teóricos sobre Sistemas Ciberfísicos, modelagem baseada em arquitetura, ROS 2 e AADL; 
+o Capítulo 3 descreve a metodologia de projeto dirigida por modelos; 
+o Capítulo 4 apresenta a especificação funcional e a infraestrutura do robô Robinho; 
+o Capítulo 5 detalha a modelagem arquitetural em AADL e discute os resultados obtidos; 
+por fim, o Capítulo 6 apresenta as conclusões e propostas de trabalhos futuros. 

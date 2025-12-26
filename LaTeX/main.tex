@@ -8,28 +8,43 @@
 ]{abntex2}
 
 
+%Trechinhos de código
+\usepackage{listings}
+\usepackage{xcolor}
 
-\usepackage{newtxtext,newtxmath}
+\lstdefinelanguage{AADL}{
+  keywords={package, public, with, system, device, end, implementation, subcomponents, connections, port, feature},
+  keywordstyle=\bfseries\color{blue!70!black},
+  comment=[l]--,
+  commentstyle=\itshape\color{gray},
+  morestring=[b]",
+  stringstyle=\color{red!60!black},
+  sensitive=true
+}
+
+\lstset{
+  language=AADL,
+  basicstyle=\ttfamily\footnotesize,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  showstringspaces=false
+}
+
+
 
 % Redefine fontes dos títulos (Times + Bold)
 \renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries}
 \renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries}
 \renewcommand{\ABNTEXsubsectionfont}{\normalfont\bfseries}
 \renewcommand{\ABNTEXsubsubsectionfont}{\normalfont\bfseries}
+\renewcommand{\lstlistlistingname}{Lista de Listagens}
 
-
-% \usepackage[a4paper,
-%     top=3cm,
-%     bottom=2cm,
-%     left=3cm,
-%     right=2cm]{geometry}
-
-% \usepackage{indentfirst}
-% \setlength{\parindent}{1.25cm}
-% \setlength{\parskip}{0pt}
-% \linespread{1.5}
-
-
+\usepackage{newtxtext,newtxmath}
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{float}
@@ -37,9 +52,9 @@
 
 \usepackage[backend=biber,style=abnt,sorting=none]{biblatex}
 \addbibresource{artigos.bib}
+ 
 
-
-\titulo{Modelagem e Análise Primitiva com AADL de Sistemas Ciberfísicos Baseados em ROS2}
+\titulo{Integração de ROS 2 e AADL em uma Abordagem Dirigida a Modelos para Validação Arquitetural de Sistemas Ciberfísicos}
 \autor{Igor Gabriel dos Santos}
 \local{Natal - RN}
 \orientador{Dr. Jorgiano Marcio Bruno Vidal}
@@ -59,20 +74,27 @@ Trabalho de Conclusão de Curso apresentado ao Curso Superior de Tecnologia em A
 \imprimircapa
 \imprimirfolhaderosto*
 
-
-
-
-
 \input{capitulos/dedicatoria.tex}
 \input{capitulos/epigrafe.tex}
 \input{capitulos/resumo.tex}
 \input{capitulos/abstract.tex}
 
-\tableofcontents
+\tableofcontents*
+\newpage
+
+\listoffigures*
+\newpage
+
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\lstlistoflistings
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
+\newpage
+
+
 \mainmatter
 
 \input{capitulos/introducao.tex}
-\input{capitulos/fundamentacao.tex}
+\input{capitulos/fundamentacao.tex} 
 \input{capitulos/metodologia.tex}
 \input{capitulos/infraestrutura.tex}
 \input{capitulos/modelagem.tex}
@@ -81,5 +103,3 @@ Trabalho de Conclusão de Curso apresentado ao Curso Superior de Tecnologia em A
 \printbibliography
 
 \end{document}
-
-
