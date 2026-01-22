@@ -1,15 +1,16 @@
+"Docstring"
 from setuptools import find_packages, setup
 
-package_name = 'webcamRaspi'
+PACKAGE_NAME = 'webcamRaspi'
 
 setup(
-    name=package_name,
+    name=PACKAGE_NAME,
     version='0.0.0',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
+            ['resource/' + PACKAGE_NAME]),
+        ('share/' + PACKAGE_NAME, ['package.xml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,11 +25,11 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'cam_node = webcamRaspi.USBCam:main',
-            'display_node = webcamRaspi.IMGDisplay:main',
-            'img_filter = webcamRaspi.IMGFilter:main',
-            'color_tracker = webcamRaspi.ColorTracker:main',
-            'pos2cmd_vel = webcamRaspi.POS2CMD_VEL:main',
+            'cam_node = webcamRaspi.usb_cam:main',
+            'display_node = webcamRaspi.img_display:main',
+            'img_filter = webcamRaspi.img_filter:main',
+            'color_tracker = webcamRaspi.color_tracker:main',
+            'pos2cmd_vel = webcamRaspi.pos_to_cmd_vel:main',
         ],
     },
 )

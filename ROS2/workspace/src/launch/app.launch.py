@@ -1,8 +1,10 @@
-from launch import LaunchDescription
+"Docstring"
 from launch_ros.actions import Node
+from launch import LaunchDescription
 
 
 def generate_launch_description():
+    "docstring"
 
     usb_cam = Node(
         package='webcamRaspi',
