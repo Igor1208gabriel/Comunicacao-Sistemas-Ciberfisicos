@@ -39,11 +39,21 @@ jobs:
       # ==========================
       #   COLCON BUILD CACHE
       # ==========================
+      - name: Cache ROS2 Workspace
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7
+        with:
+          path: |
+            ROS2/workspace/install
+            ROS2/workspace/build
+          key: ${{ runner.os }}-ros2-${{ hashFiles('ROS2/workspace/src/**/package.xml') }}
+          restore-keys: ${{ runner.os }}-ros2-
+
       - name: Build ROS2 Workspace
         run: |
           docker run --rm \
+          --privileged \
           --network=host \
-          --user $(id -u):$(id -g) \
+          --user root \
           -v ${{ github.workspace }}:/project \
           -w /project/ROS2/workspace \
           ros2-dev \
@@ -55,7 +65,6 @@ jobs:
               --event-handlers console_direct+ \
               --event-handlers console_cohesion+
           "
-
 
       # ==========================
       #   SONARQUBE
