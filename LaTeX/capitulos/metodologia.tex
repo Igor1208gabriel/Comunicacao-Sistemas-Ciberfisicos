@@ -1,29 +1,176 @@
 \chapter{Metodologia}
-A arquitetura do sistema Robinho foi projetada utilizando a linguagem AADL desde as fases iniciais do desenvolvimento. Essa abordagem baseada em modelos permitiu que decisões arquiteturais fossem tomadas com base em análises rigorosas, visando maximizar eficiência, confiabilidade e determinismo temporal do sistema embarcado.
-O processo de modelagem seguiu uma abordagem iterativa e incremental. Inicialmente, foram definidos o fluxo de dados, os dispositivos físicos envolvidos e os comportamentos esperados do sistema. A partir dessa visão funcional, os componentes foram formalmente descritos em AADL, incluindo sensores, atuadores, unidades de processamento e os aplicações de \textit{software} responsáveis pela orquestração das funcionalidades.
 
-Os componentes foram organizados em uma hierarquia modular de pacotes, projetada para promover reutilização, clareza e manutenibilidade. Cada pacote agrupa elementos logicamente relacionados, como subsistemas de controle, interfaces de sensoriamento, processamento de visão e controle de mobilidade. No modelo de Robinho, por exemplo, o sistema de tração diferencial e o módulo ESP32-CAM foram representados como dispositivos independentes, enquanto a unidade central de processamento foi modelada como um sistema contendo múltiplos processos e threads que integram dados de sensores e geram comandos de atuação.
+Este capítulo descreve a metodologia adotada para o desenvolvimento, modelagem e validação da arquitetura do sistema robótico Robinho. A abordagem empregada é baseada em projeto dirigido por modelos, utilizando a AADL como formalismo principal para representar componentes físicos, lógicos e suas interações. O objetivo é garantir que decisões arquiteturais sejam tomadas e validadas antes da implantação do sistema em hardware real, reduzindo riscos de integração e falhas de desempenho.
 
-Após a definição da estrutura lógica, os próximos passos envolvem alimentar o modelo com propriedades relacionadas a performance, que permitem análises formais de escalonabilidade e uso de recursos por meio da ferramenta OSATE:
+Este trabalho adota uma metodologia de projeto dirigida por modelos, na qual a arquitetura do sistema robótico Robinho é especificada, analisada e validada previamente à sua execução em ambiente físico, utilizando a AADL para descrever formalmente os elementos do sistema, suas conexões e propriedades não funcionais.
+
+A metodologia foi estruturada de forma iterativa e incremental, permitindo que decisões arquiteturais fossem avaliadas e refinadas progressivamente por meio de análises formais. Essa abordagem facilita a identificação precoce de gargalos computacionais e limitações de comunicação, além de aumentar a previsibilidade do comportamento do sistema. 
+A metodologia é particularmente adequada ao contexto de Sistemas Ciberfísicos, nos quais a interação contínua entre componentes computacionais e físicos impõe fortes restrições de desempenho, comunicação e sincronização temporal.
+
+
+\section{Método de Modelagem Arquitetural}
+
+O processo de modelagem arquitetural seguiu um fluxo estruturado, iniciando pela compreensão funcional do sistema e evoluindo para uma descrição formal em AADL. 
+
+A escolha da AADL justifica-se por sua capacidade de representar explicitamente aspectos estruturais, temporais e de alocação de recursos, fundamentais para a análise de Sistemas Ciberfísicos com requisitos de tempo real
+
+Inicialmente, foram identificados os fluxos de dados, os dispositivos físicos envolvidos e os comportamentos esperados do sistema robótico. Em fases posteriores, os modelos foram testados e validados, de acordo com a Figura \ref{fig:fluxo_modelagem}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{images/fluxo trabalho.png}
+\caption{Fluxo de trabalho do processo de modelagem arquitetural}
+\label{fig:fluxo_modelagem}
+\end{figure}    
+
+Conforme ilustrado na Figura \ref{fig:fluxo_modelagem}, o processo de modelagem arquitetural inicia-se pela especificação dos componentes de \textit{software}. Nessa etapa, verifica-se a existência de modelos previamente definidos para os elementos de software necessários ao sistema. Caso tais modelos não estejam disponíveis, procede-se à modelagem de novos componentes.
+
+A modelagem de componentes de \textit{software} envolve a definição de seus fluxos de comunicação e comportamento temporal, representados por componentes do tipo \textit{thread}. Para esses componentes, são atribuídas propriedades relacionadas à carga computacional, como orçamento de MIPS, período de execução e tempo de processamento, possibilitando a realização de análises de desempenho.
+
+Após a especificação do \textit{software}, o processo avança para a especificação dos componentes de \textit{hardware}. De forma análoga, caso não existam modelos previamente definidos para os dispositivos físicos, estes são modelados considerando propriedades como capacidade de processamento, memória disponível e largura de banda de comunicação.
+
+Concluída a especificação dos componentes de \textit{software} e \textit{hardware}, realiza-se a especificação da implantação, \textit{deployment}, na qual os componentes de \textit{software} são mapeados sobre os recursos físicos disponíveis. Em seguida, o modelo é instanciado, permitindo a execução de análises arquiteturais por meio da ferramenta OSATE.
+
+Caso as análises indiquem falhas, inconsistências ou violação de requisitos não funcionais, como limitações de desempenho ou sobrecarga de recursos, o processo retorna às etapas anteriores para refinamento do modelo. Esse ciclo iterativo prossegue até que os resultados das análises sejam satisfatórios, momento em que a arquitetura é considerada validada.
+
+Para iniciar os testes das instanciações dos modelos, é necessário inserir propriedades nos componentes. A listagem \ref{lst:robinho_aadl} exemplifica como estas propriedades devem ser inseridas.
+
+Esse nível de detalhamento viabiliza a execução de análises arquiteturais no OSATE, permitindo identificar antecipadamente gargalos computacionais e limitações de comunicação antes da implantação do sistema em hardware real.
+
+
+\section{Especificação Arquitetural em AADL}
+
+A especificação arquitetural do sistema Robinho foi realizada utilizando a AADL, permitindo a descrição formal dos componentes físicos e lógicos, bem como de suas interações. Os componentes foram organizados em uma hierarquia modular de pacotes, visando promover reutilização, clareza e manutenibilidade do modelo.
+
+No modelo desenvolvido, o módulo ESP-CAM   e o sistema de tração diferencial foram representados como dispositivos independentes, enquanto a unidade central de processamento foi modelada como um sistema contendo múltiplos processos e \textit{threads} responsáveis pela percepção, processamento e controle do robô.
+
+A Figura \ref{fig:diagrama_aadl} apresenta um exemplo da especificação arquitetural em AADL, ilustrando a definição de componentes e suas interfaces de comunicação.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{images/robinho_impl.png}
+\caption{Exemplo de especificação arquitetural do sistema em AADL}
+\label{fig:diagrama_aadl}
+\end{figure}
+
+A utilização da AADL possibilita representar explicitamente os dispositivos físicos, processos de \textit{software} e canais de comunicação, servindo como base para análises arquiteturais e validação antecipada do sistema.
+O principal objetivo do diagrama arquitetural consiste na validação do fluxo de comunicação entre os dispositivos, além de possibilitar uma visualização gráfica dos modelos.
+Neste diagrama, estão definidos os dispositivos físicos principais que compõem o sistema; O ESP se comunica com o Raspberry e a Ponte L298N, como descritos no modelo da listagem \ref{lst:hardware}. Também são modelados componentes de Mouse, Teclado e Monitor, apesar de não significarem um uso de recursos computacionais expressivo, foram incluídos por precisão. 
+
+\begin{lstlisting}[caption={Exemplo de especificação de componentes de hardware em AADL}, label={lst:hardware}]
+	system implementation robinho.impl
+	subcomponents
+		Raspberry: system Raspberry::Raspberry.impl;
+		ESP32: device Devices::ESP32_res_360x640.impl;
+		Monitor: device Other_Properties::Monitor.impl;
+		Mouse: device Devices::mouse.impl;
+		Teclado: device Devices::teclado.impl;
+		Ponte_L298N: device Devices::Ponte_L298N;
+	connections
+		con1: feature Raspberry.Hdmi_1 -> Monitor.HDMI_in;
+		con2: feature Mouse.mouse_out -> Raspberry.USB_1;
+		con3: feature Teclado.teclado_out -> Raspberry.USB_2;
+		con4: feature Raspberry.GPIO_out -> ESP32.GPIO_in;
+		con5: feature ESP32.GPIO_out -> Raspberry.GPIO_in;
+		con6: port ESP32.GPIO_out -> Ponte_L298N.Controller_in;
+end robinho.impl;
+\end{lstlisting}
+
+Este código da implementação do sistema Robinho.impl reflete os fluxos da comunicação do sistema, como antes descritos na Figura \ref{fig:diagrama_aadl}
+
+\section{Análises Arquiteturais com OSATE}
+
+Após a definição da estrutura arquitetural, o modelo foi enriquecido com propriedades relacionadas a desempenho, escalonabilidade e uso de recursos, possibilitando a execução de análises formais por meio da ferramenta OSATE.
+
+As principais propriedades utilizadas no modelo incluem:
 
 \begin{itemize}
-    \item MIPSBudget - Carga de um processo em MIPS.
-    \item Compute\_Execution\_Time - Tempo de execução de um processo.
-    \item Period - Período da execução de um processo.
-    \item MIPSCapacity - Capacidade de um processador em MIPS.
-    \item RAMCapacity - Capacidade de RAM de uma memória.
-    \item BandwidthCapacity - Capacidade de banda de um barramento.
-    \item DataSize - Tamanho de uma informação transmitida.
+    \item \textbf{MIPSBudget}: carga computacional de um processo em MIPS;
+    \item \textbf{Compute\_Execution\_Time}: tempo de execução de um processo;
+    \item \textbf{Period}: período de execução de um processo;
+    \item \textbf{MIPSCapacity}: capacidade de processamento de um processador em MIPS;
+    \item \textbf{RAMCapacity}: capacidade de memória disponível;
+    \item \textbf{BandwidthCapacity}: capacidade de banda de um barramento de comunicação;
+    \item \textbf{DataSize}: tamanho das informações transmitidas entre componentes.
 \end{itemize}
 
-Com o modelo completamente especificado, é feita sua instanciação. Esta etapa permite a  validação para consistência arquitetural, corretude de fluxo de dados e restrições temporais. No caso de Robinho, isto inclui verificar se a imagem consegue ser processada e transmitida dentro do tempo limite para gerar comandos de movimento com latência mínima e máxima eficiência.
+A atribuição dessas propriedades permitiu avaliar se o fluxo completo de processamento, desde a captura da imagem até a geração dos comandos de controle, atende aos requisitos não funcionais de latência e uso eficiente de recursos computacionais.
 
-Finalmente, depois de o modelo ser instanciado, o OSATE permite o uso das ferramentas de análise integradas, como análise de latência, simulação de escalonamento e previsão de uso de recursos, para definir se a arquitetura atual cumpre os requisitos do sistema. Caso quaisquer gargalos ou violações sejam detectadas, o modelo pode ser refinado iterativamente, suportando uma metodologia de design antes da implementação, que reduz significativamente os riscos de integração durante a implantação.
+A Listagem \ref{lst:image_filter} exemplifica o uso destas propriedades para os cálculos das análises reais do modelo.
 
-Repetidas vezes durante o processo de modelagem, foram encontrados gargalos computacionais e na comunicação entre os componentes. Nestes casos, O uso dos componentes específicos e meios de comunicação foi reavaliado, e iterativamente os componentes do sistema foram avaliados, e se necessário, alterados.
+\begin{lstlisting}[caption={Exemplo de especificação de componente de software em AADL}, label={lst:image_filter}]
+process image_filter extends node
+    features
+        image_in: in event data port videostream.res_360x640;
+        filtered_out: out event data port videostream.res_360x640;
+    properties
+        SEI::MIPSBudget => 250.0 MIPS;
+end image_filter;
 
-Um dos principais benefícios da abordagem centrada em modelos foi a capacidade de evoluir o sistema sem comprometer a validade da arquitetura. Quando módulos de software foram substituídos ou novas funcionalidades foram incorporadas, bastou modelar os novos componentes e reexecutar as análises, sem necessidade de reformular toda a arquitetura ou refazer validações previamente concluídas.
+process implementation image_filter.impl
+    subcomponents
+        Sub: SubscriberImage.impl;
+        Pub: PublisherImage.impl;
+    connections
+        img_in: port image_in -> Sub.in_port;
+        flt_out: port Pub.out_port -> filtered_out;
+end image_filter.impl;
 
-Essa metodologia de projeto dirigido por modelos permitiu que decisões arquiteturais fossem documentadas, quantitativamente validadas e refinadas muito antes da integração física, reduzindo drasticamente riscos
 
-Como resultado, a implantação do sistema em hardware real ocorreu com alta confiança de que os requisitos não funcionais seriam atendidos desde a primeira inicialização.
+	thread PublisherImage
+		features
+		  in_port: in event data port videostream.res_360x640;
+	      out_port: out event data port videostream.res_360x640;
+	    properties
+			SEI::MIPSBudget => 15.0 MIPS;
+			Compute_Execution_Time => 5 ms .. 8 ms;
+   			Period => 33 ms; -- 30fps
+  		end PublisherImage;
+	thread implementation PublisherImage.impl
+	  end PublisherImage.impl;
+	 
+	thread SubscriberImage
+	    features
+	      in_port: in event data port videostream.res_360x640;
+	    properties
+			SEI::MIPSBudget => 15.0 MIPS;
+  		end SubscriberImage;
+	thread implementation SubscriberImage.impl
+	  end SubscriberImage.impl;
+
+    
+    data videostream
+    end videostream;
+    data implementation videostream.res_360x640;
+		properties
+			Data_size => 691200 Bytes;
+	end videostream.res_360x640;
+
+\end{lstlisting}
+
+
+A Listagem \ref{lst:image_filter} apresenta a modelagem de um componente de \textit{software} responsável pelo processamento de imagens no sistema robótico. O processo \textit{image\_filter} é definido com portas de entrada e saída do tipo \textit{event data}, representando o fluxo de dados de vídeo entre os módulos do sistema.
+
+A carga computacional do processo é caracterizada por meio da propriedade \textit{MIPSBudget}, permitindo avaliar seu impacto sobre os recursos de processamento disponíveis. A implementação do processo é composta por duas \textit{threads}, denominadas \textit{SubscriberImage} e \textit{PublisherImage}, que refletem o padrão de comunicação adotado pelo middleware ROS 2, baseado em assinatura e publicação de mensagens.
+
+As \textit{threads} possuem propriedades temporais explícitas, tempo de execução e período, possibilitando análises de escalonamento e verificação de requisitos de tempo real. O tipo de dado \textit{videostream} modela explicitamente o tamanho das informações transmitidas, permitindo a avaliação do uso de banda e latência na comunicação entre componentes.
+
+As análises arquiteturais realizadas no OSATE baseiam-se na correlação entre as propriedades de carga computacional atribuídas aos componentes de \textit{software} e a capacidade de processamento dos recursos físicos definidos no modelo. As propriedades são estimadas de uma forma conservadora e utilizadas de forma combinada para avaliar a viabilidade de execução dos componentes dentro das restrições de tempo e recursos disponíveis.
+
+A propriedade \textit{MIPSBudget} representa a quantidade estimada de instruções, em milhões por segundo (MIPS), requerida por um processo ou \textit{thread} para executar suas funcionalidades. Esta propriedade 
+
+Durante a análise, o OSATE agrega os valores de \textit{MIPSBudget} de todos os componentes de \textit{software} mapeados para um mesmo processador, considerando o \textit{deployment} definido no modelo. Esse valor agregado é então comparado com a propriedade \textit{MIPSCapacity} do processador físico correspondente. Caso a soma das cargas computacionais exceda a capacidade disponível, o modelo indica uma condição de sobrecarga do processador, caracterizando um gargalo computacional na arquitetura.
+
+A propriedade \textit{Compute\_Execution\_Time} define o intervalo de tempo necessário para a execução de uma instância de uma \textit{thread}, sendo utilizada em conjunto com o \textit{Period} para análises de escalonamento. O OSATE verifica se o tempo máximo de execução de cada \textit{thread} é compatível com seu período de ativação, garantindo que todas as instâncias possam ser executadas dentro de seus prazos temporais. Essa análise permite identificar violações de requisitos de tempo real, como perda de prazos ou sobreposição excessiva de execuções.
+
+A combinação dessas propriedades possibilita avaliar não apenas a carga média do sistema, mas também seu comportamento temporal sob condições de execução periódica, permitindo verificar se o conjunto de tarefas pode ser escalonado de forma determinística sobre os recursos físicos disponíveis. Dessa forma, o modelo fornece uma previsão antecipada do desempenho do sistema, antes de sua implantação em hardware real.
+
+
+
+\section{Processo Iterativo e Refinamento do Modelo}
+
+Durante o processo de modelagem, gargalos computacionais e limitações de comunicação foram identificados por meio das análises realizadas no OSATE. Nesses casos, os componentes do sistema e os meios de comunicação foram reavaliados e refinados de forma iterativa.
+
+A abordagem centrada em modelos permitiu a evolução da arquitetura sem comprometer sua validade. Novos módulos de \textit{software} puderam ser incorporados ao sistema e analisados sem a necessidade de reformular toda a especificação arquitetural previamente construída.
+
+Como resultado, a implantação do sistema em hardware real ocorreu com alta confiança de que os requisitos não funcionais seriam atendidos desde a primeira inicialização, demonstrando a efetividade da metodologia de projeto dirigida por modelos adotada neste trabalho.

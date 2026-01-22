@@ -2,17 +2,23 @@
 Esta seção apresenta a descrição funcional do sistema robótico Robinho, incluindo seus objetivos, modo de operação, componentes principais e requisitos. O capítulo estabelece a base conceitual necessária para a modelagem arquitetural apresentada nos capítulos seguintes.
 
 \section{Visão geral do sistema}
-O Robinho é um robô móvel com direção diferencial, composto por motores de tração independentes e uma estrutura leve. A plataforma foi projetada como um ambiente de experimentação para testes de algoritmos de visão computacional, integração de sensores e validação de arquiteturas distribuídas em sistemas Ciberfísicos.
+O Robinho é um robô móvel com direção diferencial, composto por motores de tração independentes e uma estrutura leve. A plataforma foi projetada como um ambiente de experimentação para testes de algoritmos de visão computacional, integração de sensores e validação de arquiteturas distribuídas em Sistemas Ciberfísicos.
 
-Robinho é desenhado como uma plataforma autônoma e distribuida que emprega diversos componentes de \textit{software} para permitir percepção, tomada de decisões e atuação em tempo real. Sua infraestrutura é construida para garantir comunicação eficiente, escalabilidade de robustez em ambientes dinâmicos.
+Robinho é desenhado como uma plataforma autônoma e distribuída que emprega diversos componentes de \textit{software} para permitir percepção, tomada de decisões e atuação em tempo real. Sua infraestrutura é construida para garantir comunicação eficiente, escalabilidade e robustez em ambientes dinâmicos.
+
+A concepção do Robinho prioriza simplicidade construtiva e modularidade arquitetural, de forma a facilitar tanto a substituição de componentes físicos quanto a evolução do \textit{software}. Essa característica torna a plataforma adequada para a aplicação de técnicas de modelagem arquitetural e validação antecipada de propriedades não funcionais, como desempenho, comunicação e alocação de recursos computacionais.
+
+A Figura \ref{fig:robinho} apresenta uma visão geral da montagem física do Robinho, destacando seus principais componentes estruturais e eletrônicos.
 
 \begin{figure}[htbp]
-\begin{center}
-    \includegraphics[width=\linewidth]{images/robinho.jpeg}
-    \caption{Foto ilustrativa da montagem de Robinho}\vspace{-0.5cm}
-\end{center}
+\centering
+\includegraphics[width=0.9\linewidth]{images/robinho.jpeg}
+\caption{Visão geral da montagem física do robô Robinho}
+\label{fig:robinho}
 \end{figure}
 
+
+Conforme ilustrado na Figura \ref{fig:robinho}, o sistema é composto por uma unidade central de processamento, sensores embarcados e atuadores responsáveis pela locomoção. Essa organização reflete uma arquitetura típica de Sistemas Ciberfísicos, nos quais componentes físicos e computacionais operam de forma integrada e contínua.
 
 O sistema não possui um propósito operacional específico em contexto industrial ou comercial; sua função é servir como plataforma educacional e experimental, permitindo testar diferentes fluxos de percepção, algoritmos de visão computacional, mecanismos de controle, interações entre módulos distribuídos e modelagem arquitetural com AADL.
 
@@ -33,27 +39,37 @@ Esta funcionalidade representa apenas uma instância possível dentro do conjunt
 
 \section{Arquitetura física}
 
+A arquitetura física do Robinho foi projetada para refletir um cenário realista de sistemas robóticos de baixo custo, combinando unidades de processamento distribuídas, sensores e atuadores. Essa configuração permite avaliar aspectos como comunicação, latência e uso de recursos computacionais, que serão posteriormente modelados em AADL.
+
 Robinho consiste dos seguintes componentes de \textit{hardware}: 
 \begin{itemize}
-    \item \textbf{Raspberry Pi 2B} - A unidade de processamento principal, responsável por executar o ambiente ROS2.
+    \item \textbf{Raspberry Pi 2B} - A unidade de processamento principal, responsável por executar o ambiente ROS 2.
     \item \textbf{ESP-Cam} - Um microcontrolador equipado com um módulo de câmera, responsável por transmitir o vídeo para o Raspberry Pi.
     \item \textbf{Driver de motor Ponte L298N} - Controla o movimento de ambos os motores.
     \item \textbf{Motores DC e chassis de direção diferencial} - Fornecem mobilidade ao sistema.
     \item \textbf{Mouse, Teclado e Monitor}, para interface com o sistema
 \end{itemize}
 
+A separação entre a unidade de processamento principal e o microcontrolador embarcado permite avaliar a comunicação entre dispositivos heterogêneos, um aspecto recorrente em Sistemas Ciberfísicos modernos. Essa característica é explorada nos capítulos seguintes por meio da modelagem arquitetural e das análises realizadas com a AADL.
+
+
 \section{Arquitetura lógica}
 
-O \textit{software} do sistema é majoritariamente construido com o ROS2 em Python, visando flexibilidade e modularidade. O \textit{sketch} executado no ESP-CAM é escrito em C++.
+A arquitetura lógica do sistema foi concebida de forma modular, seguindo os princípios
+adotados pelo ROS 2. Cada funcionalidade do sistema é encapsulada em um nó independente,
+permitindo comunicação assíncrona por meio de mensagens tipadas. Essa abordagem favorece o desacoplamento entre funcionalidades e facilita tanto a manutenção quanto a modelagem arquitetural, uma vez que cada nó pode ser mapeado para componentes de \textit{software} nos modelos AADL.
 
 Os componentes de \textit{software} incluem:
+
 \begin{itemize}
     \item \textbf{Módulo ESP-Cam} - O módulo do ESP-Cam lê a entrada da câmera, processa a imagem e envia para o Raspberry Pi.
     \item \textbf{Nó de Comunicação com ESP} - Nó ROS responsável por capturar o input do ESP-Cam e encaminhar para mais processamentos de imagem.
     \item \textbf{Nós de visão computacional} - Um conjunto de nós que processam a tranmissão de vídeo e aplica algoritmos de visão computacional a fim de extrair dados relevantes.
     \item \textbf{Nó de controle do Motor} - Nó responsável por interpretar o resultado dos algoritmos de visão computacional e gerar comandos de velocidade para os motores.
 \end{itemize}
-Estes componentes realizam trocas de mensagens seguindo um caminho de comunicação específico, com tipagem de mensagens bem definidas. Uma representação deste fluxo é apresentada no próximo capítulo por meio de diagramas de modelos.
+
+Esses componentes realizam trocas de mensagens seguindo um fluxo de comunicação bem definido, desde a captura da imagem até a geração dos comandos de controle dos motores. Esse fluxo lógico serve como base para os diagramas de modelagem arquitetural apresentados no próximo capítulo, onde os componentes de \textit{software} e suas interações são formalmente descritos em AADL.
+
 
 \section{Requisitos Funcionais}
 
@@ -74,10 +90,10 @@ O sistema deve:
 \section{Requisitos Não Funcionais}
 
 \begin{itemize}
-    \item RNF01 — Baixa latência:O fluxo completo (captura → processamento → controle) deve operar em tempo hábil para permitir reação adequada a alterações do alvo.
-    \item RNF02 — Modularidade:O sistema deve suportar substituição ou inclusão de algoritmos de visão sem alterar sua estrutura geral.
-    \item RNF03 — Escalabilidade:A arquitetura deve permitir expansão futura com novos sensores ou módulos de software.
-    \item RNF04 — Estabilidade: A comunicação entre ESP32-CAM e Raspberry Pi deve permanecer funcional mesmo com variações na taxa de quadros.
+    \item RNF01 — Baixa latência: O fluxo completo (captura → processamento → controle) deve operar em tempo hábil para permitir reação adequada a alterações do alvo.
+    \item RNF02 — Modularidade: O sistema deve suportar substituição ou inclusão de algoritmos de visão sem alterar sua estrutura geral.
+    \item RNF03 — Escalabilidade: A arquitetura deve permitir expansão futura com novos sensores ou módulos de software.
+    \item RNF04 — Estabilidade: A comunicação entre ESP-CAM   e Raspberry Pi deve permanecer funcional mesmo com variações na taxa de quadros.
     \item RNF05 — Transparência da arquitetura: Cada componente deve ter responsabilidades claramente definidas, facilitando a modelagem em AADL.
 \end{itemize}
 
@@ -95,4 +111,4 @@ O sistema opera em um laço contínuo, onde:
     \item O ciclo se repete enquanto houver alvo detectado.
 \end{enumerate}
 
-Este ciclo caracteriza o comportamento dinâmico do sistema e fundamenta a modelagem arquitetural apresentada no capítulo seguinte.
+O ciclo de operação descrito acima representa o comportamento dinâmico do sistema e define os principais fluxos de dados e controle que serão formalmente modelados em AADL no capítulo seguinte. Cada etapa do fluxo corresponde a componentes de \textit{software}, dispositivos físicos e canais de comunicação explicitamente representados nos modelos arquiteturais em AADL, permitindo a análise estrutural e comportamental do sistema antes de sua implantação física.
