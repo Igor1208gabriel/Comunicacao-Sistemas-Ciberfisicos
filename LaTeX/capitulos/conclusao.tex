@@ -1,35 +1,13 @@
 \chapter{Conclusão}
 
-A modelagem arquitetural realizada ao longo deste trabalho demonstrou que o uso da
-Architecture Analysis Design Language (AADL), aliado ao ecossistema do Robot Operating
-System 2 (ROS 2), oferece uma base sólida para o projeto de sistemas robóticos com maior
-previsibilidade, confiabilidade e eficiência. A representação estruturada dos componentes de
-\textit{hardware}, \textit{software} e comunicação permitiu identificar gargalos potenciais ainda nas
-fases iniciais do desenvolvimento, reduzindo custos, riscos e retrabalho durante a etapa de
-integração física.
+Este trabalho teve como objetivo investigar a aplicação da Architecture Analysis Design Language (AADL), em conjunto com o ecossistema do Robot Operating System 2 (ROS~2), como suporte ao projeto e à validação arquitetural de sistemas robóticos. A partir da modelagem estruturada dos componentes de \textit{hardware}, \textit{software} e dos canais de comunicação, foi possível analisar antecipadamente aspectos críticos relacionados ao desempenho, ao uso de recursos computacionais e à integração entre subsistemas, ainda nas fases iniciais do desenvolvimento.
 
-Além de apoiar decisões de projeto, a abordagem dirigida por modelos mostrou-se
-particularmente eficaz na análise de desempenho e no uso de recursos computacionais.
-Durante o processo iterativo de modelagem e validação, foi possível antecipar gargalos
-computacionais e limitações de comunicação antes da implantação do sistema, evidenciando
-o valor da modelagem arquitetural como ferramenta estratégica para a tomada de decisões
-técnicas fundamentadas.
+Os resultados obtidos demonstram que a abordagem dirigida por modelos constitui uma ferramenta eficaz para a tomada de decisões arquiteturais fundamentadas. A utilização da AADL, por meio do ambiente OSATE, permitiu avaliar quantitativamente a distribuição da carga computacional entre os núcleos de processamento, o uso dos barramentos de comunicação e a disponibilidade de recursos não vinculados, evidenciando que a arquitetura proposta é coerente com as demandas do pipeline de visão computacional e não apresenta gargalos estruturais no escopo analisado.
 
-O estudo de caso do robô Robinho demonstrou que a aplicação prática da AADL possibilita
-avaliar a viabilidade da arquitetura proposta, bem como sua escalabilidade e capacidade de
-suportar futuras expansões. Mesmo com um escopo inicial focado em uma aplicação de visão
-computacional relativamente simples, a arquitetura modelada apresentou margens adequadas
-de processamento e memória, indicando robustez para a inclusão de novos sensores, módulos
-de software e requisitos temporais mais rigorosos.
+O estudo de caso do robô Robinho evidenciou a aplicabilidade prática da abordagem proposta. Mesmo considerando uma aplicação de visão computacional de complexidade moderada, a arquitetura modelada apresentou margens adequadas de processamento, comunicação e memória, além de uma alocação eficiente dos processos mais exigentes em núcleos dedicados. Esses resultados indicam que a arquitetura é estável e possui potencial de escalabilidade para a inclusão de novos sensores, módulos de \textit{software} e requisitos temporais mais rigorosos. 
 
-Estudos correlatos apontam uma elevada precisão entre os resultados obtidos por meio da
-análise em modelos AADL e medições realizadas em sistemas físicos, com diferenças tão
-baixas quanto 0{,}02\% \cite{Senn2021}. Nesse contexto, trabalhos futuros incluem a comparação
-sistemática entre os valores estimados pelo OSATE e medições reais no robô Robinho, bem
-como a investigação de técnicas de geração automática de código a partir dos modelos,
-ampliando a análise quantitativa e o nível de automação do desenvolvimento.
+É importante ressaltar que os resultados obtidos dependem do nível de abstração adotado no modelo arquitetural e das estimativas de carga computacional utilizadas, não substituindo medições empíricas em execução real. Ainda assim, as análises realizadas são suficientes para validar arquiteturalmente o sistema no escopo proposto, cumprindo o papel de antecipar problemas, reduzir riscos de integração e orientar decisões técnicas antes da implementação física. O objetivo da análise não é prever com exatidão o comportamento temporal do sistema real, mas identificar tendências e gargalos potenciais que orientem decisões arquiteturais antes da implementação física.
 
-Dessa forma, este trabalho reforça a importância da modelagem arquitetural como uma etapa
-essencial no desenvolvimento de Sistemas Ciberfísicos e evidencia que o uso combinado de
-AADL e ROS 2 constitui uma alternativa robusta para o projeto de arquiteturas escaláveis,
-previsíveis e capazes de lidar com altos níveis de complexidade.
+Estudos correlatos apontam elevada correlação entre os resultados obtidos por meio de análises em AADL e medições realizadas em sistemas físicos, com diferenças reportadas da ordem de 0{,}02\% \cite{Senn2021}. Nesse contexto, trabalhos futuros incluem a comparação sistemática entre os valores estimados pelo OSATE e medições experimentais no robô Robinho, bem como a investigação de técnicas de geração automática de código a partir dos modelos arquiteturais, ampliando o nível de automação e a precisão das análises.
+
+Ao demonstrar que é possível antecipar gargalos e validar decisões arquiteturais antes da implementação física, este trabalho contribui para a redução de riscos, custos e retrabalho no desenvolvimento de sistemas robóticos complexos, reforçando o papel da modelagem arquitetural como elemento central no projeto de Sistemas Ciberfísicos modernos.

@@ -1,0 +1,75 @@
+\chapter{Resultado}
+
+\section{Relatórios de Análise}
+
+A partir da instanciação do modelo Robinho\_impl no OSATE, foram gerados relatórios quantitativos que permitiram avaliar o uso de recursos computacionais, a carga dos barramentos de comunicação e a distribuição das tarefas entre os processadores. Esses resultados complementam a análise qualitativa apresentada anteriormente e reforçam a validade da arquitetura proposta.
+
+Esses resultados permitem verificar se as decisões arquiteturais adotadas são compatíveis com as restrições computacionais do sistema e se o pipeline de visão computacional pode operar sem violar requisitos temporais e de comunicação.
+
+\subsection{Bound Resource Budgets}
+
+A análise de \textit{Bound Resource Budgets} avaliou a distribuição da carga computacional dos nós ROS~2 nos núcleos do Raspberry Pi, considerando estimativas de MIPS baseadas em trabalhos correlatos que realizaram medições empíricas em plataformas equivalentes.
+
+A Tabela \ref{tab:mips_estimativa} apresenta os valores de carga computacional atribuídos a cada nó do sistema, definidos a partir da complexidade funcional e da frequência de execução de cada processo.
+
+\begin{table}[htbp]
+\centering
+\caption{Estimativa de carga computacional dos nós ROS~2}
+\label{tab:mips_estimativa}
+\begin{tabular}{l c l}
+\hline
+\textbf{Nó ROS~2} & \textbf{MIPS estimado} \\
+\hline
+    usb\_cam & 180 \\
+    image\_filter / color\_tracker & 350 \\
+    image\_display1 / image\_display2 & 15 \\
+    pos2cmd\_vel & 35 \\
+\hline
+
+\end{tabular}
+\end{table}
+
+A partir dessas estimativas, o relatório de \textit{Bound Resource Budgets} indicou a carga total atribuída a cada núcleo Cortex-A53 do Raspberry Pi, conforme apresentado na Tabela~\ref{tab:mips}.
+
+\begin{table}[htbp]
+\centering
+\caption{Uso de MIPS por núcleo do Raspberry Pi}
+\label{tab:mips}
+\begin{tabular}{l c}
+\hline
+\textbf{Núcleo} & \textbf{MIPS Utilizados} \\
+\hline
+Proc1 & 527,12 \\
+Proc2 & 542,12 \\
+Proc3 & 15,00 \\
+Proc4 & 15,00 \\
+\hline
+\end{tabular}
+\end{table}
+
+Os resultados confirmam que os processos mais exigentes do pipeline de visão computacional, usb\_cam, image\_filter e color\_tracker, foram corretamente alocados nos dois primeiros núcleos, enquanto os nós de exibição ocupam apenas uma carga residual. Essa distribuição evita a saturação dos recursos computacionais e mantém uma margem significativa de processamento disponível.
+
+Embora, na implementação real, o escalonamento das tarefas seja gerenciado pelo sistema operacional e possa introduzir variações não modeladas explicitamente, a folga observada nos orçamentos de MIPS indica que tais variações não comprometem a viabilidade temporal do sistema no escopo analisado. Além disso, nenhum componente excedeu seu orçamento computacional, reforçando a adequação da arquitetura proposta.
+
+
+\subsection{Bus Load}
+
+A análise de \textit{Bus Load} avaliou a utilização dos barramentos físicos e virtuais do sistema, considerando os fluxos de dados gerados pelo pipeline de visão computacional e pela comunicação entre os módulos de controle. O objetivo dessa análise foi verificar se os canais de comunicação modelados suportam as taxas de dados requeridas sem risco de saturação ou degradação do desempenho.
+
+No nível físico, o barramento principal do Raspberry Pi (\textit{PiBus}) foi modelado com capacidade de aproximadamente 80\,000KB/s. Os resultados do relatório indicam uma taxa efetiva de utilização de cerca de 8\,642 KB/s, o que representa uma fração muito reduzida da capacidade disponível. Esse resultado evidencia que o tráfego interno gerado pelos processos do sistema é amplamente suportado pelo barramento, mantendo uma margem significativa para variações de carga ou futuras expansões.
+
+No nível dos barramentos virtuais, a análise detalhou os fluxos de comunicação entre os nós ROS2. As conexões associadas à publicação e ao processamento das imagens apresentaram taxas de aproximadamente 2\,880KB/s, compatíveis com o envio de quadros RGB na frequência de operação do sistema. Esses valores permanecem coerentes ao longo do pipeline, desde a captura da imagem até sua exibição e processamento, indicando que não há acúmulo ou contenção de dados entre os componentes de visão computacional.
+
+Os fluxos associados ao controle do robô, como a comunicação entre o nó \textit{color\_tracker} e o \textit{pos2cmd\_vel}, bem como a interface entre o sistema de \textit{software} e a ponte GPIO responsável pelo acionamento dos motores, apresentaram taxas de dados da ordem de 1 KB/s. Esses valores são desprezíveis quando comparados à capacidade dos barramentos físicos, confirmando que os mecanismos de controle não impõem carga relevante sobre a infraestrutura de comunicação.
+
+De forma geral, os resultados da análise de \textit{Bus Load} demonstram que a arquitetura proposta apresenta comunicação eficiente e bem dimensionada, sem indícios de saturação ou gargalos nos barramentos. Isso reforça a adequação das decisões arquiteturais adotadas e indica que a infraestrutura de comunicação é suficiente para suportar o funcionamento atual do Robinho, bem como possíveis futuras extensões do sistema.
+
+\subsection{Not Bound Resource Budgets}
+
+A análise de \textit{Not Bound Resource Budgets} teve como objetivo verificar o uso de recursos que não possuem alocação explícita no modelo arquitetural, em especial a RAM e armazenamento, identificando possíveis violações ou indícios de subdimensionamento desses recursos.
+
+Os resultados do relatório indicaram que nenhum dos componentes do sistema ultrapassa os orçamentos implícitos de memória considerados pelo modelo. Os processos associados ao \textit{SoftwareSystem}, incluindo os nós de percepção, processamento e controle, apresentaram consumo de memória significativamente inferior à capacidade disponível no Raspberry Pi, não sendo identificadas violações ou alertas críticos relacionados a esse recurso.
+
+De forma semelhante, não foram observados problemas relacionados ao uso de armazenamento ou à alocação dinâmica de recursos, o que indica que, no escopo analisado, esses aspectos não representam fatores limitantes para o funcionamento do sistema. Esse resultado é coerente com a natureza dos nós implementados, que realizam processamento em fluxo contínuo e não dependem de operações intensivas de escrita ou armazenamento persistente.
+
+Ressalta-se que essa análise depende do nível de abstração adotado no modelo arquitetural e das estimativas utilizadas, não substituindo medições empíricas em execução real. Ainda assim, os resultados obtidos são suficientes para validar que, do ponto de vista arquitetural, os recursos não vinculados não constituem gargalos para o funcionamento atual do Robinho, mantendo margem adequada para a inclusão de novos módulos de \textit{software} e extensões futuras do sistema.

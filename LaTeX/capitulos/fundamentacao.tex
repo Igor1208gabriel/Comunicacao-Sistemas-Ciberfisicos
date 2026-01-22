@@ -2,18 +2,24 @@
 
 \section{Sistemas Ciberfísicos}
 
-De acordo com \cite{Moraes2013}, Sistemas Ciberfísicos integram componentes computacionais com componentes físicos, biológicos e de engenharia, incorporando novas capacidades. O custo computacional de um sistema é diretamente proporcional ao número de processos e tarefas simultâneas. Como consequência, um sistema complexo pode chegar rapidamente ao seu limite, causando consequências imprevisíveis se o \textit{hardware} não for corretamente adequado aos seus casos de uso previstos. \cite{SennBourdon2022}
+De acordo com \cite{Moraes2013}, Sistemas Ciberfísicos integram componentes computacionais com componentes físicos, biológicos e de engenharia, incorporando novas capacidades. Podem ser compreendidos como a integração entre o domínio cibernético e o domínio físico, ilustrados por meio de um diagrama de Venn na \ref{fig:cps}. 
+O domínio cibernético, representado em verde, engloba os elementos computacionais responsáveis pelas funções de controle, comunicação e monitoramento do sistema. São responsáveis pelas tomadas de decisão, processamento de informações do ambiente e coordenação de ações de forma lógica.
+O domínio físico, representado em azul, compreende os elementos que interagem com o ambiente, os sensores e atuadores, além dos processos físicos propriamente ditos. Os sensores permitem a aquisição de dados, enquanto os atuadores possibilitam a execução de ações físicas, influenciando o comportamento do sistema no fundo físico.
 
-De acordo com a figura tal, blablabla TODO
+A interseção entre os domínios ciber e físico caracteriza a essência dos Sistemas Ciberfísicos, evidenciando a interação contínua e bidirecional entre computação e processos físicos. Nessa interseção, dados coletados do ambiente físico são processados pelo domínio ciber, que, por sua vez, envia comandos de controle aos atuadores, fechando o ciclo de percepção, decisão e ação.
+
+Dessa forma, o diagrama ilustra de maneira conceitual como os Sistemas Ciberfísicos não se limitam à simples coexistência de componentes computacionais e físicos, mas dependem da integração estreita entre esses domínios para operar de forma confiável, eficiente e adaptativa.
+
 
 \begin{figure}[htbp]
-\begin{center}
+    \begin{center}
     \includegraphics[width=\linewidth/2]{images/CPS.png}
-    \caption{Diagrama o que é CPS}\vspace{-0.5cm}
+    \caption{Diagrama conceitual de Sistemas Ciberfísicos}
+    \label{fig:cps}
+    \vspace{-0.5cm}
 \end{center}
 \end{figure}
 
-como evidencia a figura, etc
 
 Os Sistemas Ciberfísicos (CPS) representam a evolução de conceitos como computação ubíqua, proposta por \cite{weiser1991}, que previu computadores invisíveis integrados ao cotidiano, desaparecendo no plano de fundo para focar em objetivos humanos. Weiser argumenta \enquote{As tecnologias mais profundas são as que desaparecem. Se tecem no tecido do cotidiano até se tornarem indistinguíveis dele}. Essa visão antecipa a integração de computadores e processos físicos em CPS, sem necessidade de inteligência artificial complexa, apenas com computadores embarcados e interconectados no dia-a-dia, compartilhando informações em tempo real.Esta ideia se aplica diretamente a sistemas robóticos, onde componentes operam de forma invisível, permitindo adaptação a ambientes dinâmicos sem intervenção constante do usuário.
 
@@ -22,6 +28,8 @@ Os Sistemas Ciberfísicos (CPS) representam a evolução de conceitos como compu
 No contexto deste trabalho, o robô Robinho caracteriza-se como um Sistema Ciberfísico por integrar sensores, atuadores, unidades de processamento distribuídas e algoritmos de percepção e controle que interagem continuamente com o ambiente físico. Essa integração reforça a importância de arquiteturas formais e mecanismos de validação capazes de antecipar limitações de desempenho antes da implantação física, principalmente por limitações de hardware, que precisam ser utilizados de maneira eficiente.
 
 \section{Modelagem de Sistemas}
+
+O custo computacional de um sistema é diretamente proporcional ao número de processos e tarefas simultâneas. Como consequência, um sistema complexo pode chegar rapidamente ao seu limite, causando consequências imprevisíveis se o \textit{hardware} não for corretamente adequado aos seus casos de uso previstos, como apontado por \cite{SennBourdon2022}. Especialmente no caso de sistemas com limitações computacionais e físicas, é de extrema importância que a performance e eficiência sejam previsíveis e medidas previamente.
 
 O \textit{design} e validação de Sistemas Ciberfísicos requer metologias robustas para garantir a integração de componentes de \textit{hardware} e \textit{software} mantendo performance, confiabilidade e escalabilidade. Neste estudo, a \textit{Architecture Analysis Design Language} (AADL) é empregada para modelar a arquitetura e prover uma representação estruturada de seus componentes físicos e computacionais.
 
