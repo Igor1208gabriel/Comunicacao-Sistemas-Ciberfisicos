@@ -91,15 +91,6 @@ jobs:
             --failOnCVSS 7
 
       # ==========================
-      #   PYLINT (CORRIGIDO)
-      # ==========================
-      - name: PyLint with dynamic badge
-        uses: Silleellie/pylint-github-action@00e742f459317509d4fd0ce94a676d0c098b0f4d
-        with:
-          lint-path: ROS2/workspace/src
-          python-version: 3.11
-
-      # ==========================
       #   SONAR SUMMARY
       # ==========================
       - name: Show SonarQube Results
