@@ -1,4 +1,5 @@
-"Module docstring"
+"Docstring"
+
 import sys
 from rclpy.node import Node
 import rclpy
@@ -8,16 +9,16 @@ import cv2 as cv
 
 
 class PublisherCamera(Node):
-    "Nó que pega imagem da camera e a publica"
+    "Docstring"
 
     def __init__(
         self,
         VideoCapture=0,
         TopicName="camera_raw",
-        TimerPeriod=1 / 30,
+        TimerPeriod=1 / 10,
     ):
-        super().__init__("leitor_camera")
-        self.get_logger().info("Leitor_camera iniciado!")
+        super().__init__("cam_node")
+        self.get_logger().info("cam_node iniciado!")
         self.cam = cv.VideoCapture(VideoCapture)
         self.pub = self.create_publisher(Image, TopicName, 10)
         self.bridge = CvBridge()
@@ -25,7 +26,7 @@ class PublisherCamera(Node):
             TimerPeriod), callback=self.callback)
 
     def callback(self):
-        "Roda sempre que o timer tickar"
+        "Docstring"
         _, img = self.cam.read()
         if _:
             to_send = self.bridge.cv2_to_imgmsg(img)
@@ -36,7 +37,8 @@ class PublisherCamera(Node):
 
 
 def main():
-    "docstring"
+    "Docstring"
+
     rclpy.init()
     if len(sys.argv) == 1:
         node = PublisherCamera()

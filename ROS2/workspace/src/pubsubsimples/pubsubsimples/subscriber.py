@@ -1,3 +1,4 @@
+"Subscriber simples"
 import sys
 from rclpy.node import Node
 import rclpy
@@ -5,17 +6,19 @@ from std_msgs.msg import String
 
 
 class Publisher(Node):
+    "Subscriber simples"
 
     def __init__(self, TopicName="topico"):
         super().__init__("subscriber_simples")
-        self.sub = self.create_subscription(String, TopicName, self.Hear, 10)
-        self.sub
+        self.sub = self.create_subscription(String, TopicName, self.hear, 10)
 
-    def Hear(self, message):
+    def hear(self, message):
+        "Publica mensagem que ouviu"
         self.get_logger().info(f"I Heard: {message.data}")
 
 
 def main():
+    "docstring"
     rclpy.init()
     if len(sys.argv) == 1:
         node = Publisher()
@@ -23,7 +26,7 @@ def main():
         node = Publisher(sys.argv[1])
     else:
         print("Usage: ros2 run <pkg> <node> <topic>")
-        exit()
+        sys.exit()
 
     rclpy.spin(node)
 
