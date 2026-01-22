@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           fetch-depth: 0
       
@@ -45,7 +45,7 @@ jobs:
       #   COLCON BUILD CACHE
       # ==========================
       - name: Cache ROS2 Workspace
-        uses: actions/cache@v4
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7
         with:
           path: |
             ROS2/workspace/install
@@ -85,7 +85,7 @@ jobs:
       #   OWASP DEPENDENCY CHECK
       # ==========================
       - name: Dependency Check OWASP
-        uses: dependency-check/Dependency-Check_Action@1.1.0
+        uses: dependency-check/Dependency-Check_Action@75ba02d6183445fe0761d26e836bde58b1560600
         with:
           project: "Comunicacao-Sistemas-Ciberfisicos"
           path: "ROS2/workspace"    
@@ -99,9 +99,9 @@ jobs:
       #   PYLINT (CORRIGIDO)
       # ==========================
       - name: PyLint with dynamic badge
-        uses: Silleellie/pylint-github-action@v2.1
+        uses: Silleellie/pylint-github-action@00e742f459317509d4fd0ce94a676d0c098b0f4d
         with:
-          lint-path: ROS2/workspace/src   # <-- CORRIGIDO
+          lint-path: ROS2/workspace/src
           python-version: 3.11
 
       # ==========================
