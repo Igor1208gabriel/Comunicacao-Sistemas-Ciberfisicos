@@ -44,7 +44,7 @@ A presença explícita dessas conexões no modelo arquitetural possibilita a an�
 A partir da especificação arquitetural em AADL, foi gerada uma representação gráfica do modelo físico do sistema, permitindo uma visualização consolidada dos dispositivos e das interconexões definidas no código. Essa representação facilita a compreensão da arquitetura global e auxilia na identificação dos fluxos de comunicação entre os componentes.
 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
     \includegraphics[width=\linewidth]{images/robinho_impl.png}
     \caption{Modelo de hardware da aplicação Robinho}\vspace{-0.5cm}
@@ -69,7 +69,7 @@ Ponte USB para integração com periféricos.
 
 Os dispositivos, com suas propriedades bem definidas, são conectados via Portas e Barramentos, em um fluxo ilustrado na Figura \ref{fig:hardwarePi}, a seguir.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
     \includegraphics[width=\linewidth]{images/raspberry_impl.png}
     \caption{Modelo de hardware do Raspberry Pi}\vspace{-0.5cm}
@@ -97,7 +97,7 @@ Cada processo possui propriedades de carga computacional \verb|SEI::MIPSBudget| 
 As cargas computacionais atribuídas aos processos do sistema foram estimadas a partir de trabalhos correlatos que realizaram medições empíricas em plataformas de hardware equivalentes, em especial o trabalho de \cite{Senn2021}. Para cada nó ROS, foram considerados o tipo de operação executada, a frequência de processamento e a complexidade funcional, adotando-se valores de MIPS compatíveis com os relatados na literatura para nós funcionalmente semelhantes. Essa abordagem é adequada ao nível de abstração da modelagem arquitetural e permite análises quantitativas realistas, ainda que não substitua medições empíricas em tempo de execução.
 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
     \includegraphics[width=\linewidth]{images/softwaresystem_impl.png}
     \caption{Modelo de software da aplicação em ROS 2}\vspace{-0.5cm}
