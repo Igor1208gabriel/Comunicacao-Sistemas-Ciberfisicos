@@ -74,3 +74,6 @@ preambulo.*
 /instances
 
 .vscode
+
+venv/
+*.aadlbin
