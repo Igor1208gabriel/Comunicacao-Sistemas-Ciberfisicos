@@ -6,4 +6,4 @@ with app.app_context():
     db.create_all()
 
 if __name__ == "__main__":
-    app.run(ssl_context=("certificado/certificado.pem", "certificado/key.pem"))
+    app.run(ssl_context=("../certificado/certificado.pem", "../certificado/key.pem"))
