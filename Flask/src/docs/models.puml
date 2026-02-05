@@ -1,0 +1,38 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Robo {
+    +id: Integer
+    +nome: String
+    +tipo: String
+    +status: String
+    --
+    +to_dict()
+}
+
+class Missao {
+    +id: Integer
+    +descricao: String
+    +local: String
+    +status: String
+    +robo_id: Integer
+    --
+    +to_dict()
+}
+
+class Sensor {
+    +id: Integer
+    +tipo: String
+    +modelo: String
+    +status: String
+    +robo_id: Integer
+    --
+    +to_dict()
+}
+
+Robo "1" --> "0..*" Missao : possui
+Robo "1" --> "0..*" Sensor : possui
+Missao "*" --> "1" Robo : pertence
+Sensor "*" --> "1" Robo : pertence
+
+@enduml

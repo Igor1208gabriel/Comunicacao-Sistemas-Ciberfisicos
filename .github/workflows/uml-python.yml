@@ -1,0 +1,25 @@
+name: Generate UML Diagrams
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  plantuml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate UML with PlantUML
+        uses: plantuml/plantuml-action@v1
+        with:
+          args: -tpng Flask/src/docs/*.puml
+
+      - name: Upload UML artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: uml-diagrams
+          path: Flask/src/docs/*.png
