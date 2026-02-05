@@ -30,7 +30,7 @@ jobs:
       - name: Generate UML Class Diagram
         run: |
           mkdir -p uml
-          pyreverse Flask/src \
+          pyreverse Flask/src/app \
             -o png \
             -p ROS2_Project \
             -d uml
