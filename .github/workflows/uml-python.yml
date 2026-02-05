@@ -21,18 +21,6 @@ jobs:
         run: |
           find Flask/src/docs -name "*.puml" -exec plantuml -tpng {} \;
 
-      - name: Add UML to Job Summary
-        run: |
-          echo "## 📊 UML Diagrams" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          for file in Flask/src/docs/*.png; do
-            name=$(basename "$file")
-            echo "### ${name}" >> $GITHUB_STEP_SUMMARY
-            echo "![${name}](${file})" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-          done
-
       - name: Upload UML
         uses: actions/upload-artifact@v4
         with:
