@@ -123,30 +123,3 @@ jobs:
               echo "> ⚠️ **Cobertura baixa:** recomenda-se acima de 70%."
             fi
           } >> $GITHUB_STEP_SUMMARY
-      
-      - name: Generate UML Class Diagram (Python)
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/project \
-            -w /project \
-            ros2-dev \
-            bash -c "
-              pip install pylint graphviz
-              mkdir -p uml
-              pyreverse ROS2/workspace/src -o png -p ROS2_Project -d uml
-            "
-
-      - name: Upload UML Diagram
-        uses: actions/upload-artifact@v4
-        with:
-          name: uml-class-diagram
-          path: uml
-      
-      - name: Add UML to Step Summary
-        if: always()
-        run: |
-          {
-            echo "## 🧩 Diagrama UML de Classes (Python)"
-            echo ""
-            echo "![UML Class Diagram](uml/classes_ROS2_Project.png)"
-          } >> $GITHUB_STEP_SUMMARY
