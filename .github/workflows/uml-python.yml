@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install PlantUML
         run: |
           sudo apt-get update
@@ -16,11 +19,10 @@ jobs:
 
       - name: Generate UML
         run: |
-          plantuml Flask/src/docs/*.puml
+          find Flask/src/docs -name "*.puml" -exec plantuml -tpng {} \;
 
       - name: Upload UML
         uses: actions/upload-artifact@v4
         with:
           name: uml
           path: Flask/src/docs/*.png
-
