@@ -27,3 +27,22 @@ jobs:
       - name: Run pylint
         run: |
           pylint ROS2/workspace/src --exit-zero
+      - name: Install UML dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+          pip install pylint plantuml
+
+      - name: Generate UML Diagram
+        run: |
+          mkdir -p docs/uml
+          pyreverse ROS2/workspace/src \
+            -o png \
+            -p ComunicacaoSistemasCiberfisicos \
+            --output-directory docs/uml
+      
+      - name: Upload UML Diagram
+        uses: actions/upload-artifact@v4
+        with:
+          name: uml-diagrams
+          path: docs/uml
