@@ -17,10 +17,15 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install UML tools
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+
+      - name: Install Python tools
         run: |
           python -m pip install --upgrade pip
-          pip install pylint graphviz
+          pip install pylint
 
       - name: Generate UML Class Diagram
         run: |
@@ -39,6 +44,8 @@ jobs:
             echo "Gerado automaticamente a partir do código Python."
             echo ""
             echo "![UML Class Diagram](uml/classes_ROS2_Project.png)"
+            echo ""
+            echo "![UML Package Diagram](uml/packages_ROS2_Project.png)"
           } >> $GITHUB_STEP_SUMMARY
 
       - name: Upload UML Artifact
