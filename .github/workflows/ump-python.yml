@@ -2,7 +2,6 @@ name: Generate UML (Python)
 
 on:
   push:
-    branches: [ main ]
   pull_request:
 
 jobs:
