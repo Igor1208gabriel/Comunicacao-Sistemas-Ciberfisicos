@@ -9,16 +9,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Install PlantUML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y plantuml graphviz
 
-      - name: Generate UML with PlantUML
-        uses: plantuml/plantuml-action@v1
-        with:
-          args: -tpng Flask/src/docs/*.puml
+      - name: Generate UML
+        run: |
+          plantuml docs/uml/*.puml
 
-      - name: Upload UML artifacts
+      - name: Upload UML
         uses: actions/upload-artifact@v4
         with:
-          name: uml-diagrams
-          path: Flask/src/docs/*.png
+          name: uml
+          path: docs/uml/*.png
+
