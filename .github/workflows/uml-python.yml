@@ -19,14 +19,14 @@ jobs:
 
       - name: Generate UML
         run: |
-          find Flask/src/docs -name "*.puml" -exec plantuml -tsvg {} \;
+          find Flask/src/docs -name "*.puml" -exec plantuml -tpng {} \;
 
       - name: Add UML to Job Summary
         run: |
           echo "## 📊 UML Diagrams" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
-          for file in Flask/src/docs/*.svg; do
+          for file in Flask/src/docs/*.png; do
             name=$(basename "$file")
             echo "### ${name}" >> $GITHUB_STEP_SUMMARY
             echo "![${name}](${file})" >> $GITHUB_STEP_SUMMARY
@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: uml
-          path: Flask/src/docs/*.svg
+          path: Flask/src/docs/*.png
